@@ -1,0 +1,133 @@
+{
+  "label": "stoprule",
+  "date": "2026-11-03 20:05:34",
+  "host": "63b1f4773003",
+  "machine": {
+    "cpu": "aarch64",
+    "logical_cores": 16,
+    "physical_cores": 16,
+    "ram_gb": 29.6,
+    "ram_available_gb": 25.1,
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.14-linuxkit",
+    "arch": "aarch64",
+    "wsl": false,
+    "solver_cores": 8,
+    "python": "3.12.3"
+  },
+  "n_procs": 4,
+  "preset": "quick",
+  "airspeed": 20.0,
+  "alpha": 10.0,
+  "angles": null,
+  "case": "/runs/3d50fd0c-8c9d-480e-b7bf-c2907cdc0f21",
+  "stages": [
+    {
+      "name": "blockMesh",
+      "seconds": 0.09,
+      "peak_mb": 7
+    },
+    {
+      "name": "surfaceFeatureExtract",
+      "seconds": 0.02,
+      "peak_mb": 6
+    },
+    {
+      "name": "decomposePar",
+      "seconds": 0.07,
+      "peak_mb": 8
+    },
+    {
+      "name": "snappyHexMesh",
+      "seconds": 11.42,
+      "peak_mb": 902
+    },
+    {
+      "name": "checkMesh",
+      "seconds": 0.27,
+      "peak_mb": 350
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.42,
+      "peak_mb": 557
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 42.48,
+      "peak_mb": 1041
+    }
+  ],
+  "stage_seconds": {
+    "blockMesh": 0.09,
+    "surfaceFeatureExtract": 0.02,
+    "decomposePar": 0.07,
+    "snappyHexMesh": 11.42,
+    "checkMesh": 0.27,
+    "potentialFoam": 0.42,
+    "simpleFoam": 42.48
+  },
+  "snappy_phases": {
+    "refine": 5.52,
+    "snap": 3.12,
+    "layers": 2.85,
+    "total": 11.61
+  },
+  "solver_log": {
+    "iterations_logged": 245,
+    "first_50_s_per_it": 0.1754,
+    "mean_s_per_it": 0.1718032786885246,
+    "last_100_s_per_it": 0.16340000000000005,
+    "exec_total_s": 42.24,
+    "clock_total_s": 42.0,
+    "p_iterations_mean": 1.5510204081632653,
+    "ux_iterations_mean": 4.689795918367347
+  },
+  "iterations": 245,
+  "converged": true,
+  "cells": 371829,
+  "mesh_ok": true,
+  "layers": {
+    "body": {
+      "faces": 32256,
+      "target_layers": 5,
+      "mean_layers": 4.75,
+      "thickness_m": 0.0055,
+      "thickness_pct": 96.0
+    }
+  },
+  "max_non_orthogonality": 64.988803,
+  "cl": 0.45129474037000006,
+  "cd": 0.05578398339500001,
+  "cm": 0.016043160913,
+  "cd_pressure": 0.046759138954708145,
+  "cd_viscous": 0.00902484443372678,
+  "cl_pm": 0.00018869899999998663,
+  "cd_pm": 2.2767400000001797e-05,
+  "points": [],
+  "y_plus": {
+    "body": {
+      "min": 5.11331325,
+      "max": 167.676819,
+      "average": 24.6340828
+    }
+  },
+  "events": [
+    {
+      "converged": 243,
+      "t": 54.736959399990155
+    }
+  ],
+  "post": {
+    "surface_s": 0.03035108299809508,
+    "surface_bytes": 1310376,
+    "slice_read_s": 0.004562000001897104,
+    "slice_encode_s": 0.0001364170020679012,
+    "streamlines_s": 0.2950011250068201,
+    "slice_bytes": 173812
+  },
+  "run_case_wall_s": 55.1,
+  "total_wall_s": 55.4,
+  "peak_memory_mb": 1041,
+  "notes": []
+}

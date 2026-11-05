@@ -1,0 +1,36 @@
+[project]
+name = "windlab"
+version = "0.1.0.dev0"
+description = "SenSym WindLab - a virtual wind tunnel for engineering students"
+requires-python = ">=3.12"
+dependencies = ["numpy", "pydantic>=2", "fastapi>=0.110", "uvicorn>=0.30"]
+
+[project.scripts]
+windlab = "windlab.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest", "trimesh", "ruff", "httpx"]
+step = ["cadquery-ocp"]   # STEP import (OpenCASCADE); needs the system package libgl1
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["windlab*"]
+
+[tool.setuptools.package-data]
+windlab = ["templates/**/*", "app/static/**/*", "lessons/**/*", "*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-m 'not slow'"
+markers = ["slow: runs the real OpenFOAM solver (minutes); run with  pytest -m slow"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]

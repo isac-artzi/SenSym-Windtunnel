@@ -1,0 +1,337 @@
+{
+  "version": "2026-11-03.2",
+  "label": "Uncalibrated prototype - not yet validated",
+  "about": "Expected-error ranges for WindLab's coefficients (PRD RES-2), derived from this repository's own validation evidence: validation/naca0012_tmr.md (2D solver chain against NASA's TMR), validation/wing3d_mesh_study.md (the Quick and Standard meshes against a 3.4-million-cell mesh and its Richardson extrapolation) and the fully turbulent drag bias documented in docs/TEACHING_NOTES.md. A range says where the answer would most likely land if the same case were computed with a mesh-converged, wall-resolved model (the 'numerical' part) and, for drag, where a low-turbulence wind-tunnel measurement would most likely land (the 'model' part: WindLab assumes a boundary layer that is turbulent from the leading edge). Ranges are relative to the WindLab value: low and high are fractions, floor is an absolute minimum half-width. Bluff and streamlined bodies: validation/bluff_bodies.md (one Quick run per built-in shape at 20 m/s against handbook drag coefficients).",
+  "unvalidated_text": "Unvalidated - treat as a trend only",
+  "classes": {
+    "streamlined-lifting": {
+      "title": "streamlined, lift-producing shape (the built-in NACA wings)",
+      "presets": {
+        "quick": {
+          "envelope": {
+            "reynolds": [
+              150000,
+              1200000
+            ],
+            "alpha_abs_max_deg": 12,
+            "note": "Evidence at Re 4.1e5 (3D wing, Quick mesh) and Re 6e6 (2D section, wall-resolved); the band covers about a factor of three either side of the 3D evidence. Beyond 12 degrees the lift of this wing is no longer in its linear range (stall predictions by steady RANS are uncertain)."
+          },
+          "cl": {
+            "low": -0.04,
+            "high": 0.04,
+            "floor": 0.01,
+            "basis": "Lift is the number to trust. On the default NACA 0012 wing at 10 degrees the Quick mesh gave CL 0.451 against 0.455 on a mesh nine times finer (0.9 % low); the solver chain itself, checked in 2D against NASA's two codes, was 1.9 % low at 10 degrees and 2.1 % low at 15 degrees. A band of plus or minus 4 % (at least 0.01) covers every comparison we made.",
+            "evidence": [
+              {
+                "case": "3D NACA 0012 wing, Re 4.1e5, 10 deg: Quick vs fine mesh",
+                "error": -0.009
+              },
+              {
+                "case": "2D NACA 0012, Re 6e6, 10 deg: WindLab vs NASA TMR (CFL3D/FUN3D mean)",
+                "error": -0.019
+              },
+              {
+                "case": "2D NACA 0012, Re 6e6, 15 deg: WindLab vs NASA TMR",
+                "error": -0.021
+              },
+              {
+                "case": "3D NACA 0012 wing, 0 deg: |CL| vs 0 (symmetry)",
+                "error_abs": 0.0003
+              }
+            ]
+          },
+          "cd": {
+            "bands": [
+              {
+                "alpha_abs_max_deg": 4,
+                "numerical": {
+                  "low": -0.12,
+                  "high": 0.02
+                },
+                "model": {
+                  "low": -0.4,
+                  "high": 0.0,
+                  "reynolds_below": 1000000
+                },
+                "basis": "Drag at low lift is where the Quick mesh is weakest, and it is always too high. Against the mesh-converged value of the same model the Quick wing at 0 degrees was 9 % high (0.0171 against 0.0156); against the validated wall-resolved 2D section at the same Reynolds number (plus the tip caps) it was 32 % high. The two numbers set the numerical part of the range. On top of that, WindLab assumes a boundary layer that is turbulent from the leading edge: measured NACA 0012 drag near Re 4e5 is about 0.009-0.011, which is 20-40 % below even the wall-resolved fully turbulent value. So the real drag at this Reynolds number is most likely 10 to 50 % below the WindLab number, and almost never above it."
+              },
+              {
+                "alpha_abs_max_deg": 12,
+                "numerical": {
+                  "low": -0.12,
+                  "high": 0.02
+                },
+                "model": {
+                  "low": -0.12,
+                  "high": 0.0,
+                  "reynolds_below": 1000000
+                },
+                "basis": "At larger angles most of the drag of a finite wing is induced drag, which comes from the lift distribution and is captured well. At 10 degrees the Quick wing gave CD 0.0558 against 0.0516 for the mesh-converged value (8 % high) and the 2D section matched NASA's reference within 1 %. The fully turbulent assumption still makes the skin-friction part too high at Re below about a million, worth roughly a further 10 % of the total here. The real drag is most likely 5 to 25 % below the WindLab number."
+              }
+            ],
+            "evidence": [
+              {
+                "case": "3D NACA 0012 wing, 0 deg: Quick vs Richardson-extrapolated CD",
+                "error": 0.094
+              },
+              {
+                "case": "3D NACA 0012 wing, 0 deg: Quick vs fine mesh CD",
+                "error": 0.084
+              },
+              {
+                "case": "3D NACA 0012 wing, 10 deg: Quick vs Richardson-extrapolated CD",
+                "error": 0.082
+              },
+              {
+                "case": "3D NACA 0012 wing, 10 deg: Quick vs fine mesh CD",
+                "error": 0.072
+              },
+              {
+                "case": "3D NACA 0012 wing, 0 deg: Quick vs wall-resolved 2D section + tip caps",
+                "error": 0.32
+              },
+              {
+                "case": "2D NACA 0012, Re 6e6, 0 deg: WindLab vs NASA TMR CD",
+                "error": -0.008
+              },
+              {
+                "case": "2D NACA 0012, Re 6e6, 10 deg: WindLab vs NASA TMR CD",
+                "error": 0.003
+              },
+              {
+                "case": "2D NACA 0012, Re 6e6, 15 deg: WindLab vs NASA TMR CD",
+                "error": -0.007
+              },
+              {
+                "case": "3D NACA 0012 wing, 0 deg: Quick (0.0171) vs measured 0.009-0.011 (natural transition)",
+                "error": 0.71
+              }
+            ]
+          }
+        },
+        "standard": {
+          "envelope": {
+            "reynolds": [
+              150000,
+              1200000
+            ],
+            "alpha_abs_max_deg": 12,
+            "note": "Same evidence as Quick; the Standard mesh was run once per angle in the mesh study."
+          },
+          "cl": {
+            "low": -0.03,
+            "high": 0.03,
+            "floor": 0.01,
+            "basis": "On the default wing at 10 degrees the Standard mesh gave CL 0.459 against 0.455 on the fine mesh (0.8 % high); the solver chain is about 2 % low against NASA's 2D reference.",
+            "evidence": [
+              {
+                "case": "3D NACA 0012 wing, 10 deg: Standard vs fine mesh",
+                "error": 0.008
+              }
+            ]
+          },
+          "cd": {
+            "bands": [
+              {
+                "alpha_abs_max_deg": 4,
+                "numerical": {
+                  "low": -0.25,
+                  "high": 0.02
+                },
+                "model": {
+                  "low": -0.4,
+                  "high": 0.0,
+                  "reynolds_below": 1000000
+                },
+                "basis": "At 0 degrees the Standard mesh was 2 % above the mesh-converged value and 24 % above the wall-resolved 2D section plus tip caps; measured drag with natural transition is a further 20-40 % lower."
+              },
+              {
+                "alpha_abs_max_deg": 12,
+                "numerical": {
+                  "low": -0.06,
+                  "high": 0.02
+                },
+                "model": {
+                  "low": -0.12,
+                  "high": 0.0,
+                  "reynolds_below": 1000000
+                },
+                "basis": "At 10 degrees the Standard mesh was 2.6 % above the mesh-converged value."
+              }
+            ],
+            "evidence": [
+              {
+                "case": "3D NACA 0012 wing, 0 deg: Standard vs Richardson-extrapolated CD",
+                "error": 0.024
+              },
+              {
+                "case": "3D NACA 0012 wing, 10 deg: Standard vs Richardson-extrapolated CD",
+                "error": 0.026
+              }
+            ]
+          }
+        }
+      }
+    },
+    "streamlined-body": {
+      "title": "streamlined body of revolution (the built-in teardrop)",
+      "presets": {
+        "quick": {
+          "envelope": {
+            "reynolds": [
+              100000,
+              500000
+            ],
+            "alpha_abs_max_deg": 2,
+            "note": "One Quick run per shape at 20 m/s and 0 degrees (Re 2.1e5 to 2.7e5); the band covers a factor of about two either side. Bodies at an angle were not checked."
+          },
+          "cl": {
+            "low": 0.0,
+            "high": 0.0,
+            "floor": 0.02,
+            "basis": "A body of revolution at zero incidence makes no lift; WindLab's teardrop gave |CL| below 0.001.",
+            "evidence": [
+              {
+                "case": "teardrop 0.2 m, fineness 3, 0 deg: |CL|",
+                "error_abs": 0.000203952925535
+              }
+            ]
+          },
+          "cd": {
+            "bands": [
+              {
+                "alpha_abs_max_deg": 2,
+                "numerical": {
+                  "low": -0.3,
+                  "high": 0.5
+                },
+                "basis": "One check so far: the teardrop of fineness ratio 3 gave CD 0.068 on frontal area, inside the handbook range 0.05-0.1, with the drag split half pressure, half friction. The mesh around this slender body is coarse (83,000 cells, y+ up to 130), the friction part carries the same fully turbulent bias as the wing, and the pressure part depends on the mesh, so the band is wide: the real value is most likely between 30 % below and 50 % above the WindLab number."
+              }
+            ],
+            "evidence": [
+              {
+                "case": "teardrop 0.2 m, fineness 3, Re 2.7e5, 0 deg: WindLab 0.068 vs handbook 0.05-0.1 (middle 0.075)",
+                "error": -0.08724803974666684
+              }
+            ]
+          }
+        }
+      }
+    },
+    "bluff": {
+      "title": "sharp-edged bluff body (the built-in flat plate and cube)",
+      "presets": {
+        "quick": {
+          "envelope": {
+            "reynolds": [
+              100000,
+              500000
+            ],
+            "alpha_abs_max_deg": 2,
+            "note": "One Quick run per shape at 20 m/s and 0 degrees (Re 2.1e5 to 2.7e5); the band covers a factor of about two either side. Bodies at an angle were not checked."
+          },
+          "cl": {
+            "low": 0.0,
+            "high": 0.0,
+            "floor": 0.05,
+            "basis": "A body facing the wind squarely makes no lift on average; WindLab's plate and cube gave |CL| below 0.001. Small swings around zero come from the unsteady wake.",
+            "evidence": [
+              {
+                "case": "flat plate 0.2 x 0.2 m, 0 deg: |CL|",
+                "error_abs": 8.3656674359e-05
+              },
+              {
+                "case": "cube 0.2 m, 0 deg: |CL|",
+                "error_abs": 9.667787525749999e-05
+              }
+            ]
+          },
+          "cd": {
+            "bands": [
+              {
+                "alpha_abs_max_deg": 2,
+                "numerical": {
+                  "low": -0.1,
+                  "high": 0.1
+                },
+                "basis": "Sharp edges fix where the flow separates, so a steady RANS solution on the Quick mesh gets the pressure drag of a plate or a cube about right: WindLab gave 1.21 for the square plate (handbooks 1.17-1.28) and 1.03 for the cube (handbook 1.05). The drag is almost entirely pressure drag; skin friction hardly matters, so the fully turbulent assumption adds no bias here. The real value is most likely within 10 % of the WindLab number."
+              }
+            ],
+            "evidence": [
+              {
+                "case": "flat plate 0.2 x 0.2 m, 0 deg: WindLab 1.212 vs handbook 1.1-1.3 (middle 1.2)",
+                "error": 0.010275241999999851
+              },
+              {
+                "case": "cube 0.2 m, 0 deg: WindLab 1.027 vs handbook 1-1.1 (middle 1.05)",
+                "error": -0.02196104609523819
+              }
+            ]
+          }
+        }
+      }
+    },
+    "mixed": {
+      "title": "mixed shapes (cars, fuselages with wings...)",
+      "presets": {}
+    },
+    "unknown": {
+      "title": "uploaded part of unknown class",
+      "presets": {}
+    },
+    "bluff-smooth": {
+      "title": "smooth bluff body (the built-in sphere and cylinder)",
+      "presets": {
+        "quick": {
+          "envelope": {
+            "reynolds": [
+              100000,
+              500000
+            ],
+            "alpha_abs_max_deg": 2,
+            "note": "One Quick run per shape at 20 m/s and 0 degrees (Re 2.1e5 to 2.7e5); the band covers a factor of about two either side. Bodies at an angle were not checked. The lift of a smooth bluff body swings about zero in a steady solution (vortex shedding); that alone does not make the run unvalidated here, because the band already allows for it.",
+            "unsteady_ok": true
+          },
+          "cl": {
+            "low": 0.0,
+            "high": 0.0,
+            "floor": 0.3,
+            "basis": "Smooth bluff bodies shed vortices: their lift swings about zero (the cylinder's by +/-0.25 in WindLab's steady solution) and only averages to zero. Treat any single CL as noise.",
+            "evidence": [
+              {
+                "case": "sphere 0.2 m, 0 deg: |CL| (mean of the last 200 iterations)",
+                "error_abs": 0.083026334415
+              },
+              {
+                "case": "cylinder 0.15 x 0.45 m, 0 deg: |CL|",
+                "error_abs": 0.007571694665050001
+              }
+            ]
+          },
+          "cd": {
+            "bands": [
+              {
+                "alpha_abs_max_deg": 2,
+                "numerical": {
+                  "low": -0.2,
+                  "high": 1.0
+                },
+                "basis": "Where a smooth body's flow separates depends on whether its boundary layer is laminar or turbulent, and WindLab assumes turbulent everywhere. A turbulent layer clings on further round and gives a narrower wake, as a real sphere's does only above its drag crisis (Re above about 3e5). So at the Reynolds numbers of a student model WindLab under-predicts: the sphere gave 0.25 against the handbook 0.47, the cylinder (three diameters long, free ends) 0.57 against about 0.7 for such a short cylinder and 1.0-1.2 for a very long one, and its wake never settled (steady solver, unsteady flow). The real value is most likely between 20 % below and twice the WindLab number; the trend between shapes is still right."
+              }
+            ],
+            "evidence": [
+              {
+                "case": "sphere 0.2 m, Re 2.7e5, 0 deg: WindLab 0.252 vs handbook 0.4-0.5 (middle 0.45)",
+                "error": -0.4392786964333333
+              },
+              {
+                "case": "cylinder 0.15 x 0.45 m, Re 2.1e5, 0 deg: WindLab 0.574 vs handbook 0.6-1.2 (middle 0.9)",
+                "error": -0.3617597163388887
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

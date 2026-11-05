@@ -1,0 +1,47 @@
+# Build the static WindLab demo (scripts/build_static_demo.py) and publish it with GitHub Pages:
+# the instant preview, the glossary and the lessons with their pre-computed results, no CFD solver.
+# It runs on every push to main and by hand (Actions > Pages demo > Run workflow) once Pages is
+# enabled in the repository settings (Settings > Pages > Source: "GitHub Actions"); until then the
+# deploy step fails harmlessly. The published page is
+# https://isac-artzi.github.io/SenSym-Windtunnel/ (see "Online demo" in the README).
+name: Pages demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install WindLab (no OpenFOAM needed for the demo build)
+        run: pip install . pytest
+      - name: Build site/ and fetch every file once (no 404s)
+        run: python scripts/build_static_demo.py --out site --check --port 8081
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

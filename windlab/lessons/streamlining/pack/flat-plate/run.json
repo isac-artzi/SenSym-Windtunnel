@@ -1,0 +1,74 @@
+{
+ "pack_version": 1,
+ "name": "flat-plate",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "single",
+  "airspeed": 20.0,
+  "alpha_deg": 0.0,
+  "angles": null,
+  "preset": "quick",
+  "reynolds": 273841.3089614569,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.04000000000000001,
+  "reference_length": 0.2,
+  "reference_how": "frontal area and height",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "Flat plate facing the wind, 0.2 m wide, 0.2 m high",
+  "geometry_class": "bluff"
+ },
+ "geometry": {
+  "name": "Flat plate facing the wind, 0.2 m wide, 0.2 m high",
+  "class": "bluff",
+  "body_min": [
+   0.0,
+   -0.10000000149011612,
+   -0.10000000149011612
+  ],
+  "body_max": [
+   0.009999999776482582,
+   0.10000000149011612,
+   0.10000000149011612
+  ]
+ },
+ "result": {
+  "cl": -8.3656674359e-05,
+  "cd": 1.2123302904,
+  "cm": 6.2292255937e-05,
+  "cl_pm": 5.82763076e-05,
+  "cd_pm": 0.00035346499999999725,
+  "l_over_d": -6.900485372793751e-05,
+  "iterations": 360,
+  "converged": true,
+  "cells": 198454,
+  "solver_seconds": 42.66683001899946,
+  "peak_memory_mb": 686.328125,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [],
+ "y_plus": {
+  "body": {
+   "min": 1.20859996,
+   "max": 22.170089,
+   "average": 11.9176755
+  }
+ },
+ "mesh": {
+  "cells": 198454,
+  "max_non_orthogonality": 44.827249,
+  "max_skewness": 2.3685182,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 14588,
+    "target_layers": 5,
+    "mean_layers": 5.0,
+    "thickness_m": 0.00404,
+    "thickness_pct": 98.5
+   }
+  }
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "pack_version": 1,
+ "name": "sphere",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "single",
+  "airspeed": 20.0,
+  "alpha_deg": 0.0,
+  "angles": null,
+  "preset": "quick",
+  "reynolds": 273841.3089614569,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.031415926535897934,
+  "reference_length": 0.2,
+  "reference_how": "frontal area and diameter",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "Sphere, diameter 0.2 m",
+  "geometry_class": "bluff"
+ },
+ "geometry": {
+  "name": "Sphere, diameter 0.2 m",
+  "class": "bluff",
+  "body_min": [
+   0.0,
+   -0.10000000149011612,
+   -0.10000000149011612
+  ],
+  "body_max": [
+   0.20000000298023224,
+   0.10000000149011612,
+   0.10000000149011612
+  ]
+ },
+ "result": {
+  "cl": 0.083026334415,
+  "cd": 0.252324586605,
+  "cm": 0.000205855035865,
+  "cl_pm": 0.025599754250000002,
+  "cd_pm": 0.008890886000000014,
+  "l_over_d": 0.32904575623053756,
+  "iterations": 472,
+  "converged": true,
+  "cells": 169536,
+  "solver_seconds": 49.403587772008905,
+  "peak_memory_mb": 632.66015625,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [
+  "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+ ],
+ "y_plus": {
+  "body": {
+   "min": 2.38594204,
+   "max": 41.172389,
+   "average": 25.0615155
+  }
+ },
+ "mesh": {
+  "cells": 169536,
+  "max_non_orthogonality": 37.914245,
+  "max_skewness": 0.49992879,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 10904,
+    "target_layers": 5,
+    "mean_layers": 5.0,
+    "thickness_m": 0.00561,
+    "thickness_pct": 100.0
+   }
+  }
+ }
+}

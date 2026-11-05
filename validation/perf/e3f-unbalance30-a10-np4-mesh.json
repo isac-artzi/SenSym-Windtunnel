@@ -1,0 +1,101 @@
+{
+  "label": "e3f-unbalance30",
+  "date": "2026-11-03 20:27:46",
+  "host": "63b1f4773003",
+  "machine": {
+    "cpu": "aarch64",
+    "logical_cores": 16,
+    "physical_cores": 16,
+    "ram_gb": 29.6,
+    "ram_available_gb": 24.2,
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.14-linuxkit",
+    "arch": "aarch64",
+    "wsl": false,
+    "solver_cores": 8,
+    "python": "3.12.3"
+  },
+  "n_procs": 4,
+  "preset": "quick",
+  "airspeed": 20.0,
+  "alpha": 10.0,
+  "angles": null,
+  "patches": [
+    [
+      "system/snappyHexMeshDict",
+      "maxLoadUnbalance    0.10;",
+      "maxLoadUnbalance    0.30;"
+    ]
+  ],
+  "case": "/runs/96db77ae-ba51-4fc2-8536-cbf9e1718267",
+  "stages": [
+    {
+      "name": "blockMesh",
+      "seconds": 0.1,
+      "peak_mb": 7
+    },
+    {
+      "name": "surfaceFeatureExtract",
+      "seconds": 0.02,
+      "peak_mb": 6
+    },
+    {
+      "name": "decomposePar",
+      "seconds": 0.07,
+      "peak_mb": 8
+    },
+    {
+      "name": "snappyHexMesh",
+      "seconds": 10.73,
+      "peak_mb": 911
+    },
+    {
+      "name": "checkMesh",
+      "seconds": 0.27,
+      "peak_mb": 347
+    }
+  ],
+  "stage_seconds": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.02,
+    "decomposePar": 0.07,
+    "snappyHexMesh": 10.73,
+    "checkMesh": 0.27
+  },
+  "snappy_phases": {
+    "refine": 4.63,
+    "snap": 3.23,
+    "layers": 2.83,
+    "total": 10.81
+  },
+  "solver_log": {},
+  "iterations": 0,
+  "converged": false,
+  "cells": 371829,
+  "mesh_ok": true,
+  "layers": {
+    "body": {
+      "faces": 32256,
+      "target_layers": 5,
+      "mean_layers": 4.75,
+      "thickness_m": 0.0055,
+      "thickness_pct": 96.0
+    }
+  },
+  "max_non_orthogonality": 64.988448,
+  "cl": null,
+  "cd": null,
+  "cm": null,
+  "cd_pressure": null,
+  "cd_viscous": null,
+  "cl_pm": null,
+  "cd_pm": null,
+  "points": [],
+  "y_plus": {},
+  "events": [],
+  "post": {},
+  "run_case_wall_s": 11.5,
+  "total_wall_s": 11.5,
+  "peak_memory_mb": 911,
+  "notes": []
+}

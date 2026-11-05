@@ -1,0 +1,390 @@
+{
+  "label": "baseline",
+  "date": "2026-11-03 19:53:46",
+  "host": "63b1f4773003",
+  "machine": {
+    "cpu": "aarch64",
+    "logical_cores": 16,
+    "physical_cores": 16,
+    "ram_gb": 29.6,
+    "ram_available_gb": 24.5,
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.14-linuxkit",
+    "arch": "aarch64",
+    "wsl": false,
+    "solver_cores": 8,
+    "python": "3.12.3"
+  },
+  "n_procs": 4,
+  "preset": "quick",
+  "airspeed": 20.0,
+  "alpha": 10.0,
+  "angles": [
+    -4.0,
+    0.0,
+    4.0,
+    8.0,
+    12.0,
+    16.0
+  ],
+  "case": "/runs/74fc1e2d-6c1a-44ab-9f41-0c682dc472ff",
+  "stages": [
+    {
+      "name": "blockMesh",
+      "seconds": 0.1,
+      "peak_mb": 7
+    },
+    {
+      "name": "surfaceFeatureExtract",
+      "seconds": 0.02,
+      "peak_mb": 6
+    },
+    {
+      "name": "decomposePar",
+      "seconds": 0.07,
+      "peak_mb": 8
+    },
+    {
+      "name": "snappyHexMesh",
+      "seconds": 11.47,
+      "peak_mb": 894
+    },
+    {
+      "name": "checkMesh",
+      "seconds": 0.28,
+      "peak_mb": 380
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.37,
+      "peak_mb": 558
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 58.51,
+      "peak_mb": 1034
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.37,
+      "peak_mb": 559
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 52.48,
+      "peak_mb": 1025
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.37,
+      "peak_mb": 558
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 58.6,
+      "peak_mb": 1014
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.37,
+      "peak_mb": 561
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 62.52,
+      "peak_mb": 1014
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.37,
+      "peak_mb": 558
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 136.57,
+      "peak_mb": 1017
+    },
+    {
+      "name": "potentialFoam",
+      "seconds": 0.42,
+      "peak_mb": 558
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 276.02,
+      "peak_mb": 1023
+    }
+  ],
+  "stage_seconds": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.02,
+    "decomposePar": 0.07,
+    "snappyHexMesh": 11.47,
+    "checkMesh": 0.28,
+    "potentialFoam": 2.27,
+    "simpleFoam": 644.69
+  },
+  "snappy_phases": {
+    "refine": 5.56,
+    "snap": 3.11,
+    "layers": 2.85,
+    "total": 11.69
+  },
+  "solver_log": {
+    "p0": {
+      "iterations_logged": 367,
+      "first_50_s_per_it": 0.172,
+      "mean_s_per_it": 0.15833333333333335,
+      "last_100_s_per_it": 0.14910000000000004,
+      "exec_total_s": 58.27,
+      "clock_total_s": 58.0,
+      "p_iterations_mean": 0.9019073569482289,
+      "ux_iterations_mean": 3.111716621253406
+    },
+    "p1": {
+      "iterations_logged": 322,
+      "first_50_s_per_it": 0.17439999999999997,
+      "mean_s_per_it": 0.16183800623052957,
+      "last_100_s_per_it": 0.15559999999999996,
+      "exec_total_s": 52.26,
+      "clock_total_s": 52.0,
+      "p_iterations_mean": 1.0434782608695652,
+      "ux_iterations_mean": 2.5093167701863353
+    },
+    "p2": {
+      "iterations_logged": 364,
+      "first_50_s_per_it": 0.1736,
+      "mean_s_per_it": 0.15980716253443525,
+      "last_100_s_per_it": 0.15239999999999995,
+      "exec_total_s": 58.33,
+      "clock_total_s": 58.0,
+      "p_iterations_mean": 0.9175824175824175,
+      "ux_iterations_mean": 3.1483516483516483
+    },
+    "p3": {
+      "iterations_logged": 377,
+      "first_50_s_per_it": 0.171,
+      "mean_s_per_it": 0.1647872340425532,
+      "last_100_s_per_it": 0.1646,
+      "exec_total_s": 62.29,
+      "clock_total_s": 62.0,
+      "p_iterations_mean": 1.0848806366047745,
+      "ux_iterations_mean": 4.5782493368700266
+    },
+    "p4": {
+      "iterations_logged": 763,
+      "first_50_s_per_it": 0.17059999999999997,
+      "mean_s_per_it": 0.17850393700787404,
+      "last_100_s_per_it": 0.1713000000000001,
+      "exec_total_s": 136.33,
+      "clock_total_s": 136.0,
+      "p_iterations_mean": 1.8768020969855832,
+      "ux_iterations_mean": 7.17038007863696
+    },
+    "p5": {
+      "iterations_logged": 1500,
+      "first_50_s_per_it": 0.1722,
+      "mean_s_per_it": 0.18376250833889257,
+      "last_100_s_per_it": 0.18299999999999955,
+      "exec_total_s": 275.78,
+      "clock_total_s": 275.0,
+      "p_iterations_mean": 2.3533333333333335,
+      "ux_iterations_mean": 7.56
+    }
+  },
+  "iterations": 3693,
+  "converged": false,
+  "cells": 371920,
+  "mesh_ok": true,
+  "layers": {
+    "body": {
+      "faces": 32256,
+      "target_layers": 5,
+      "mean_layers": 4.75,
+      "thickness_m": 0.0055,
+      "thickness_pct": 96.0
+    }
+  },
+  "max_non_orthogonality": 64.992665,
+  "cl": null,
+  "cd": null,
+  "cm": null,
+  "cd_pressure": null,
+  "cd_viscous": null,
+  "cl_pm": null,
+  "cd_pm": null,
+  "points": [
+    {
+      "alpha_deg": -4.0,
+      "status": "done",
+      "iterations": 367,
+      "converged": true,
+      "seconds": 58.89032877700811,
+      "cl": -0.176001041515,
+      "cd": 0.0227108051135
+    },
+    {
+      "alpha_deg": 0.0,
+      "status": "done",
+      "iterations": 322,
+      "converged": true,
+      "seconds": 52.85266510800284,
+      "cl": -6.352468322949999e-05,
+      "cd": 0.017107793139000002
+    },
+    {
+      "alpha_deg": 4.0,
+      "status": "done",
+      "iterations": 364,
+      "converged": true,
+      "seconds": 58.96874515200034,
+      "cl": 0.17592645341000002,
+      "cd": 0.0227066700315
+    },
+    {
+      "alpha_deg": 8.0,
+      "status": "done",
+      "iterations": 377,
+      "converged": true,
+      "seconds": 62.889493779002805,
+      "cl": 0.35899216625999997,
+      "cd": 0.040866002835
+    },
+    {
+      "alpha_deg": 12.0,
+      "status": "done",
+      "iterations": 763,
+      "converged": true,
+      "seconds": 136.9450397299952,
+      "cl": 0.535136258895,
+      "cd": 0.075741081498
+    },
+    {
+      "alpha_deg": 16.0,
+      "status": "done",
+      "iterations": 1500,
+      "converged": false,
+      "seconds": 276.44078379200073,
+      "cl": 0.545507672855,
+      "cd": 0.17765593188499998
+    }
+  ],
+  "y_plus": {},
+  "events": [
+    {
+      "point": {
+        "index": 0,
+        "alpha_deg": -4.0,
+        "count": 6
+      },
+      "t": 12.277184631006094
+    },
+    {
+      "converged": 365,
+      "t": 70.7923099489999
+    },
+    {
+      "point_done": {
+        "index": 0,
+        "status": "done"
+      },
+      "t": 71.1696577410039
+    },
+    {
+      "point": {
+        "index": 1,
+        "alpha_deg": 0.0,
+        "count": 6
+      },
+      "t": 71.16973315800715
+    },
+    {
+      "converged": 320,
+      "t": 123.64927047400852
+    },
+    {
+      "point_done": {
+        "index": 1,
+        "status": "done"
+      },
+      "t": 124.02803755800414
+    },
+    {
+      "point": {
+        "index": 2,
+        "alpha_deg": 4.0,
+        "count": 6
+      },
+      "t": 124.02810597400821
+    },
+    {
+      "converged": 362,
+      "t": 182.52706991801097
+    },
+    {
+      "point_done": {
+        "index": 2,
+        "status": "done"
+      },
+      "t": 183.00143371000013
+    },
+    {
+      "point": {
+        "index": 3,
+        "alpha_deg": 8.0,
+        "count": 6
+      },
+      "t": 183.0015080430021
+    },
+    {
+      "converged": 375,
+      "t": 245.47337353001058
+    },
+    {
+      "point_done": {
+        "index": 3,
+        "status": "done"
+      },
+      "t": 245.89558744701208
+    },
+    {
+      "point": {
+        "index": 4,
+        "alpha_deg": 12.0,
+        "count": 6
+      },
+      "t": 245.89565482200123
+    },
+    {
+      "converged": 761,
+      "t": 382.4709557599999
+    },
+    {
+      "point_done": {
+        "index": 4,
+        "status": "done"
+      },
+      "t": 382.8447568430129
+    },
+    {
+      "point": {
+        "index": 5,
+        "alpha_deg": 16.0,
+        "count": 6
+      },
+      "t": 382.84486609300075
+    },
+    {
+      "point_done": {
+        "index": 5,
+        "status": "done"
+      },
+      "t": 659.2899238009995
+    }
+  ],
+  "post": {},
+  "run_case_wall_s": 659.3,
+  "total_wall_s": 659.3,
+  "peak_memory_mb": 1034,
+  "notes": []
+}

@@ -1,0 +1,122 @@
+{
+ "pack_version": 1,
+ "name": "ar4-sweep",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "sweep",
+  "airspeed": 20.0,
+  "alpha_deg": null,
+  "angles": [
+   0.0,
+   4.0,
+   8.0
+  ],
+  "preset": "quick",
+  "reynolds": 410761.96344218525,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.36,
+  "reference_length": 0.3,
+  "reference_how": "mean aerodynamic chord and planform area (chord x span)",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "NACA 0012 wing, chord 0.3 m, span 1.2 m",
+  "geometry_class": null
+ },
+ "geometry": {
+  "name": "NACA 0012 wing, chord 0.3 m, span 1.2 m",
+  "class": null,
+  "body_min": [
+   0.0,
+   -0.6000000238418579,
+   -0.018001887947320938
+  ],
+  "body_max": [
+   0.30000001192092896,
+   0.6000000238418579,
+   0.018001887947320938
+  ]
+ },
+ "result": {
+  "points": [
+   {
+    "alpha_deg": 0.0,
+    "status": "done",
+    "seconds": 95.83403854399512,
+    "cl": 0.0011259322792000002,
+    "cd": 0.016687737902,
+    "cm": -0.00037224743108999994,
+    "l_over_d": 0.0674706353738369,
+    "cl_pm": 1.070919999999944e-06,
+    "cd_pm": 7.710000000070438e-08,
+    "iterations": 328,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 4.0,
+    "status": "done",
+    "seconds": 108.09143359100563,
+    "cl": 0.24367999572500001,
+    "cd": 0.022576928350500004,
+    "cm": 0.0082547601155,
+    "l_over_d": 10.793319265665442,
+    "cl_pm": 1.611099999999921e-05,
+    "cd_pm": 4.167500000009511e-07,
+    "iterations": 371,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 8.0,
+    "status": "done",
+    "seconds": 114.1193713850007,
+    "cl": 0.485514695855,
+    "cd": 0.0420670034585,
+    "cm": 0.014045195093500001,
+    "l_over_d": 11.541461381578335,
+    "cl_pm": 4.1140500000008684e-05,
+    "cd_pm": 4.077599999999237e-06,
+    "iterations": 377,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   }
+  ],
+  "max_l_over_d": 11.541461381578335,
+  "max_l_over_d_alpha": 8.0,
+  "cl_max": 0.485514695855,
+  "cl_max_alpha": 8.0,
+  "stall_alpha": null,
+  "stall_note": null,
+  "iterations": 1076,
+  "converged": true,
+  "cells": 673749,
+  "solver_seconds": 337.2544971949901,
+  "peak_memory_mb": 1610.15625,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [],
+ "y_plus": {},
+ "mesh": {
+  "cells": 673749,
+  "max_non_orthogonality": 64.990226,
+  "max_skewness": 2.3219521,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 60672,
+    "target_layers": 5,
+    "mean_layers": 4.78,
+    "thickness_m": 0.00566,
+    "thickness_pct": 96.6
+   }
+  }
+ }
+}

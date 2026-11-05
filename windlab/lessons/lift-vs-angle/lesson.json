@@ -1,0 +1,56 @@
+{
+  "id": "lift-vs-angle",
+  "order": 1,
+  "title": "Lift vs angle of attack",
+  "minutes": 50,
+  "summary": "Tilt the wind into a wing, step by step, and watch the lift rise - until it stops rising. One sweep of six angles on the default NACA 0012 wing.",
+  "objectives": [
+    "Describe how the lift coefficient of a wing changes with angle of attack, and read the lift slope from a chart.",
+    "Explain why the curve bends over at high angles (stall) and why a symmetric wing gives zero lift at zero angle.",
+    "Use the drag polar to find the angle with the best lift-to-drag ratio."
+  ],
+  "glossary": ["angle-of-attack", "lift-coefficient", "drag-coefficient", "lift-slope", "stall", "drag-polar", "lift-to-drag-ratio", "sweep"],
+  "timeline": [
+    {"minutes": 5, "what": "Open the lesson, read the objectives, write the prediction (sketch CL against angle)."},
+    {"minutes": 10, "what": "Set up and start the sweep (or load the pre-computed results); while it runs, discuss what the solver is doing."},
+    {"minutes": 15, "what": "Read the table and the three charts; fill in the observation box; find the slope and the best L/D."},
+    {"minutes": 10, "what": "Explain: downwash and the finite wing, separation and stall; compare with the prediction."},
+    {"minutes": 10, "what": "Comprehension questions, debrief, homework (NACA 2412)."}
+  ],
+  "misconceptions": [
+    "'Lift keeps growing with angle': it does, until separation; past stall more angle gives less lift and much more drag.",
+    "'The wind tunnel turns the wind, so the wing is not really at an angle': tilting the wind by 8 degrees and tilting the wing by 8 degrees are the same experiment; WindLab measures lift perpendicular to the wind either way.",
+    "'The slope should be 0.11 per degree as in the textbook': that is the two-dimensional value; a finite wing of aspect ratio 2 feels a strong downwash and makes less than half of it."
+  ],
+  "steps": [
+    {"id": "intro", "kind": "intro", "title": "What you will do",
+     "text": "A wing makes lift by deflecting air downwards. The angle between the wind and the wing is the angle of attack. In a real wind tunnel you would turn the model a few degrees at a time and read the force balance after each turn; here WindLab does the same with one mesh and six solver runs. The wing is the default NACA 0012: a symmetric section, chord 0.3 m, span 0.6 m (aspect ratio 2), in a 20 m/s wind."},
+    {"id": "predict-curve", "kind": "predict", "title": "Predict before you run",
+     "prompt": "Sketch (on paper) and describe in words how you expect the lift coefficient CL to change as the angle of attack goes from -4 to 16 degrees. Will it be a straight line? What happens at 0 degrees for a symmetric wing? Does it keep rising all the way to 16 degrees? Write your prediction here before running.",
+     "placeholder": "I expect CL to ..."},
+    {"id": "run-sweep", "kind": "run", "title": "Run the angle sweep", "pack": "naca0012-sweep",
+     "shape": {"naca": {"code": "0012", "chord": 0.3, "span": 0.6}},
+     "conditions": {"kind": "sweep", "airspeed": 20, "angles": [-4, 0, 4, 8, 12, 16]},
+     "text": "Six angles on one mesh take about six Quick runs (6-10 minutes on a laptop). Watch the CL and CD traces settle for each angle. If time is short, use the pre-computed results: the WindLab team ran exactly this case."},
+    {"id": "observe-table", "kind": "observe", "title": "Observe",
+     "prompt": "From the results table write down CL at -4, 4, 8, 12 and 16 degrees, and the angle with the best L/D. Work out the lift slope between -4 and 8 degrees (change in CL divided by change in angle) and between 12 and 16 degrees.",
+     "placeholder": "CL(-4) = ..., CL(4) = ..., slope -4 to 8 = ... per degree, slope 12 to 16 = ..., best L/D at ..."},
+    {"id": "explain-curve", "kind": "explain", "title": "Explain",
+     "prompt": "Why is the lift slope so much smaller than the 0.11 per degree a two-dimensional wing section gives, and why does the curve flatten between 12 and 16 degrees? Compare with your prediction.",
+     "text": "Two effects. First, this wing is short (aspect ratio 2): the air spilling around the tips rolls into vortices that push air down over the whole wing (downwash), so the wing feels a smaller angle than the geometric one; the slope drops from 0.11 to about 0.045 per degree. Second, above about 12 degrees the air can no longer follow the upper surface; it separates, the lift stops rising (0.536 at 12, only 0.588 at 16 degrees) and the drag more than doubles. That is the start of stall. WindLab's steady simulation shows where it begins but is only rough past it; the solver also needed many more iterations at 16 degrees."},
+    {"id": "q1", "kind": "question", "prompt": "Between -4 and 8 degrees the lift coefficient rises by about the same amount per degree. What is this slope for this wing?",
+     "choices": ["about 0.011 per degree", "about 0.045 per degree", "about 0.11 per degree", "about 0.5 per degree"],
+     "answer": 1,
+     "explanation": "(0.360 - (-0.175)) / 12 degrees is about 0.045 per degree. A two-dimensional section would give 0.11; the finite wing with aspect ratio 2 gives less than half of that."},
+    {"id": "q2", "kind": "question", "prompt": "Why does the lift curve bend over between 12 and 16 degrees?",
+     "choices": ["The wind speed drops at high angles", "The air separates from the upper surface: the beginning of stall", "The mesh runs out of cells", "Drag pushes the wing backwards"],
+     "answer": 1,
+     "explanation": "At high angles the pressure on the upper surface must rise steeply towards the trailing edge; the slowed air in the boundary layer cannot manage that and leaves the surface. Separated flow makes little extra lift and a lot of drag."},
+    {"id": "q3", "kind": "question", "prompt": "At -4 degrees the drag coefficient equals that at +4 degrees and the lift is equal and opposite. Why?",
+     "choices": ["Because the solver reuses the 4-degree result", "Because the NACA 0012 is symmetric: turned upside down it is the same wing", "Because drag never depends on the angle", "Because a sweep uses one mesh for all angles"],
+     "answer": 1,
+     "explanation": "A symmetric section at -4 degrees is the mirror image of the same section at +4 degrees, so the lift simply changes sign and the drag is the same. A cambered section (NACA 2412) would not show this symmetry."},
+    {"id": "homework", "kind": "homework", "title": "Homework (optional, 20 minutes)",
+     "text": "Make a NACA 2412 wing with the same chord and span and run the same sweep. Then tick both sweeps under My runs and press Compare. Expect the 2412 curve to sit about 0.1 higher at every angle (its zero-lift angle is about -2.5 degrees) with the same slope. Where is the best L/D now?"}
+  ]
+}

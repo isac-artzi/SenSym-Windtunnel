@@ -1,0 +1,412 @@
+{
+ "about": "Task 012 step 3: why the symmetric 4-fin rocket shows lift at 0 degrees. Quick preset unless said, 20 m/s, 0 deg, 4 ranks, reference area = plan-view box (0.0504 m2 rocket; frontal area is 0.00159 m2). coeff_means are the last-100-iteration means of forceCoeffs (Cs = side force).",
+ "rocket_turned_about_x": [
+  {
+   "label": "as uploaded, Quick",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": -0.013745485541,
+    "cd": 0.020385438393999995,
+    "cm": 0.0095299286584,
+    "cl_pm": 5.402000000003307e-07,
+    "cd_pm": 4.929999999989804e-07,
+    "iterations": 241,
+    "converged": true,
+    "cells": 86543
+   },
+   "params": {
+    "reference_area": 0.05039999999999999,
+    "reference_length": 0.42,
+    "reference_how": "length along the wind (x) and plan-view box area (length x width)"
+   },
+   "coeff_means": {
+    "Time": 191.5,
+    "Cd": 0.020385438393999995,
+    "Cd(f)": 0.009833648849799998,
+    "Cd(r)": 0.010551789549,
+    "Cl": -0.013745485541,
+    "Cl(f)": 0.0026571858887000006,
+    "Cl(r)": -0.016402671427000002,
+    "CmPitch": 0.0095299286584,
+    "CmRoll": -0.00035907034810999994,
+    "CmYaw": 0.012806952769999996,
+    "Cs": 0.018122841204999997,
+    "Cs(f)": 0.021868373372000004,
+    "Cs(r)": -0.0037455321674999997,
+    "rows": 241
+   },
+   "surface": {
+    "faces": 10844,
+    "cp_min": -0.7382420301437378,
+    "cp_max": 0.3522423803806305,
+    "faces_z_plus": 5372,
+    "faces_z_minus": 5472,
+    "area_z_plus": 0.03226667642593384,
+    "area_z_minus": 0.03257361799478531,
+    "cp_mean_z_plus": -0.04269285872578621,
+    "cp_mean_z_minus": -0.060724008828401566,
+    "faces_y_plus": 5318,
+    "faces_y_minus": 5526,
+    "area_y_plus": 0.03200022876262665,
+    "area_y_minus": 0.0328400656580925,
+    "cp_mean_y_plus": -0.06685762852430344,
+    "cp_mean_y_minus": -0.03703092411160469
+   }
+  },
+  {
+   "label": "turned 90 about x, Quick",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": -0.015177132239000002,
+    "cd": 0.020279502343,
+    "cm": 0.010622753618,
+    "cl_pm": 1.026999999999799e-06,
+    "cd_pm": 4.160249999999449e-06,
+    "iterations": 256,
+    "converged": true,
+    "cells": 86633
+   },
+   "params": {
+    "reference_area": 0.05039999729990963,
+    "reference_length": 0.41999998688697815,
+    "reference_how": "length along the wind (x) and plan-view box area (length x width)"
+   },
+   "coeff_means": {
+    "Time": 206.5,
+    "Cd": 0.020279502343,
+    "Cd(f)": 0.0100022830753,
+    "Cd(r)": 0.010277219272,
+    "Cl": -0.015177132239000002,
+    "Cl(f)": 0.0030341874982,
+    "Cl(r)": -0.018211319737,
+    "CmPitch": 0.010622753618,
+    "CmRoll": -0.00013746809969000004,
+    "CmYaw": 0.012825387533,
+    "Cs": 0.018118664015,
+    "Cs(f)": 0.021884719541999994,
+    "Cs(r)": -0.0037660555249,
+    "rows": 256
+   },
+   "surface": {
+    "faces": 10844,
+    "cp_min": -0.7181583046913147,
+    "cp_max": 0.3598327040672302,
+    "faces_z_plus": 5421,
+    "faces_z_minus": 5423,
+    "area_z_plus": 0.03249617666006088,
+    "area_z_minus": 0.03235134109854698,
+    "cp_mean_z_plus": -0.041485004127025604,
+    "cp_mean_z_minus": -0.06179801747202873,
+    "faces_y_plus": 5322,
+    "faces_y_minus": 5522,
+    "area_y_plus": 0.03200230747461319,
+    "area_y_minus": 0.03284521400928497,
+    "cp_mean_y_plus": -0.06610318273305893,
+    "cp_mean_y_minus": -0.03750617429614067
+   }
+  },
+  {
+   "label": "turned 180 about x, Quick",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": -0.015665765789,
+    "cd": 0.020317482228000002,
+    "cm": 0.010918844541,
+    "cl_pm": 2.1330500000003166e-06,
+    "cd_pm": 6.345249999999483e-06,
+    "iterations": 252,
+    "converged": true,
+    "cells": 86587
+   },
+   "params": {
+    "reference_area": 0.05039999729990963,
+    "reference_length": 0.41999998688697815,
+    "reference_how": "length along the wind (x) and plan-view box area (length x width)"
+   },
+   "coeff_means": {
+    "Time": 202.5,
+    "Cd": 0.020317482228000002,
+    "Cd(f)": 0.010068248681000001,
+    "Cd(r)": 0.010249233549000002,
+    "Cl": -0.015665765789,
+    "Cl(f)": 0.0030859616434999997,
+    "Cl(r)": -0.018751727431,
+    "CmPitch": 0.010918844541,
+    "CmRoll": -9.049243668899998e-05,
+    "CmYaw": 0.012722965961000001,
+    "Cs": 0.017959007645000004,
+    "Cs(f)": 0.021702469781,
+    "Cs(r)": -0.003743462133899999,
+    "rows": 252
+   },
+   "surface": {
+    "faces": 10844,
+    "cp_min": -0.7104735970497131,
+    "cp_max": 0.35487106442451477,
+    "faces_z_plus": 5413,
+    "faces_z_minus": 5431,
+    "area_z_plus": 0.03246427699923515,
+    "area_z_minus": 0.03237823769450188,
+    "cp_mean_z_plus": -0.04109793156385422,
+    "cp_mean_z_minus": -0.062318578362464905,
+    "faces_y_plus": 5319,
+    "faces_y_minus": 5525,
+    "area_y_plus": 0.031997568905353546,
+    "area_y_minus": 0.032844945788383484,
+    "cp_mean_y_plus": -0.06599158048629761,
+    "cp_mean_y_minus": -0.03776564076542854
+   }
+  },
+  {
+   "label": "turned 270 about x, Quick",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": -0.012918990581,
+    "cd": 0.020328854299000002,
+    "cm": 0.0090030012299,
+    "cl_pm": 9.54699999999864e-07,
+    "cd_pm": 3.3455500000004884e-06,
+    "iterations": 247,
+    "converged": true,
+    "cells": 86224
+   },
+   "params": {
+    "reference_area": 0.05039999729990963,
+    "reference_length": 0.41999998688697815,
+    "reference_how": "length along the wind (x) and plan-view box area (length x width)"
+   },
+   "coeff_means": {
+    "Time": 197.5,
+    "Cd": 0.020328854299000002,
+    "Cd(f)": 0.009805640533199999,
+    "Cd(r)": 0.010523213767,
+    "Cl": -0.012918990581,
+    "Cl(f)": 0.0025435059384000002,
+    "Cl(r)": -0.015462496519,
+    "CmPitch": 0.0090030012299,
+    "CmRoll": -0.00035878661730000006,
+    "CmYaw": 0.012906201383000002,
+    "Cs": 0.018240236341,
+    "Cs(f)": 0.022026319546999996,
+    "Cs(r)": -0.0037860832108999997,
+    "rows": 247
+   },
+   "surface": {
+    "faces": 10844,
+    "cp_min": -0.7236799597740173,
+    "cp_max": 0.35527053475379944,
+    "faces_z_plus": 5411,
+    "faces_z_minus": 5433,
+    "area_z_plus": 0.03242892771959305,
+    "area_z_minus": 0.032418392598629,
+    "cp_mean_z_plus": -0.04299737885594368,
+    "cp_mean_z_minus": -0.06000397726893425,
+    "faces_y_plus": 5320,
+    "faces_y_minus": 5524,
+    "area_y_plus": 0.03200298547744751,
+    "area_y_minus": 0.032844334840774536,
+    "cp_mean_y_plus": -0.06622644513845444,
+    "cp_mean_y_minus": -0.037149399518966675
+   }
+  },
+  {
+   "label": "back to original (360), Standard",
+   "status": "done",
+   "seconds": 42,
+   "result": {
+    "cl": -0.016346965745999996,
+    "cd": 0.01908458036,
+    "cm": 0.011545465216999999,
+    "cl_pm": 3.7262899999999585e-05,
+    "cd_pm": 3.52855000000131e-06,
+    "iterations": 282,
+    "converged": true,
+    "cells": 240544
+   },
+   "params": {
+    "reference_area": 0.05039999729990963,
+    "reference_length": 0.41999998688697815,
+    "reference_how": "length along the wind (x) and plan-view box area (length x width)"
+   },
+   "coeff_means": {
+    "Time": 232.5,
+    "Cd": 0.01908458036,
+    "Cd(f)": 0.0095391157581,
+    "Cd(r)": 0.0095454646011,
+    "Cl": -0.016346965745999996,
+    "Cl(f)": 0.0033719823473000003,
+    "Cl(r)": -0.019718948092999997,
+    "CmPitch": 0.011545465216999999,
+    "CmRoll": -3.1744216100999997e-06,
+    "CmYaw": -0.011416051489,
+    "Cs": -0.016150371363999997,
+    "Cs(f)": -0.019491237165,
+    "Cs(r)": 0.0033408658091,
+    "rows": 282
+   },
+   "surface": {
+    "faces": 27346,
+    "cp_min": -0.7516403794288635,
+    "cp_max": 0.36860668659210205,
+    "faces_z_plus": 13823,
+    "faces_z_minus": 13523,
+    "area_z_plus": 0.03280206397175789,
+    "area_z_minus": 0.03228853642940521,
+    "cp_mean_z_plus": -0.037893909960985184,
+    "cp_mean_z_minus": -0.06444685161113739,
+    "faces_y_plus": 13830,
+    "faces_y_minus": 13516,
+    "area_y_plus": 0.03280245512723923,
+    "area_y_minus": 0.032288141548633575,
+    "cp_mean_y_plus": -0.03817356750369072,
+    "cp_mean_y_minus": -0.06416307389736176
+   }
+  }
+ ],
+ "variants": [
+  {
+   "label": "finless-blunt",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": 2.3154684604380004e-05,
+    "cd": 0.031854628757,
+    "cm": -1.1419579002119999e-05,
+    "cl_pm": 2.2685013861e-05,
+    "cd_pm": 1.3264250000002281e-05,
+    "iterations": 277,
+    "converged": true,
+    "cells": 84018
+   },
+   "params": {
+    "reference_area": 0.0168,
+    "reference_length": 0.42
+   },
+   "coeff_means": {
+    "Time": 227.5,
+    "Cd": 0.031854628757,
+    "Cd(f)": 0.015927301392000003,
+    "Cd(r)": 0.015927327363,
+    "Cl": 2.3154684604380004e-05,
+    "Cl(f)": 1.5776330098599996e-07,
+    "Cl(r)": 2.2996921301370996e-05,
+    "CmPitch": -1.1419579002119999e-05,
+    "CmRoll": -1.2984096758000004e-08,
+    "CmYaw": 4.524454097200001e-06,
+    "Cs": 1.8416746550000002e-05,
+    "Cs(f)": 1.3732827377999998e-05,
+    "Cs(r)": 4.6839191802000004e-06,
+    "rows": 277
+   }
+  },
+  {
+   "label": "fins-boattail",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": 0.018784375894,
+    "cd": 0.012936404251,
+    "cm": -0.010930908231,
+    "cl_pm": 1.0110000000021491e-07,
+    "cd_pm": 2.0449999999817836e-08,
+    "iterations": 260,
+    "converged": true,
+    "cells": 86110
+   },
+   "params": {
+    "reference_area": 0.0552,
+    "reference_length": 0.46
+   },
+   "coeff_means": {
+    "Time": 210.5,
+    "Cd": 0.012936404251,
+    "Cd(f)": 0.006468826270499999,
+    "Cd(r)": 0.006467577982,
+    "Cl": 0.018784375894,
+    "Cl(f)": -0.0015387202897000005,
+    "Cl(r)": 0.020323096192999993,
+    "CmPitch": -0.010930908231,
+    "CmRoll": 6.241441936800001e-07,
+    "CmYaw": 0.010942603175999998,
+    "Cs": 0.018804806682000005,
+    "Cs(f)": 0.020345006516999997,
+    "Cs(r)": -0.0015401998369,
+    "rows": 260
+   }
+  },
+  {
+   "label": "finless-spindle",
+   "status": "done",
+   "seconds": 12,
+   "result": {
+    "cl": 2.5415696884000003e-05,
+    "cd": 0.016734805646000005,
+    "cm": -1.9019144267999997e-05,
+    "cl_pm": 1.702529999999988e-08,
+    "cd_pm": 4.3949999998724176e-08,
+    "iterations": 248,
+    "converged": true,
+    "cells": 74972
+   },
+   "params": {
+    "reference_area": 0.0184,
+    "reference_length": 0.46
+   },
+   "coeff_means": {
+    "Time": 198.5,
+    "Cd": 0.016734805646000005,
+    "Cd(f)": 0.0083673980856,
+    "Cd(r)": 0.0083674075563,
+    "Cl": 2.5415696884000003e-05,
+    "Cl(f)": -6.3112958259e-06,
+    "Cl(r)": 3.172699271399999e-05,
+    "CmPitch": -1.9019144267999997e-05,
+    "CmRoll": -4.7352151033000005e-09,
+    "CmYaw": 1.4322709928e-05,
+    "Cs": 3.0513931942999995e-05,
+    "Cs(f)": 2.9579675903000004e-05,
+    "Cs(r)": 9.342560418300002e-07,
+    "rows": 248
+   }
+  },
+  {
+   "label": "finless-blunt turned 90 about x",
+   "status": "done",
+   "seconds": 15,
+   "result": {
+    "cl": 2.0040938227e-05,
+    "cd": 0.03185587906,
+    "cm": -5.094389860504e-06,
+    "cl_pm": 1.22309999e-05,
+    "cd_pm": 8.574399999999177e-06,
+    "iterations": 264,
+    "converged": true,
+    "cells": 84046
+   },
+   "params": {
+    "reference_area": 0.016799999099969876,
+    "reference_length": 0.41999998688697815
+   },
+   "coeff_means": {
+    "Time": 214.5,
+    "Cd": 0.03185587906,
+    "Cd(f)": 0.015927938335,
+    "Cd(r)": 0.015927940722,
+    "Cl": 2.0040938227e-05,
+    "Cl(f)": 4.926079254500001e-06,
+    "Cl(r)": 1.5114858974300002e-05,
+    "CmPitch": -5.094389860504e-06,
+    "CmRoll": -1.19626920022e-09,
+    "CmYaw": -5.0048214421400006e-06,
+    "Cs": -2.20457632448e-06,
+    "Cs(f)": -6.107109605053002e-06,
+    "Cs(r)": 3.9025332798e-06,
+    "rows": 264
+   }
+  }
+ ]
+}

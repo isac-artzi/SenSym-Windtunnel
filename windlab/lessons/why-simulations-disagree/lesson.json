@@ -1,0 +1,69 @@
+{
+  "id": "why-simulations-disagree",
+  "order": 5,
+  "title": "Why simulations disagree",
+  "minutes": 50,
+  "summary": "Three meshes, one wing, three different drag numbers - and a wind tunnel that disagrees with all of them. Mesh and model literacy from WindLab's own validation data.",
+  "objectives": [
+    "Tell numerical error (mesh, iterations) from model error (the assumptions of steady, fully turbulent RANS) and name an example of each.",
+    "Read a mesh study: say which coefficient is mesh-converged and which is not, and estimate the mesh-converged value.",
+    "Use the expected-error range next to a WindLab result correctly: as a band, with its basis, and as 'unvalidated' when the case is outside what was checked."
+  ],
+  "glossary": ["mesh", "convergence", "y-plus", "solver", "turbulence-model", "laminar-and-turbulent", "expected-error", "quick-mesh"],
+  "timeline": [
+    {"minutes": 5, "what": "Objectives; prediction: how much would CL and CD change on a mesh nine times finer?"},
+    {"minutes": 10, "what": "One Quick run of the default wing at 10 degrees (live or pre-computed); read its expected-error ranges and 'Why this range?'."},
+    {"minutes": 15, "what": "Read the mesh study table (Quick / Standard / fine / extrapolated, the 2D reference, the measurement) and fill in the observation box."},
+    {"minutes": 10, "what": "Explain: numerical versus model error; why lift converges and drag does not; the fully turbulent assumption."},
+    {"minutes": 10, "what": "Comprehension questions, debrief, homework."}
+  ],
+  "table": {
+    "title": "The default wing (NACA 0012, chord 0.3 m, span 0.6 m) at 20 m/s: the same case on three meshes, from validation/wing3d_mesh_study.md",
+    "columns": ["mesh", "cells", "run time (4 cores)", "CL at 10 deg", "CD at 10 deg", "CD at 0 deg"],
+    "rows": [
+      ["Quick (the app's everyday mesh)", "372,000", "81 s", "0.451", "0.0558", "0.0171"],
+      ["Standard", "806,000", "169 s", "0.459", "0.0529", "0.0160"],
+      ["fine", "3,389,000", "764 s", "0.455", "0.0517", "0.0157"],
+      ["mesh-converged estimate (Richardson)", "-", "-", "about 0.455", "0.0516", "0.0156"],
+      ["2D section, wall-resolved, same Re (no tips)", "92,000", "120 s", "-", "-", "0.0125"],
+      ["wind-tunnel measurements, natural transition", "-", "-", "-", "-", "0.009-0.011"]
+    ],
+    "note": "The 2D solver chain was also checked against NASA's reference (Re 6 million): lift within 2 %, drag within 1 %. Measured values are literature ranges for this section near Re 4 x 10^5, not WindLab numbers."
+  },
+  "misconceptions": [
+    "'The computer's answer is exact': it is the exact answer to an approximate question; the mesh and the model both leave their mark.",
+    "'More cells always means closer to the measurement': refinement removes numerical error only; the fully turbulent model keeps WindLab's drag high however fine the mesh.",
+    "'A range next to a number means the number is useless': the range is what makes the number usable - it says how far to trust it and compares like with like (trends between runs on the same mesh are far tighter than the absolute drag)."
+  ],
+  "steps": [
+    {"id": "intro", "kind": "intro", "title": "What you will do",
+     "text": "Every simulation answers a question with two kinds of error. Numerical error comes from how the equations are solved: cell size, the number of iterations, rounding. Model error comes from what the equations leave out: here, that the flow is steady and that the boundary layer is turbulent from the leading edge. WindLab's team ran the default wing on three meshes and against a wall-resolved 2D reference; in this lesson you read that study like an engineer and learn what the expected-error range next to every coefficient means."},
+    {"id": "predict-refine", "kind": "predict", "title": "Predict before you look",
+     "prompt": "The Quick mesh has about 370,000 cells. If the same case were run on a mesh with 3.4 million cells (nine times more), by how many percent do you expect CL and CD to change? Which of the two do you expect to change more, and why? Would a finer mesh bring the result closer to a wind-tunnel measurement?",
+     "placeholder": "CL would change by about ... %, CD by about ... %, because ..."},
+    {"id": "run-quick10", "kind": "run", "title": "Run: the default wing at 10 degrees on Quick", "pack": "quick10",
+     "shape": {"naca": {"code": "0012", "chord": 0.3, "span": 0.6}},
+     "conditions": {"kind": "single", "airspeed": 20, "alpha_deg": 10},
+     "text": "This is the case of the mesh study. After it finishes, open 'Why this range?' under CL and under CD and read how the ranges were made. If you run it live, your numbers should match the pre-computed ones to three digits: the same inputs give the same answer on any computer."},
+    {"id": "observe-table", "kind": "observe", "title": "Observe: the mesh study",
+     "prompt": "From the table in this lesson: by how many percent does CL change from Quick to fine? And CD at 10 degrees? And CD at 0 degrees? How far is the Quick drag at 0 degrees from the wall-resolved 2D value, and from the measurements?",
+     "placeholder": "CL Quick -> fine: ... %; CD(10) Quick -> fine: ... %; CD(0): ... %; Quick vs 2D: ... %; vs measured: ... %"},
+    {"id": "explain-errors", "kind": "explain", "title": "Explain",
+     "prompt": "Sort the differences in the table into numerical error and model error. Why does lift settle on a coarse mesh while drag does not? Why is even the finest mesh far from the measurement?",
+     "text": "Lift comes from the pressure difference between the two surfaces, which even coarse cells capture: Quick is within 1 % of the fine mesh. Drag is a small difference between large pressure forces plus the skin friction in a boundary layer a few millimetres thick; the Quick cells cover only half of that layer, so its pressure drag is too high by 30-50 % at zero lift and the total by 9 %. That is numerical error, and the three-mesh study lets you extrapolate it away (0.0156). The remaining gap to the wall-resolved 2D section (0.0125) is partly the mesh family and the tips. The gap from there to the measurement (0.009-0.011) is model error: WindLab assumes a turbulent boundary layer everywhere, while a real wing at Re 400,000 keeps laminar flow over much of the chord and has less friction. No mesh refinement can fix that; only a different model (transition) could. This is why WindLab's expected-error range for drag is wide and one-sided, and why it says 'unvalidated' for shapes and conditions nobody has checked."},
+    {"id": "q1", "kind": "question", "prompt": "Refining the mesh from 0.37 to 3.4 million cells changed CL by about 1 % and CD by about 7 %. Which number should you trust more from a Quick run?",
+     "choices": ["CD", "CL", "Neither", "Both equally"],
+     "answer": 1,
+     "explanation": "Lift is mesh-converged on Quick to about 1 %; drag is not. Read Quick drag as an upper estimate and compare runs on the same mesh with each other."},
+    {"id": "q2", "kind": "question", "prompt": "WindLab's drag at zero lift (0.0171) is well above the measured 0.009-0.011 for this wing section at this Reynolds number. The two main reasons are ...",
+     "choices": ["A coarse mesh (numerical) and the fully turbulent boundary-layer assumption (model)", "A wrong reference area and a wrong air density", "Gravity and compressibility", "Stall and the tip vortices"],
+     "answer": 0,
+     "explanation": "Roughly 60 % of the gap is mesh and wall treatment, 40 % the fully turbulent assumption (teaching notes and validation/wing3d_mesh_study.md). Reference area and density are inputs, not errors, and at 20 m/s the air is incompressible."},
+    {"id": "q3", "kind": "question", "prompt": "'A finer mesh always gives the right answer.' Is that true?",
+     "choices": ["True", "False: it removes numerical error, but the model's assumptions (steady, fully turbulent RANS) remain"],
+     "answer": 1,
+     "explanation": "The mesh-converged drag (0.0156) is still 40-70 % above the measurement because of the model, not the mesh. Knowing which error you are reducing is the heart of simulation literacy."},
+    {"id": "homework", "kind": "homework", "title": "Homework (optional)",
+     "text": "Run the same case at 0 degrees and compare its drag with the table (Quick 0.0171). Then open the CSV of your run and find the 'CD likely low / high' columns: write one sentence on how you would report this drag in a lab report, with its range and its basis. Read validation/wing3d_mesh_study.md in the WindLab repository for the full study."}
+  ]
+}

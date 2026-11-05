@@ -1,0 +1,34 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| WindLab airfoil_2d template                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (@@U_VEC@@);
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    farfield
+    {
+        type            freestreamVelocity;
+        freestreamValue uniform (@@U_VEC@@);
+        value           uniform (@@U_VEC@@);
+    }
+
+    airfoil
+    {
+        type            noSlip;
+    }
+}
+
+// ************************************************************************* //

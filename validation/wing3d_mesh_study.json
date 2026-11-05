@@ -1,0 +1,658 @@
+{
+ "info": {
+  "date": "2026-11-03",
+  "machine": "aarch64 Linux container",
+  "n_procs": 4,
+  "case": {
+   "code": "0012",
+   "chord": 0.3,
+   "span": 0.6,
+   "airspeed": 20.0,
+   "reynolds": 410761.96344218525
+  },
+  "levels": {
+   "quick": {
+    "preset": "quick",
+    "bg_cell_over_l": 2.0
+   },
+   "standard": {
+    "preset": "standard",
+    "bg_cell_over_l": 1.2903225806451613
+   },
+   "fine": {
+    "preset": "detailed",
+    "bg_cell_over_l": 0.6451612903225806
+   }
+  },
+  "label": "uncalibrated prototype - not yet validated",
+  "updated": "2026-11-03",
+  "footnotes": [
+   "The fine run at 0 deg was stopped by hand at iteration 2560 (writeNow) after CD had been constant to five digits for over 500 iterations: the app's stop rule had not fired because the spanwise-velocity residual (normalised by an almost-zero field at zero incidence) stayed at 1.4e-4, just above its 1e-4 threshold; the run would otherwise have gone to the 3000-iteration cap. Its runtime therefore overstates what a settled fine run needs.",
+   "Memory: snappyHexMesh needed 5.8 GB for the fine mesh and simpleFoam 6.5 GB; a 12 GB WSL2 allowance would take it, but a 16 GB laptop would not run anything else meanwhile.",
+   "Quick-preset variants tried (2026-11-03): (a) surface refinement level 8 everywhere instead of 7-8: 709k cells, i.e. nearly the Standard mesh, so no longer a Quick run; (b) 8 boundary-layer cells instead of 5 (stack 7.0 mm instead of 5.5 mm, +21 % cells, +19 % runtime): CD at 0 deg 0.01724 (pressure 0.00617, viscous 0.01107) against 0.01711 with 5 layers, CD at 10 deg 0.05484 against 0.05578, CL unchanged. The thicker stack lowers the pressure part by 4 % but raises the viscous part by the same amount, so the total does not improve: the Quick error is in the surface cell size (and the y+ it sets), not in the layer count. Neither variant was adopted; the Quick preset is unchanged.",
+   "Stop rule fixed on 2026-11-03 (task 007): the residual guard now looks only at pressure, k, omega and the velocity components that carry freestream (windlab.case_builder.residual_guard_fields), so the spanwise residual no longer blocks it. Replayed on the recorded histories, the new rule stops the fine 0 deg run at about 350 iterations and the standard one at about 330, both with CD already at its long-run value (tests/test_convergence.py); a fresh Quick 0 deg run stopped at 329 iterations (CD 0.01711, 65 s)."
+  ],
+  "quick_variant_trial": {
+   "description": "Quick preset with 8 instead of 5 boundary-layer cells (same expansion 1.2 and final-layer thickness 0.5; layer stack 7.0 mm instead of 5.5 mm), 2026-11-03, 4 ranks",
+   "rows": [
+    {
+     "alpha": 0.0,
+     "cells": 450391,
+     "cl": -0.00027,
+     "cd": 0.017241,
+     "cd_pressure": 0.006174,
+     "cd_viscous": 0.011067,
+     "y_plus": {
+      "min": 7.2,
+      "average": 18.5,
+      "max": 211.2
+     },
+     "iterations": 328,
+     "runtime_s": 77.4,
+     "peak_rss_mb": 1115
+    },
+    {
+     "alpha": 10.0,
+     "cells": 450233,
+     "cl": 0.45117,
+     "cd": 0.054838,
+     "cd_pressure": 0.045147,
+     "cd_viscous": 0.009691,
+     "y_plus": {
+      "min": 3.0,
+      "average": 18.1,
+      "max": 231.2
+     },
+     "iterations": 380,
+     "runtime_s": 91.6,
+     "peak_rss_mb": 1145
+    }
+   ],
+   "verdict": "not adopted"
+  }
+ },
+ "rows": [
+  {
+   "level": "quick",
+   "kind": "wing3d",
+   "alpha": 0.0,
+   "cells": 372004,
+   "background_cell": 0.6,
+   "surface_cell": 0.00234375,
+   "reynolds": 410761.96344218525,
+   "cl": 0.00017663434997000003,
+   "cl_pm": 1.4300740000000074e-06,
+   "cd": 0.017107113549499998,
+   "cd_pm": 5.2650000000389885e-08,
+   "cm": -6.99754358915e-05,
+   "cd_pressure": 0.006405665673696145,
+   "cd_viscous": 0.010701447873582766,
+   "cl_pressure": 0.00017669190773242631,
+   "cl_viscous": -5.755778087981858e-08,
+   "y_plus": {
+    "min": 9.41575853,
+    "average": 26.1482458,
+    "max": 146.428242
+   },
+   "layers": {
+    "faces": 32256,
+    "target_layers": 5,
+    "mean_layers": 4.75,
+    "thickness_m": 0.0055,
+    "thickness_pct": 96.0
+   },
+   "iterations": 329,
+   "converged": true,
+   "runtime_s": 65.08992948799278,
+   "stages": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 11.7,
+    "checkMesh": 0.3,
+    "potentialFoam": 0.4,
+    "simpleFoam": 52.6
+   },
+   "peak_rss_mb": 1040.97265625,
+   "max_non_orthogonality": 64.986804,
+   "mesh_ok": true,
+   "residuals": {
+    "Ux": 1.2561623e-08,
+    "Uy": 2.760765e-05,
+    "Uz": 2.4147863e-06,
+    "k": 9.4913971e-09,
+    "omega": 9.976955e-09,
+    "p": 9.9335063e-08
+   },
+   "run_id": "81b72336-4e31-475b-97bd-66f9ecaaef18",
+   "notes": [],
+   "date": "2026-11-03",
+   "tag": ""
+  },
+  {
+   "level": "standard",
+   "kind": "wing3d",
+   "alpha": 0.0,
+   "cells": 806489,
+   "background_cell": 0.3870967741935484,
+   "surface_cell": 0.0015120967741935483,
+   "reynolds": 410761.96344218525,
+   "cl": 0.000351561657085,
+   "cl_pm": 3.961480000000059e-07,
+   "cd": 0.016009351405,
+   "cd_pm": 4.593500000007328e-07,
+   "cm": -0.00013179100328499998,
+   "cd_pressure": 0.004878131692970521,
+   "cd_viscous": 0.011131219711451246,
+   "cl_pressure": 0.0003516025063945578,
+   "cl_viscous": -4.08492611869161e-08,
+   "y_plus": {
+    "min": 5.10105167,
+    "average": 19.7212507,
+    "max": 113.743352
+   },
+   "layers": {
+    "faces": 64794,
+    "target_layers": 5,
+    "mean_layers": 4.68,
+    "thickness_m": 0.00394,
+    "thickness_pct": 95.8
+   },
+   "iterations": 982,
+   "converged": true,
+   "runtime_s": 346.5063056959989,
+   "stages": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 25.3,
+    "checkMesh": 0.5,
+    "potentialFoam": 0.7,
+    "simpleFoam": 319.8
+   },
+   "peak_rss_mb": 1756.37109375,
+   "max_non_orthogonality": 64.711366,
+   "mesh_ok": true,
+   "residuals": {
+    "Ux": 2.664786e-07,
+    "Uy": 0.00010752512,
+    "Uz": 8.491698e-05,
+    "k": 9.6662169e-09,
+    "omega": 9.4587522e-09,
+    "p": 5.8998896e-07
+   },
+   "run_id": "78e533cf-e52b-4c08-95de-062d42738be6",
+   "notes": [],
+   "date": "2026-11-03",
+   "tag": ""
+  },
+  {
+   "level": "quick",
+   "kind": "wing3d",
+   "alpha": 10.0,
+   "cells": 371857,
+   "background_cell": 0.6,
+   "surface_cell": 0.00234375,
+   "reynolds": 410761.96344218525,
+   "cl": 0.45128521175,
+   "cl_pm": 2.0285999999980486e-05,
+   "cd": 0.055784777514500006,
+   "cd_pm": 2.4643499999983665e-06,
+   "cm": 0.016049877674,
+   "cd_pressure": 0.04676134986986894,
+   "cd_viscous": 0.00902342763291487,
+   "cl_pressure": 0.45209031863902416,
+   "cl_viscous": -0.0008051068914572603,
+   "y_plus": {
+    "min": 5.10785662,
+    "average": 24.6304204,
+    "max": 167.678884
+   },
+   "layers": {
+    "faces": 32256,
+    "target_layers": 5,
+    "mean_layers": 4.75,
+    "thickness_m": 0.0055,
+    "thickness_pct": 96.0
+   },
+   "iterations": 394,
+   "converged": true,
+   "runtime_s": 80.84282937099488,
+   "stages": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 11.5,
+    "checkMesh": 0.3,
+    "potentialFoam": 0.4,
+    "simpleFoam": 68.6
+   },
+   "peak_rss_mb": 995.66796875,
+   "max_non_orthogonality": 64.992208,
+   "mesh_ok": true,
+   "residuals": {
+    "Ux": 6.3954258e-08,
+    "Uy": 5.0862024e-06,
+    "Uz": 1.035802e-07,
+    "k": 1.6902883e-08,
+    "omega": 9.1585017e-09,
+    "p": 9.2559725e-08
+   },
+   "run_id": "daf06a3f-0113-4182-a984-f74bb9c8d1bf",
+   "notes": [],
+   "date": "2026-11-03",
+   "tag": ""
+  },
+  {
+   "level": "standard",
+   "kind": "wing3d",
+   "alpha": 10.0,
+   "cells": 806405,
+   "background_cell": 0.3870967741935484,
+   "surface_cell": 0.0015120967741935483,
+   "reynolds": 410761.96344218525,
+   "cl": 0.45908671636500004,
+   "cl_pm": 2.899300000000493e-05,
+   "cd": 0.0529232896085,
+   "cd_pm": 3.184149999998359e-06,
+   "cm": 0.0154024550685,
+   "cd_pressure": 0.04273228613077354,
+   "cd_viscous": 0.010191003453577745,
+   "cl_pressure": 0.4600257549492532,
+   "cl_viscous": -0.0009390386413358458,
+   "y_plus": {
+    "min": 3.1234254,
+    "average": 19.3636292,
+    "max": 124.252591
+   },
+   "layers": {
+    "faces": 64794,
+    "target_layers": 5,
+    "mean_layers": 4.68,
+    "thickness_m": 0.00394,
+    "thickness_pct": 95.8
+   },
+   "iterations": 397,
+   "converged": true,
+   "runtime_s": 168.95726624200324,
+   "stages": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 24.5,
+    "checkMesh": 0.5,
+    "potentialFoam": 0.7,
+    "simpleFoam": 143.0
+   },
+   "peak_rss_mb": 1806.32421875,
+   "max_non_orthogonality": 64.711464,
+   "mesh_ok": true,
+   "residuals": {
+    "Ux": 6.9471812e-08,
+    "Uy": 6.4777443e-06,
+    "Uz": 8.370664e-08,
+    "k": 8.0878789e-09,
+    "omega": 8.3315462e-09,
+    "p": 1.2032091e-07
+   },
+   "run_id": "1c43ef26-876c-463c-bc9c-fa26d83f0587",
+   "notes": [],
+   "date": "2026-11-03",
+   "tag": ""
+  },
+  {
+   "level": "airfoil2d",
+   "kind": "airfoil2d",
+   "alpha": 0.0,
+   "cells": 92364,
+   "background_cell": null,
+   "surface_cell": null,
+   "reynolds": 410761.96344218525,
+   "cl": 0.0,
+   "cl_pm": 0.0,
+   "cd": 0.012471813242499998,
+   "cd_pm": 4.043549999999986e-06,
+   "cm": 0.0,
+   "cd_pressure": 0.0024248255144489793,
+   "cd_viscous": 0.010046987725061225,
+   "cl_pressure": null,
+   "cl_viscous": null,
+   "y_plus": {
+    "min": 0.00317420095,
+    "average": 0.0191885731,
+    "max": 0.0390724792
+   },
+   "layers": null,
+   "iterations": 3317,
+   "converged": true,
+   "runtime_s": 119.88747534700087,
+   "stages": {
+    "blockMesh": 0.3,
+    "checkMesh": 0.3,
+    "decomposePar": 0.2,
+    "potentialFoam": 0.5,
+    "simpleFoam": 118.5
+   },
+   "peak_rss_mb": 472.0703125,
+   "max_non_orthogonality": 44.996577,
+   "mesh_ok": false,
+   "residuals": {
+    "Ux": 8.4525137e-05,
+    "Uz": 3.9576296e-05,
+    "k": 5.2753163e-05,
+    "omega": 4.1337023e-11,
+    "p": 0.00020589157
+   },
+   "run_id": "f943b5ca-0fd4-45bb-90dd-4bda234af132",
+   "notes": [],
+   "date": "2026-11-03",
+   "half_model": true,
+   "tag": ""
+  },
+  {
+   "level": "fine",
+   "kind": "wing3d",
+   "alpha": 10.0,
+   "cells": 3389226,
+   "background_cell": 0.1935483870967742,
+   "surface_cell": 0.0007560483870967742,
+   "reynolds": 410761.96344218525,
+   "cl": 0.455417162065,
+   "cl_pm": 8.732499999999921e-05,
+   "cd": 0.0517412047015,
+   "cd_pm": 8.694600000001135e-06,
+   "cm": 0.0160210289815,
+   "cd_pressure": 0.040870053432462985,
+   "cd_viscous": 0.010871151239562983,
+   "cl_pressure": 0.45637089704544087,
+   "cl_viscous": -0.0009537349941089571,
+   "y_plus": {
+    "min": 0.81595558,
+    "average": 11.2292374,
+    "max": 65.6289727
+   },
+   "layers": {
+    "faces": 204252,
+    "target_layers": 5,
+    "mean_layers": 4.83,
+    "thickness_m": 0.00232,
+    "thickness_pct": 97.7
+   },
+   "iterations": 440,
+   "converged": true,
+   "runtime_s": 764.4702132229941,
+   "stages": {
+    "blockMesh": 0.6,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.5,
+    "snappyHexMesh": 127.1,
+    "checkMesh": 1.5,
+    "potentialFoam": 2.5,
+    "simpleFoam": 632.2
+   },
+   "peak_rss_mb": 6088.7109375,
+   "max_non_orthogonality": 64.990034,
+   "mesh_ok": true,
+   "residuals": {
+    "Ux": 5.753824e-08,
+    "Uy": 5.7704641e-06,
+    "Uz": 7.1715848e-08,
+    "k": 1.4622027e-08,
+    "omega": 8.4799027e-09,
+    "p": 1.3296982e-07
+   },
+   "run_id": "728c1e5a-bff8-4564-b743-3e2e9b39bd65",
+   "notes": [],
+   "date": "2026-11-03",
+   "tag": ""
+  },
+  {
+   "level": "fine",
+   "kind": "wing3d",
+   "alpha": 0.0,
+   "cells": 3389233,
+   "background_cell": 0.1935483870967742,
+   "surface_cell": 0.0007560483870967742,
+   "reynolds": 410761.96344218525,
+   "cl": 0.00066387128308,
+   "cl_pm": 1.5846535000000488e-06,
+   "cd": 0.015662895281,
+   "cd_pm": 1.3284999999998298e-06,
+   "cm": -0.00026256828142500003,
+   "cd_pressure": 0.004194306721995465,
+   "cd_viscous": 0.011468588562244898,
+   "cl_pressure": 0.0006627148082312926,
+   "cl_viscous": 1.1564749086394556e-06,
+   "y_plus": {
+    "min": 1.54242364,
+    "average": 11.2742049,
+    "max": 57.4917292
+   },
+   "layers": {
+    "faces": 204252,
+    "target_layers": 5,
+    "mean_layers": 4.83,
+    "thickness_m": 0.00232,
+    "thickness_pct": 97.7
+   },
+   "iterations": 2560,
+   "converged": false,
+   "runtime_s": 3656.4637374960002,
+   "stages": {
+    "blockMesh": 0.6,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.5,
+    "snappyHexMesh": 128.9,
+    "checkMesh": 1.5,
+    "potentialFoam": 2.7,
+    "simpleFoam": 3522.2
+   },
+   "peak_rss_mb": 6614.05859375,
+   "max_non_orthogonality": 64.972046,
+   "mesh_ok": true,
+   "residuals": {
+    "Ux": 5.8367414e-08,
+    "Uy": 0.00013802077,
+    "Uz": 3.5805664e-06,
+    "k": 1.1736085e-08,
+    "omega": 8.4900489e-09,
+    "p": 1.043559e-07
+   },
+   "run_id": "8bb579b8-8249-4bbc-9411-45ed5eeec59e",
+   "notes": [
+    "CL/CD did not settle within 3000 iterations - treat as indicative"
+   ],
+   "date": "2026-11-03",
+   "tag": ""
+  }
+ ],
+ "analysis": {
+  "reynolds": 410761.96344218525,
+  "estimate": {
+   "reynolds": 410761.96344218525,
+   "wetted_over_planform": 2.039546060136892,
+   "tip_caps_over_planform": 0.08170515999699593,
+   "form_factor": 1.2524416,
+   "cf": {
+    "ittc57": 0.005743590371752184,
+    "prandtl_schlichting": 0.00530848228796861
+   },
+   "cd0": {
+    "ittc57": 0.015140779039130338,
+    "prandtl_schlichting": 0.013993783009067565
+   }
+  },
+  "richardson": {
+   "0": {
+    "cl": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.00017663434997000003,
+      0.000351561657085,
+      0.00066387128308
+     ],
+     "r21": 1.6137428313410138,
+     "r32": 1.294246342017847,
+     "order_p": 0.10466112147916364,
+     "extrapolated": 0.006744458735610585,
+     "fine_minus_extrapolated_pct": -90.15678931246514,
+     "coarse_minus_extrapolated_pct": -97.3810448414878,
+     "gci_fine_pct": 1144.9108448252164
+    },
+    "cd": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.017107113549499998,
+      0.016009351405,
+      0.015662895281
+     ],
+     "r21": 1.6137428313410138,
+     "r32": 1.294246342017847,
+     "order_p": 5.293370903021415,
+     "extrapolated": 0.015633011458754776,
+     "fine_minus_extrapolated_pct": 0.1911584490555029,
+     "coarse_minus_extrapolated_pct": 9.42941860328323,
+     "gci_fine_pct": 0.23849216339869497
+    },
+    "cd_pressure": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.006405665673696145,
+      0.004878131692970521,
+      0.004194306721995465
+     ],
+     "r21": 1.6137428313410138,
+     "r32": 1.294246342017847,
+     "order_p": 4.167568939569397,
+     "extrapolated": 0.004086582309787864,
+     "fine_minus_extrapolated_pct": 2.6360514493881175,
+     "coarse_minus_extrapolated_pct": 56.74872517198035,
+     "gci_fine_pct": 3.2104355781457716
+    },
+    "cd_viscous": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.010701447873582766,
+      0.011131219711451246,
+      0.011468588562244898
+     ],
+     "r21": 1.6137428313410138,
+     "r32": 1.294246342017847,
+     "order_p": 2.4441284072434923,
+     "extrapolated": 0.011620496685138046,
+     "fine_minus_extrapolated_pct": -1.3072429433023274,
+     "coarse_minus_extrapolated_pct": -7.90885997782428,
+     "gci_fine_pct": 1.6556976700824797
+    }
+   },
+   "10": {
+    "cl": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.45128521175,
+      0.45908671636500004,
+      0.455417162065
+     ],
+     "r21": 1.6137977507571957,
+     "r32": 1.2943719221630647,
+     "note": "oscillatory or stalled convergence - no order estimate"
+    },
+    "cd": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.055784777514500006,
+      0.0529232896085,
+      0.0517412047015
+     ],
+     "r21": 1.6137977507571957,
+     "r32": 1.2943719221630647,
+     "order_p": 4.420829917809067,
+     "extrapolated": 0.051579185128530464,
+     "fine_minus_extrapolated_pct": 0.3141181322772001,
+     "coarse_minus_extrapolated_pct": 8.15366193841489,
+     "gci_fine_pct": 0.3914181499644266
+    },
+    "cd_pressure": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.04676134986986894,
+      0.04273228613077354,
+      0.040870053432462985
+     ],
+     "r21": 1.6137977507571957,
+     "r32": 1.2943719221630647,
+     "order_p": 4.064853779229117,
+     "extrapolated": 0.040559496309463226,
+     "fine_minus_extrapolated_pct": 0.7656828887377009,
+     "coarse_minus_extrapolated_pct": 15.290755864142021,
+     "gci_fine_pct": 0.9498309181102054
+    },
+    "cd_viscous": {
+     "levels": [
+      "quick",
+      "standard",
+      "fine"
+     ],
+     "values": [
+      0.00902342763291487,
+      0.010191003453577745,
+      0.010871151239562983
+     ],
+     "r21": 1.6137977507571957,
+     "r32": 1.2943719221630647,
+     "order_p": 3.344738864459938,
+     "extrapolated": 0.011043044839934665,
+     "fine_minus_extrapolated_pct": -1.5565779444276826,
+     "coarse_minus_extrapolated_pct": -18.288590115257954,
+     "gci_fine_pct": 1.9764880069246769
+    }
+   }
+  },
+  "cd0_budget": {
+   "quick_cd": 0.017107113549499998,
+   "finest_level": "fine",
+   "finest_cd": 0.015662895281,
+   "mesh_converged_cd": 0.015633011458754776,
+   "mesh_converged_how": "Richardson extrapolation",
+   "quick_over_mesh_converged_pct": 9.42941860328323,
+   "flat_plate_cd0": {
+    "ittc57": 0.015140779039130338,
+    "prandtl_schlichting": 0.013993783009067565
+   },
+   "airfoil2d_cd": 0.012471813242499998,
+   "airfoil2d_cd_pressure": 0.0024248255144489793,
+   "airfoil2d_cd_viscous": 0.010046987725061225,
+   "airfoil2d_plus_tips_cd": 0.012941094212781215,
+   "tip_caps_cd_estimate": 0.00046928097028121755,
+   "mesh_converged_over_airfoil2d_pct": 20.80131093794913
+  }
+ }
+}

@@ -1,0 +1,300 @@
+{
+  "info": {
+    "date": "2026-11-03",
+    "machine": "aarch64 Linux container",
+    "n_procs": 4,
+    "speed": 50.0,
+    "nu": 8.333333333333334e-06,
+    "reynolds": 6000000.0,
+    "mach": 0.14693349789885096,
+    "tu_percent": 0.1,
+    "nut_ratio": 0.2,
+    "cells": 184728,
+    "farfield": 500.0,
+    "first_cell": 2e-06,
+    "mesh_controls": {
+      "farfield": 500.0,
+      "inner_ring": 2.0,
+      "split_x": 0.3,
+      "first_cell": 2e-06,
+      "wall_growth": 1.1,
+      "le_spacing": 0.001,
+      "mid_spacing": 0.015,
+      "te_spacing": 0.001,
+      "wake_growth": 1.1,
+      "wake_max_cell": 2.0,
+      "wake_split": 1.0,
+      "wake_normal_cell": 0.001,
+      "outlet_normal_cell": 0.015,
+      "span": 0.1,
+      "n_curve_points": 400
+    },
+    "convergence": {
+      "window": 200,
+      "cl_tol": 0.001,
+      "cd_tol": 0.002,
+      "cl_floor": 0.0005,
+      "residual_tol": 1e-05,
+      "min_iterations": 500
+    },
+    "label": "validation of the solver chain only - not of the snappyHexMesh wing presets",
+    "tmr_mach": 0.15,
+    "prandtl_glauert_factor": 1.0114434748483472,
+    "rewritten": "2026-11-03",
+    "footnotes": [
+      "Rows for alpha = 0 deg were rerun on 2026-11-03 (`--alpha 0 --merge`); the other rows are from the solver runs of 2026-11-03.",
+      "Previous 0 deg result (2026-11-03): CL -0.0011, CD 0.00791, 1535 iterations, 120 s; the new CD differs from it by +1.4 %.",
+      "The 0 deg row uses the zero-incidence stop rule (`windlab.airfoil2d.ZERO_ALPHA_CONVERGENCE`: at least 2500 iterations, then CD settled to 0.2 % between 200-iteration means 500 iterations apart); the other angles use the strict validation rule."
+    ],
+    "updated": "2026-11-03",
+    "tmr_url": "https://tmbwg.github.io/turbmodels/naca0012_val_sst.html",
+    "tmr_grid": "897x257",
+    "tmr_codes": [
+      "cfl3d",
+      "fun3d"
+    ],
+    "tmr_reference": {
+      "0": {
+        "cfl3d": {
+          "cl": 0.0,
+          "cd": 0.00809
+        },
+        "fun3d": {
+          "cl": 0.0,
+          "cd": 0.00808
+        },
+        "mean": {
+          "cl": 0.0,
+          "cd": 0.008085
+        }
+      },
+      "10": {
+        "cfl3d": {
+          "cl": 1.0778,
+          "cd": 0.01236
+        },
+        "fun3d": {
+          "cl": 1.084,
+          "cd": 0.01253
+        },
+        "mean": {
+          "cl": 1.0809000000000002,
+          "cd": 0.012445
+        }
+      },
+      "15": {
+        "cfl3d": {
+          "cl": 1.5068,
+          "cd": 0.02219
+        },
+        "fun3d": {
+          "cl": 1.5109,
+          "cd": 0.02275
+        },
+        "mean": {
+          "cl": 1.5088499999999998,
+          "cd": 0.02247
+        }
+      }
+    },
+    "acceptance": "PRD section 9, judged against the mean of CFL3D and FUN3D, raw (no Prandtl-Glauert correction); cl_error_pg_pct is indicative only"
+  },
+  "results": [
+    {
+      "alpha": 0.0,
+      "cl": 0.0,
+      "cl_pm": 0.0,
+      "cd": 0.008022192067,
+      "cd_pm": 2.201340000000662e-06,
+      "cm": 0.0,
+      "half_model": true,
+      "reference": {
+        "cfl3d": {
+          "cl": 0.0,
+          "cd": 0.00809
+        },
+        "fun3d": {
+          "cl": 0.0,
+          "cd": 0.00808
+        },
+        "mean": {
+          "cl": 0.0,
+          "cd": 0.008085
+        }
+      },
+      "cl_error_cfl3d_pct": null,
+      "cl_error_fun3d_pct": null,
+      "cl_error_pct": null,
+      "cd_error_cfl3d_pct": -0.8381697527812084,
+      "cd_error_fun3d_pct": -0.7154447153465368,
+      "cd_error_pct": -0.7768451824366106,
+      "cl_error_pg_pct": null,
+      "check": "pass",
+      "y_plus": {
+        "min": 0.0749509887,
+        "max": 0.328318068,
+        "average": 0.222792751
+      },
+      "iterations": 2519,
+      "converged": true,
+      "runtime_s": 95.65466154400929,
+      "stages": {
+        "blockMesh": 0.3,
+        "checkMesh": 0.3,
+        "decomposePar": 0.1,
+        "potentialFoam": 0.5,
+        "simpleFoam": 94.3
+      },
+      "peak_rss_mb": 470.13671875,
+      "cells": 92364,
+      "max_non_orthogonality": 44.996577,
+      "failed_mesh_checks": 1,
+      "run_id": "b0a7af5e-9115-4623-9708-4a0f67192a75",
+      "notes": [],
+      "date": "2026-11-03"
+    },
+    {
+      "alpha": 5.0,
+      "cl": 0.544105669125,
+      "cl_pm": 7.447299999996382e-05,
+      "cd": 0.00897318244355,
+      "cd_pm": 6.5558049999999216e-06,
+      "cm": 0.00342018195685,
+      "reference": null,
+      "cl_error_pct": null,
+      "cl_error_pg_pct": null,
+      "cd_error_pct": null,
+      "check": "no reference",
+      "y_plus": {
+        "min": 0.0316595573,
+        "max": 0.508487055,
+        "average": 0.227386888
+      },
+      "iterations": 1445,
+      "converged": true,
+      "runtime_s": 110.75513625800158,
+      "stages": {
+        "blockMesh": 0.5,
+        "checkMesh": 0.7,
+        "decomposePar": 0.2,
+        "potentialFoam": 3.0,
+        "simpleFoam": 106.3
+      },
+      "peak_rss_mb": 638.546875,
+      "cells": 184728,
+      "max_non_orthogonality": 44.996577,
+      "failed_mesh_checks": 1,
+      "run_id": "6962476a-9b1f-4b55-a34d-6b0afdfb6d70",
+      "notes": [],
+      "date": "2026-11-03",
+      "cl_error_cfl3d_pct": null,
+      "cl_error_fun3d_pct": null,
+      "cd_error_cfl3d_pct": null,
+      "cd_error_fun3d_pct": null
+    },
+    {
+      "alpha": 10.0,
+      "cl": 1.0603545995499999,
+      "cl_pm": 0.0005608200000000174,
+      "cd": 0.012478319915000001,
+      "cd_pm": 1.6744750000000433e-05,
+      "cm": 0.00913899705395,
+      "reference": {
+        "cfl3d": {
+          "cl": 1.0778,
+          "cd": 0.01236
+        },
+        "fun3d": {
+          "cl": 1.084,
+          "cd": 0.01253
+        },
+        "mean": {
+          "cl": 1.0809000000000002,
+          "cd": 0.012445
+        }
+      },
+      "cl_error_pct": -1.90076792025167,
+      "cl_error_pg_pct": -0.7781718253048877,
+      "cd_error_pct": 0.2677373644033871,
+      "check": "pass",
+      "y_plus": {
+        "min": 0.0392915934,
+        "max": 0.745685622,
+        "average": 0.232839141
+      },
+      "iterations": 1974,
+      "converged": true,
+      "runtime_s": 119.29498101199715,
+      "stages": {
+        "blockMesh": 0.5,
+        "checkMesh": 0.7,
+        "decomposePar": 0.2,
+        "potentialFoam": 1.4,
+        "simpleFoam": 116.4
+      },
+      "peak_rss_mb": 627.51953125,
+      "cells": 184728,
+      "max_non_orthogonality": 44.996577,
+      "failed_mesh_checks": 1,
+      "run_id": "1dd45495-2e32-419e-ae33-9546873deb5a",
+      "notes": [],
+      "date": "2026-11-03",
+      "cl_error_cfl3d_pct": -1.6186120291334387,
+      "cl_error_fun3d_pct": -2.181310004612563,
+      "cd_error_cfl3d_pct": 0.9572808656958053,
+      "cd_error_fun3d_pct": -0.4124507980845849
+    },
+    {
+      "alpha": 15.0,
+      "cl": 1.4773461400499999,
+      "cl_pm": 0.001018069999999982,
+      "cd": 0.022323477767999998,
+      "cd_pm": 3.616765000000015e-05,
+      "cm": 0.021394266881,
+      "reference": {
+        "cfl3d": {
+          "cl": 1.5068,
+          "cd": 0.02219
+        },
+        "fun3d": {
+          "cl": 1.5109,
+          "cd": 0.02275
+        },
+        "mean": {
+          "cl": 1.5088499999999998,
+          "cd": 0.02247
+        }
+      },
+      "cl_error_pct": -2.0879384928919333,
+      "cl_error_pg_pct": -0.967484279685527,
+      "cd_error_pct": -0.652079359145537,
+      "check": "indicative",
+      "y_plus": {
+        "min": 0.0016613046,
+        "max": 0.957081963,
+        "average": 0.229507406
+      },
+      "iterations": 3479,
+      "converged": true,
+      "runtime_s": 220.67593339199993,
+      "stages": {
+        "blockMesh": 0.5,
+        "checkMesh": 0.6,
+        "decomposePar": 0.2,
+        "potentialFoam": 2.4,
+        "simpleFoam": 216.9
+      },
+      "peak_rss_mb": 637.265625,
+      "cells": 184728,
+      "max_non_orthogonality": 44.996577,
+      "failed_mesh_checks": 1,
+      "run_id": "40a65e49-e14c-4c6b-b4af-a66f61558e80",
+      "notes": [],
+      "date": "2026-11-03",
+      "cl_error_cfl3d_pct": -1.954729224183704,
+      "cl_error_fun3d_pct": -2.2207862830101295,
+      "cd_error_cfl3d_pct": 0.6015221631365337,
+      "cd_error_fun3d_pct": -1.874822997802203
+    }
+  ]
+}

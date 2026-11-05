@@ -1,0 +1,18 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| WindLab airfoil_2d template                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+transportModel  Newtonian;
+
+// Chosen so that Re = U c / nu = 6 million with c = 1 m (not air's viscosity).
+nu              @@NU@@;
+
+// ************************************************************************* //

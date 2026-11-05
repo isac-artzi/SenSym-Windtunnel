@@ -1,0 +1,101 @@
+{
+  "label": "e3c-layer30",
+  "date": "2026-11-03 20:27:04",
+  "host": "63b1f4773003",
+  "machine": {
+    "cpu": "aarch64",
+    "logical_cores": 16,
+    "physical_cores": 16,
+    "ram_gb": 29.6,
+    "ram_available_gb": 24.5,
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.14-linuxkit",
+    "arch": "aarch64",
+    "wsl": false,
+    "solver_cores": 8,
+    "python": "3.12.3"
+  },
+  "n_procs": 4,
+  "preset": "quick",
+  "airspeed": 20.0,
+  "alpha": 10.0,
+  "angles": null,
+  "patches": [
+    [
+      "system/snappyHexMeshDict",
+      "nLayerIter          50;",
+      "nLayerIter          30;"
+    ]
+  ],
+  "case": "/runs/2ba0cbb2-07dd-4bd4-8105-ddda999fdb10",
+  "stages": [
+    {
+      "name": "blockMesh",
+      "seconds": 0.1,
+      "peak_mb": 7
+    },
+    {
+      "name": "surfaceFeatureExtract",
+      "seconds": 0.02,
+      "peak_mb": 6
+    },
+    {
+      "name": "decomposePar",
+      "seconds": 0.07,
+      "peak_mb": 8
+    },
+    {
+      "name": "snappyHexMesh",
+      "seconds": 11.67,
+      "peak_mb": 929
+    },
+    {
+      "name": "checkMesh",
+      "seconds": 0.32,
+      "peak_mb": 404
+    }
+  ],
+  "stage_seconds": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.02,
+    "decomposePar": 0.07,
+    "snappyHexMesh": 11.67,
+    "checkMesh": 0.32
+  },
+  "snappy_phases": {
+    "refine": 5.5,
+    "snap": 3.36,
+    "layers": 2.9,
+    "total": 11.89
+  },
+  "solver_log": {},
+  "iterations": 0,
+  "converged": false,
+  "cells": 371801,
+  "mesh_ok": true,
+  "layers": {
+    "body": {
+      "faces": 32256,
+      "target_layers": 5,
+      "mean_layers": 4.75,
+      "thickness_m": 0.0055,
+      "thickness_pct": 96.0
+    }
+  },
+  "max_non_orthogonality": 64.987794,
+  "cl": null,
+  "cd": null,
+  "cm": null,
+  "cd_pressure": null,
+  "cd_viscous": null,
+  "cl_pm": null,
+  "cd_pm": null,
+  "points": [],
+  "y_plus": {},
+  "events": [],
+  "post": {},
+  "run_case_wall_s": 12.5,
+  "total_wall_s": 12.5,
+  "peak_memory_mb": 929,
+  "notes": []
+}

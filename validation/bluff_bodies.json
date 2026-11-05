@@ -1,0 +1,203 @@
+{
+ "info": {
+  "date": "2026-11-03",
+  "machine": "aarch64 Linux container, 4 MPI ranks",
+  "airspeed": 20.0,
+  "alpha_deg": 0.0,
+  "preset": "quick",
+  "label": "uncalibrated prototype - not yet validated",
+  "note": "Reference area = frontal area; reference length = diameter / height / side."
+ },
+ "rows": [
+  {
+   "shape": "flat-plate",
+   "name": "Flat plate facing the wind, 0.2 m wide, 0.2 m high",
+   "spec": {
+    "height": 0.2,
+    "width": 0.2
+   },
+   "reynolds": 273841.3089614569,
+   "reference_area_m2": 0.04000000000000001,
+   "reference_length_m": 0.2,
+   "cells": 198454,
+   "cl": -8.3656674359e-05,
+   "cl_pm": 5.82763076e-05,
+   "cd": 1.2123302904,
+   "cd_pm": 0.00035346499999999725,
+   "cd_pressure": 1.2123542226020405,
+   "cd_viscous": -2.3932349000510194e-05,
+   "iterations": 360,
+   "converged": true,
+   "solver_seconds": 42.66683001899946,
+   "peak_memory_mb": 686.328125,
+   "y_plus": {
+    "min": 1.20859996,
+    "average": 11.9176755,
+    "max": 22.170089
+   },
+   "layers_pct": 98.5,
+   "max_non_orthogonality": 44.827249,
+   "warnings": [],
+   "textbook_cd": [
+    1.1,
+    1.3
+   ],
+   "textbook_note": "square plate normal to the flow, Re > 1e3 (Hoerner 1965: 1.17; other handbook tables give up to 1.28)",
+   "error_vs_textbook_mid": 0.010275241999999851,
+   "inside_textbook": true
+  },
+  {
+   "shape": "cube",
+   "name": "Cube, side 0.2 m",
+   "spec": {
+    "side": 0.2
+   },
+   "reynolds": 273841.3089614569,
+   "reference_area_m2": 0.04000000000000001,
+   "reference_length_m": 0.2,
+   "cells": 370029,
+   "cl": -9.667787525749999e-05,
+   "cl_pm": 0.003252445125,
+   "cd": 1.0269409016,
+   "cd_pm": 0.0010994799999999305,
+   "cd_pressure": 1.0299109799489794,
+   "cd_viscous": -0.002970078213367346,
+   "iterations": 454,
+   "converged": true,
+   "solver_seconds": 99.45969342098397,
+   "peak_memory_mb": 1011.96484375,
+   "y_plus": {
+    "min": 0.542652952,
+    "average": 10.7822681,
+    "max": 22.0963895
+   },
+   "layers_pct": 98.0,
+   "max_non_orthogonality": 44.26292,
+   "warnings": [
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "textbook_cd": [
+    1.0,
+    1.1
+   ],
+   "textbook_note": "cube facing the wind (Hoerner 1965: 1.05)",
+   "error_vs_textbook_mid": -0.02196104609523819,
+   "inside_textbook": true
+  },
+  {
+   "shape": "cylinder",
+   "name": "Cylinder across the wind, diameter 0.15 m, length 0.45 m",
+   "spec": {
+    "diameter": 0.15,
+    "length": 0.45
+   },
+   "reynolds": 205380.98172109263,
+   "reference_area_m2": 0.0675,
+   "reference_length_m": 0.15,
+   "cells": 548119,
+   "cl": -0.007571694665050001,
+   "cl_pm": 0.250101708,
+   "cd": 0.5744162552950001,
+   "cd_pm": 0.022738097000000013,
+   "cd_pressure": 0.564423195531368,
+   "cd_viscous": 0.009993059810733184,
+   "iterations": 1500,
+   "converged": false,
+   "solver_seconds": 441.82476991000294,
+   "peak_memory_mb": 1318.14453125,
+   "y_plus": {
+    "min": 0.65184935,
+    "average": 16.8114869,
+    "max": 116.896576
+   },
+   "layers_pct": 95.5,
+   "max_non_orthogonality": 63.50364,
+   "warnings": [
+    "The numbers did not fully settle before the iteration limit. Treat them as a rough guide.",
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "textbook_cd": [
+    0.6,
+    1.2
+   ],
+   "textbook_note": "circular cylinder across the flow at subcritical Re: about 1.2 for a very long one (Re 1e4 to 2e5), about 0.7 for a finite one with free ends at length/diameter 3 (Hoerner 1965, Fig. 3-10: 0.63 at 1, 0.68 at 2, 0.74 at 5)",
+   "error_vs_textbook_mid": -0.3617597163388887,
+   "inside_textbook": false
+  },
+  {
+   "shape": "sphere",
+   "name": "Sphere, diameter 0.2 m",
+   "spec": {
+    "diameter": 0.2
+   },
+   "reynolds": 273841.3089614569,
+   "reference_area_m2": 0.031415926535897934,
+   "reference_length_m": 0.2,
+   "cells": 169536,
+   "cl": 0.083026334415,
+   "cl_pm": 0.025599754250000002,
+   "cd": 0.252324586605,
+   "cd_pm": 0.008890886000000014,
+   "cd_pressure": 0.23410084286467994,
+   "cd_viscous": 0.018223743803208143,
+   "iterations": 472,
+   "converged": true,
+   "solver_seconds": 49.403587772008905,
+   "peak_memory_mb": 632.66015625,
+   "y_plus": {
+    "min": 2.38594204,
+    "average": 25.0615155,
+    "max": 41.172389
+   },
+   "layers_pct": 100.0,
+   "max_non_orthogonality": 37.914245,
+   "warnings": [
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "textbook_cd": [
+    0.4,
+    0.5
+   ],
+   "textbook_note": "smooth sphere below the drag crisis, Re 1e4 to 3e5 (Achenbach 1972; Schlichting: 0.47); 0.1-0.2 above the crisis (Re > 4e5)",
+   "error_vs_textbook_mid": -0.4392786964333333,
+   "inside_textbook": false
+  },
+  {
+   "shape": "teardrop",
+   "name": "Streamlined teardrop, diameter 0.2 m, fineness ratio 3",
+   "spec": {
+    "diameter": 0.2,
+    "fineness": 3.0
+   },
+   "reynolds": 273841.3089614569,
+   "reference_area_m2": 0.031415926535897934,
+   "reference_length_m": 0.2,
+   "cells": 83399,
+   "cl": -0.000203952925535,
+   "cl_pm": 3.504649999999936e-08,
+   "cd": 0.068456397019,
+   "cd_pm": 9.034999999546489e-08,
+   "cd_pressure": 0.03271337717728981,
+   "cd_viscous": 0.03574301979532972,
+   "iterations": 357,
+   "converged": true,
+   "solver_seconds": 15.668023842008552,
+   "peak_memory_mb": 485.80859375,
+   "y_plus": {
+    "min": 19.3329695,
+    "average": 93.2097931,
+    "max": 129.821733
+   },
+   "layers_pct": 99.1,
+   "max_non_orthogonality": 64.735376,
+   "warnings": [],
+   "textbook_cd": [
+    0.05,
+    0.1
+   ],
+   "textbook_note": "streamlined body of revolution, fineness ratio 3, on frontal area (Hoerner 1965, chapter 6: 0.05-0.06 at Re_L about 1e6, higher at lower Re)",
+   "error_vs_textbook_mid": -0.08724803974666684,
+   "inside_textbook": true
+  }
+ ]
+}

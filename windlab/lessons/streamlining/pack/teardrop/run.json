@@ -1,0 +1,74 @@
+{
+ "pack_version": 1,
+ "name": "teardrop",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "single",
+  "airspeed": 20.0,
+  "alpha_deg": 0.0,
+  "angles": null,
+  "preset": "quick",
+  "reynolds": 273841.3089614569,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.031415926535897934,
+  "reference_length": 0.2,
+  "reference_how": "frontal area and diameter",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "Streamlined teardrop, diameter 0.2 m, fineness ratio 3",
+  "geometry_class": "streamlined-body"
+ },
+ "geometry": {
+  "name": "Streamlined teardrop, diameter 0.2 m, fineness ratio 3",
+  "class": "streamlined-body",
+  "body_min": [
+   0.0,
+   -0.10000000149011612,
+   -0.10000000149011612
+  ],
+  "body_max": [
+   0.6000000238418579,
+   0.10000000149011612,
+   0.10000000149011612
+  ]
+ },
+ "result": {
+  "cl": -0.000203952925535,
+  "cd": 0.068456397019,
+  "cm": 0.00013874085079000002,
+  "cl_pm": 3.504649999999936e-08,
+  "cd_pm": 9.034999999546489e-08,
+  "l_over_d": -0.0029793114218148683,
+  "iterations": 357,
+  "converged": true,
+  "cells": 83399,
+  "solver_seconds": 15.668023842008552,
+  "peak_memory_mb": 485.80859375,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [],
+ "y_plus": {
+  "body": {
+   "min": 19.3329695,
+   "max": 129.821733,
+   "average": 93.2097931
+  }
+ },
+ "mesh": {
+  "cells": 83399,
+  "max_non_orthogonality": 64.735376,
+  "max_skewness": 0.9165978,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 1604,
+    "target_layers": 5,
+    "mean_layers": 4.93,
+    "thickness_m": 0.0222,
+    "thickness_pct": 99.1
+   }
+  }
+ }
+}

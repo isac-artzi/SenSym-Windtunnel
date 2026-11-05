@@ -1,0 +1,60 @@
+{
+  "id": "aspect-ratio",
+  "order": 4,
+  "title": "Aspect ratio and induced drag",
+  "minutes": 50,
+  "summary": "Three wings with the same section and chord but spans of 0.3, 0.6 and 1.2 m: why gliders have long, slender wings.",
+  "objectives": [
+    "Define aspect ratio and show how the lift slope of a wing rises with it, towards the two-dimensional value.",
+    "Explain induced drag with the tip vortices and downwash, and check the estimate CDi = CL^2 / (pi e AR) against WindLab's numbers.",
+    "Judge when coefficients of different wings can be compared and when their reference areas get in the way."
+  ],
+  "glossary": ["aspect-ratio", "span", "chord", "induced-drag", "lift-slope", "lift-to-drag-ratio", "reference-area", "drag-polar"],
+  "timeline": [
+    {"minutes": 5, "what": "Objectives; prediction: how will the lift slope and the drag change with span?"},
+    {"minutes": 15, "what": "Sweep (0, 4, 8 degrees) of the aspect-ratio-1 wing and of the aspect-ratio-4 wing - live or pre-computed; the aspect-ratio-2 points come from the lift lesson."},
+    {"minutes": 10, "what": "Compare the three sweeps; compute the lift slopes and the induced drag estimate."},
+    {"minutes": 10, "what": "Explain: tip vortices, downwash, Helmbold's formula, induced drag."},
+    {"minutes": 10, "what": "Comprehension questions, debrief, homework (aspect ratio 8)."}
+  ],
+  "misconceptions": [
+    "'Four times the span, four times the lift coefficient': the coefficient already divides by the area; the slope rises because of less downwash, from 0.030 to 0.061 per degree, not fourfold.",
+    "'Induced drag comes from friction at the tips': it is the backward tilt of the lift force caused by the downwash, present even for a frictionless wing.",
+    "'WindLab warns that the areas differ, so the comparison is wrong': the warning is a reminder; comparing coefficients on each wing's own planform area is exactly how wings are compared."
+  ],
+  "steps": [
+    {"id": "intro", "kind": "intro", "title": "What you will do",
+     "text": "Aspect ratio is span squared over area: span over chord for a rectangular wing. You will sweep three NACA 0012 wings of chord 0.3 m with spans 0.3, 0.6 and 1.2 m (aspect ratios 1, 2 and 4) through 0, 4 and 8 degrees at 20 m/s. Each wing's coefficients use its own planform area; Compare notes that the areas differ and that this is the standard way to compare wings - we compare shapes, not forces."},
+    {"id": "predict-slope", "kind": "predict", "title": "Predict before you run",
+     "prompt": "The aspect-ratio-2 wing has a lift slope of about 0.045 per degree (lift lesson). What slope do you expect for the aspect-ratio-1 and the aspect-ratio-4 wing? Which wing will have the best lift-to-drag ratio at 8 degrees, and why?",
+     "placeholder": "AR 1: about ... per degree; AR 4: about ... per degree; best L/D: ... because ..."},
+    {"id": "run-ar1", "kind": "run", "title": "Run 1: aspect ratio 1 (span 0.3 m)", "pack": "ar1-sweep",
+     "shape": {"naca": {"code": "0012", "chord": 0.3, "span": 0.3}},
+     "conditions": {"kind": "sweep", "airspeed": 20, "angles": [0, 4, 8]},
+     "text": "A square wing. Three angles on one mesh: about 3 Quick runs."},
+    {"id": "run-ar4", "kind": "run", "title": "Run 2: aspect ratio 4 (span 1.2 m)", "pack": "ar4-sweep",
+     "shape": {"naca": {"code": "0012", "chord": 0.3, "span": 1.2}},
+     "conditions": {"kind": "sweep", "airspeed": 20, "angles": [0, 4, 8]},
+     "text": "Twice the default span. The mesh is bigger (about 670,000 cells), so each angle takes longer. For the aspect-ratio-2 wing use the sweep from the lift lesson (angles 0, 4, 8 are in it), then Compare the three sweeps."},
+    {"id": "observe-slopes", "kind": "observe", "title": "Observe",
+     "prompt": "For each wing write down CL and CD at 0, 4 and 8 degrees and the L/D at 8 degrees. Compute the lift slope (CL at 8 degrees divided by 8) and the rise in drag from 0 to 8 degrees, CD(8) - CD(0).",
+     "placeholder": "AR 1: slope ... /deg, CD(8)-CD(0) = ..., L/D(8) = ...; AR 2: ...; AR 4: ..."},
+    {"id": "explain-induced", "kind": "explain", "title": "Explain",
+     "prompt": "Compare your drag rises with the induced-drag estimate CDi = CL^2 / (pi e AR) with e = 0.9, using each wing's CL at 8 degrees. Why does the slender wing make more lift per degree and pay less drag for it?",
+     "text": "Air leaks around the tips from the high-pressure lower surface to the low-pressure upper surface and rolls up into two vortices. They push air downwards over the whole span (downwash), which tilts the wind the wing feels: less effective angle (lower lift slope) and a lift force tilted backwards (induced drag). The shorter the wing, the larger the share of it near the tips. WindLab gives lift slopes of 0.030, 0.045 and 0.061 per degree for aspect ratios 1, 2 and 4 (Helmbold's formula: 0.026, 0.045 and 0.068; a two-dimensional section: 0.11). The drag rise from 0 to 8 degrees is 0.020, 0.024 and 0.025, against CL^2/(pi 0.9 AR) = 0.020, 0.023 and 0.021 - the estimate works, and the small excess at aspect ratio 4 is profile drag growing with lift. L/D at 8 degrees climbs from 6.4 to 8.8 to 11.5. A glider with aspect ratio 25 pushes the same idea to L/D above 40."},
+    {"id": "q1", "kind": "question", "prompt": "Going from aspect ratio 1 to 4 (same chord, four times the span), the lift slope roughly ...",
+     "choices": ["halves", "stays the same", "doubles", "becomes zero"],
+     "answer": 2,
+     "explanation": "0.030 to 0.061 per degree in WindLab. It cannot rise without limit: the two-dimensional section's 0.11 per degree is the ceiling as the aspect ratio grows."},
+    {"id": "q2", "kind": "question", "prompt": "Why does a longer, slenderer wing make more lift per degree?",
+     "choices": ["The tip vortices affect a smaller share of the wing, so the downwash and the loss of effective angle are smaller", "Longer wings are heavier", "The chord is larger", "The Reynolds number is higher"],
+     "answer": 0,
+     "explanation": "The chord and the Reynolds number are the same for all three wings here; only the span changes. Downwash from the tips reduces the angle the wing feels, and it matters less when the tips are a small part of the span."},
+    {"id": "q3", "kind": "question", "prompt": "Induced drag is about CL^2 / (pi e AR). At the same lift coefficient, doubling the aspect ratio ...",
+     "choices": ["doubles the induced drag", "halves the induced drag", "has no effect", "quarters the induced drag"],
+     "answer": 1,
+     "explanation": "AR is in the denominator. At the same CL, twice the aspect ratio means half the induced drag; this is why long wings are efficient at the high lift coefficients of slow flight."},
+    {"id": "homework", "kind": "homework", "title": "Homework (optional)",
+     "text": "Make a wing with span 2.4 m and chord 0.3 m (aspect ratio 8) and sweep 0, 4, 8 degrees. Predict its lift slope with Helmbold's formula first (about 0.082 per degree), then check. Note how the mesh grows with the span and how long the run takes. Add the forces in newtons to the comparison: which wing lifts most at 8 degrees, and is that the same wing that has the best L/D?"}
+  ]
+}

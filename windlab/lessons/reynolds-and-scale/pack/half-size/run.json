@@ -1,0 +1,74 @@
+{
+ "pack_version": 1,
+ "name": "half-size",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "single",
+  "airspeed": 20.0,
+  "alpha_deg": 8.0,
+  "angles": null,
+  "preset": "quick",
+  "reynolds": 205380.98172109263,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.045,
+  "reference_length": 0.15,
+  "reference_how": "mean aerodynamic chord and planform area (chord x span)",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "NACA 0012 wing, chord 0.15 m, span 0.3 m",
+  "geometry_class": null
+ },
+ "geometry": {
+  "name": "NACA 0012 wing, chord 0.15 m, span 0.3 m",
+  "class": null,
+  "body_min": [
+   0.0,
+   -0.15000000596046448,
+   -0.009000943973660469
+  ],
+  "body_max": [
+   0.15000000596046448,
+   0.15000000596046448,
+   0.009000943973660469
+  ]
+ },
+ "result": {
+  "cl": 0.35212463067,
+  "cd": 0.04301986671949999,
+  "cm": 0.0163446796325,
+  "cl_pm": 6.567499999998727e-06,
+  "cd_pm": 1.4675999999991252e-06,
+  "l_over_d": 8.185163216937383,
+  "iterations": 377,
+  "converged": true,
+  "cells": 372599,
+  "solver_seconds": 77.21611978398869,
+  "peak_memory_mb": 987.46875,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [],
+ "y_plus": {
+  "body": {
+   "min": 2.55285138,
+   "max": 87.8277735,
+   "average": 13.7998797
+  }
+ },
+ "mesh": {
+  "cells": 372599,
+  "max_non_orthogonality": 64.993756,
+  "max_skewness": 2.3219516,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 32256,
+    "target_layers": 5,
+    "mean_layers": 4.75,
+    "thickness_m": 0.00275,
+    "thickness_pct": 96.0
+   }
+  }
+ }
+}

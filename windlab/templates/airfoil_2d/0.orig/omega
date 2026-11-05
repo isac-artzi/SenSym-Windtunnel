@@ -1,0 +1,37 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| WindLab airfoil_2d template                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Freestream eddy-viscosity ratio nut/nu = @@NUT_RATIO@@  (PRD SIM-5)
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform @@OMEGA_INF@@;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    farfield
+    {
+        type            freestream;
+        freestreamValue uniform @@OMEGA_INF@@;
+        value           uniform @@OMEGA_INF@@;
+    }
+
+    // At y+ < 1 this sets the viscous-sublayer value 6 nu / (beta1 y^2).
+    airfoil
+    {
+        type            omegaWallFunction;
+        value           uniform @@OMEGA_INF@@;
+    }
+}
+
+// ************************************************************************* //

@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="page.misc.title">WindLab — virtual wind tunnel</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script type="module" src="/static/app.js"></script>
+</head>
+<body>
+  <!-- ============================================================ educational-use notice: a real modal, accepted once per
+       notice version (windlab/disclaimer.py); the rest of the page is inert and the Run button disabled until then -->
+  <div id="disclaimer-modal" class="modal-backdrop" hidden>
+    <section id="disclaimer" class="card modal" role="dialog" aria-modal="true" aria-labelledby="h-disclaimer"
+             aria-describedby="disclaimer-text">
+      <h2 id="h-disclaimer" tabindex="-1" data-i18n="page.hDisclaimer">Before you start: this is an educational simulation</h2>
+      <div id="disclaimer-text">
+        <p data-i18n="page.disclaimer.p"><strong>WindLab's results are approximate and may be inaccurate.</strong> It is a
+          teaching tool. It is not validated for engineering design, certification or safety-critical decisions.</p>
+        <p class="disclaimer-key" data-i18n="page.disclaimer.p.2">SenSym LLC assumes no responsibility for any damages or injury caused by
+          objects built using this simulator.</p>
+        <p><span data-i18n="page.disclaimer.p.3">Before you build or fly anything based on these numbers, verify them
+          independently: physical testing and a qualified engineer. WindLab is open-source software provided "as is",
+          without warranty of any kind (MIT License).</span>
+          <a class="disclaimer-link" href="/disclaimer" target="_blank" rel="noopener" data-i18n="page.disclaimerLink">Read the
+            full notice (DISCLAIMER.md)</a></p>
+      </div>
+      <label class="check disclaimer-ack"><input type="checkbox" id="disclaimer-ack">
+        <span data-i18n="page.disclaimer.ack">I understand this is an educational simulation that may give inaccurate results,
+          and SenSym LLC is not responsible for anything built with it</span></label>
+      <div class="row">
+        <button type="button" id="disclaimer-accept" class="primary" disabled data-i18n="page.disclaimerAccept">Accept and
+          continue</button>
+        <span class="help" data-i18n="page.disclaimer.span">Tick the box to enable the button. The page cannot be used until the
+          notice is accepted; it is shown again only when the notice changes.</span>
+      </div>
+    </section>
+  </div>
+  <a class="skip" href="#main" data-i18n="page.misc.a">Skip to the steps</a>
+  <header class="top">
+    <div class="top-row">
+      <h1>WindLab <span class="sub" data-i18n="page.misc.span">virtual wind tunnel</span></h1>
+      <div class="top-tools">
+        <button type="button" id="tour-open" class="secondary small" aria-controls="tour" aria-expanded="false" data-i18n="page.tourOpen">Take
+          the tour</button>
+        <button type="button" id="about-open" class="secondary small" aria-controls="about" aria-expanded="false" data-i18n="page.aboutOpen">About
+          WindLab</button>
+        <div class="theme-pick">
+          <label for="theme" data-i18n="page.misc.label">Colours</label>
+          <select id="theme">
+            <option value="system" data-i18n="page.theme.option">Like my computer</option>
+            <option value="light" data-i18n="page.theme.option.2">Light</option>
+            <option value="dark" data-i18n="page.theme.option.3">Dark</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <p class="banner" role="note" data-i18n="page.misc.p"><strong>Uncalibrated prototype — not yet validated.</strong>
+      Use the numbers to learn and compare, not to design real hardware.</p>
+  </header>
+
+  <nav aria-label="Steps" class="steps" data-i18n-attr="aria-label:page.misc.nav.ariaLabel">
+    <ol>
+      <li data-step="shape" class="current"><a href="#step-shape" data-i18n="page.misc.a.2">1 Shape</a></li>
+      <li data-step="conditions"><a href="#step-conditions" data-i18n="page.misc.a.3">2 Conditions</a></li>
+      <li data-step="run"><a href="#step-run" data-i18n="page.misc.a.4">3 Run</a></li>
+      <li data-step="results"><a href="#step-results" data-i18n="page.misc.a.5">4 Results</a></li>
+      <li data-step="runs"><a href="#my-runs" data-i18n="page.misc.a.6">My runs</a></li>
+      <li data-step="compare" id="nav-compare" hidden><a href="#compare" data-i18n="page.navCompare.a">Compare</a></li>
+      <li data-step="lessons"><a href="#lessons" data-i18n="page.misc.a.7">Lessons</a></li>
+      <li data-step="glossary"><a href="#glossary" data-i18n="page.misc.a.8">Glossary</a></li>
+    </ol>
+  </nav>
+
+  <main id="main">
+    <!-- ============================================================ first visit: start card and tour -->
+    <section id="start-card" class="card start" aria-labelledby="h-start" hidden>
+      <div class="slice-head">
+        <h2 id="h-start" data-i18n="page.hStart">New here? Start with a lesson</h2>
+        <button type="button" id="start-dismiss" class="secondary small" data-i18n="page.startDismiss">Hide this card</button>
+      </div>
+      <p data-i18n="page.startCard.p">WindLab puts a part in a virtual wind tunnel and shows its lift and drag. The quickest way in is the
+        first guided lesson, <b>Lift vs angle of attack</b> (about 50 minutes; it comes with pre-computed results, so
+        nothing has to be calculated to start). Or take the two-minute tour of the page, or simply press
+        <b>Make this wing</b> below and then <b>Run the wind tunnel</b>.</p>
+      <div class="row">
+        <button type="button" id="start-lesson" class="primary" data-i18n="page.startLesson">Open the first lesson</button>
+        <button type="button" id="start-tour" class="secondary" data-i18n="page.tourOpen">Take the tour</button>
+      </div>
+    </section>
+    <section id="tour" class="card tour" role="dialog" aria-labelledby="tour-title" aria-describedby="tour-text" hidden>
+      <div class="slice-head">
+        <p class="tour-count" id="tour-count" aria-live="polite"></p>
+        <button type="button" id="tour-close" class="secondary small" data-i18n="page.tourClose">Close the tour</button>
+      </div>
+      <h2 id="tour-title" tabindex="-1"></h2>
+      <p id="tour-text"></p>
+      <div class="row">
+        <button type="button" id="tour-back" class="secondary" data-i18n="page.tourBack">Back</button>
+        <button type="button" id="tour-next" class="primary" data-i18n="page.tourNext">Next</button>
+        <span class="help" data-i18n="page.tour.span">Esc closes the tour; you can reopen it any time with "Take the tour" at the top.</span>
+      </div>
+    </section>
+    <!-- ============================================================ about WindLab: version, licences, notices -->
+    <section id="about" class="card about" role="dialog" aria-labelledby="h-about" hidden>
+      <div class="slice-head">
+        <h2 id="h-about" tabindex="-1" data-i18n="page.aboutOpen">About WindLab</h2>
+        <button type="button" id="about-close" class="secondary small" data-i18n="page.aboutClose">Close</button>
+      </div>
+      <p data-i18n="page.about.p">SenSym WindLab is a virtual wind tunnel for engineering students: it meshes a part, runs the open-source
+        OpenFOAM® solver on your own computer and shows the lift and drag. <strong>Uncalibrated prototype — not yet
+        validated.</strong> For educational and preliminary design use; not for airworthiness or safety
+        determinations.</p>
+      <dl class="settings">
+        <dt data-i18n="page.about.dt">Version</dt><dd id="about-version">–</dd>
+        <dt data-i18n="page.about.dt.2">Commit</dt><dd id="about-commit">–</dd>
+        <dt data-i18n="page.about.dt.3">Made by</dt><dd data-i18n="page.about.dd">SenSym LLC. Everything runs on this computer; nothing is sent anywhere.</dd>
+        <dt data-i18n="page.about.dt.4">Licence</dt><dd data-i18n="page.about.dd.2">WindLab is open-source software under the MIT License (the LICENSE file in the
+          WindLab folder), provided "as is" without warranty of any kind.</dd>
+      </dl>
+      <h3 data-i18n="page.about.h3.3">Educational simulation: please read</h3>
+      <p class="about-disclaimer"><span data-i18n="page.about.p.3">WindLab's results are approximate and may be inaccurate. It is not
+        validated for engineering design, certification or safety-critical decisions. SenSym LLC assumes no responsibility
+        for any damages or injury caused by objects built using this simulator. Verify independently (physical testing, a
+        qualified engineer) before building or flying anything.</span>
+        <a class="disclaimer-link" href="/disclaimer" target="_blank" rel="noopener" data-i18n="page.disclaimerLink">Read the
+          full notice (DISCLAIMER.md)</a></p>
+      <h3 data-i18n="page.about.h3">Third-party software</h3>
+      <ul id="about-licences" class="licences"></ul>
+      <h3 data-i18n="page.about.h3.2">Trade marks</h3>
+      <p id="about-trademark" class="trademark" data-i18n="page.aboutTrademark">OPENFOAM® is a registered trade mark of OpenCFD Limited, producer and
+        distributor of the OpenFOAM software via www.openfoam.com. This offering is not approved or endorsed by OpenCFD
+        Limited, producer and distributor of the OpenFOAM software via www.openfoam.com, and owner of the OPENFOAM® and
+        OpenCFD® trade marks. OpenFOAM is distributed under the GNU GPL v3.</p>
+      <p class="help" data-i18n="page.about.p.2">Esc closes this panel.</p>
+    </section>
+    <!-- ============================================================ lesson panel (EDU-1) -->
+    <section id="lesson-panel" class="card lesson" aria-labelledby="h-lesson" hidden>
+      <div class="slice-head">
+        <h2 id="h-lesson" tabindex="-1" data-i18n="page.hLesson">Lesson</h2>
+        <button type="button" id="lesson-close" class="secondary small" data-i18n="page.lessonClose">Close the lesson</button>
+      </div>
+      <p id="lesson-summary" class="help"></p>
+      <details class="details lesson-objectives" open>
+        <summary data-i18n="page.lessonPanel.summary">What you will learn</summary>
+        <ol id="lesson-objectives"></ol>
+        <p class="help"><span data-i18n="page.lessonPanel.p">Terms in this lesson:</span> <span id="lesson-terms"></span></p>
+      </details>
+      <nav aria-label="Lesson steps" data-i18n-attr="aria-label:page.lessonPanel.nav.ariaLabel">
+        <ol id="lesson-steps" class="lesson-steps"></ol>
+      </nav>
+      <div id="lesson-step" class="lesson-step" aria-live="polite"></div>
+      <p id="lesson-error" class="error" role="alert" hidden></p>
+      <p id="lesson-note" class="note" role="status" hidden></p>
+      <div class="row lesson-nav">
+        <button type="button" id="lesson-back" class="secondary" data-i18n="page.tourBack">Back</button>
+        <button type="button" id="lesson-next" class="primary" data-i18n="page.lessonNext">Next step</button>
+        <span id="lesson-progress" class="help"></span>
+      </div>
+    </section>
+    <!-- ============================================================ 1 shape -->
+    <section id="step-shape" class="card" aria-labelledby="h-shape">
+      <h2 id="h-shape" data-i18n="page.hShape">Step 1 · Shape</h2>
+      <fieldset class="choice">
+        <legend data-i18n="page.stepShape.legend">What do you want to put in the wind tunnel?</legend>
+        <label><input type="radio" name="shape-kind" value="naca" checked> <span data-i18n="page.stepShape.label">A built-in wing (NACA 4-digit)</span></label>
+        <label><input type="radio" name="shape-kind" value="builtin"> <span data-i18n="page.stepShape.label.2">A built-in body: sphere, cylinder, plate, cube
+          or streamlined teardrop</span> <button type="button" class="def" data-term="bluff-body"
+          aria-label="What is a bluff body?" data-i18n-attr="aria-label:page.def.bluffBody">?</button></label>
+        <label class="advanced"><input type="radio" name="shape-kind" value="upload"> <span data-i18n="page.stepShape.label.3">My own part (STEP or STL file
+          from SolidWorks)</span></label>
+      </fieldset>
+
+      <form id="form-builtin" class="grid" hidden novalidate>
+        <div class="field">
+          <label for="builtin-shape" data-i18n="page.formBuiltin.label">Shape</label>
+          <select id="builtin-shape" aria-describedby="builtin-help"></select>
+          <p id="builtin-help" class="help"></p>
+        </div>
+        <div id="builtin-params" class="builtin-params"></div>
+        <div class="actions"><button type="submit" class="primary" data-i18n="page.formBuiltin.button">Make this shape</button></div>
+        <p class="help wide"><span data-i18n="page.formBuiltin.p">Reference values: the <b>frontal area</b></span> <button type="button" class="def"
+          data-term="frontal-area" aria-label="What is the frontal area?" data-i18n-attr="aria-label:page.def.frontalArea">?</button> <span data-i18n="page.formBuiltin.p.2">and the diameter or height, so
+          the drag coefficient compares with textbook values (sphere ≈ 0.47, cube ≈ 1.05, streamlined body ≈ 0.05–0.1).
+          A streamlined body</span> <button type="button" class="def" data-term="streamlined-body"
+          aria-label="What is a streamlined body?" data-i18n-attr="aria-label:page.def.streamlinedBody">?</button> <span data-i18n="page.formBuiltin.p.3">has a tenth of a bluff body's drag; its fineness ratio</span>
+          <button type="button" class="def" data-term="fineness-ratio" aria-label="What is the fineness ratio?" data-i18n-attr="aria-label:page.def.finenessRatio">?</button>
+          <span data-i18n="page.formBuiltin.p.4">is length ÷ diameter.</span></p>
+      </form>
+
+      <form id="form-naca" class="grid" novalidate>
+        <div class="field">
+          <label for="naca-code" data-i18n="page.formNaca.label">NACA code</label> <button type="button" class="def" data-term="naca-code"
+            aria-label="What is a NACA code?" data-i18n-attr="aria-label:page.def.nacaCode">?</button>
+          <input id="naca-code" name="code" value="0012" inputmode="numeric" maxlength="4" pattern="[0-9]{4}"
+                 aria-describedby="naca-code-help" required>
+          <p id="naca-code-help" class="help"><span data-i18n="page.nacaCodeHelp">Four digits. 0012 = symmetric, 12 % thick. 2412 = 2 % camber</span>
+            <button type="button" class="def" data-term="camber" aria-label="What is camber?" data-i18n-attr="aria-label:page.def.camber">?</button>.</p>
+        </div>
+        <div class="field">
+          <label for="naca-chord" data-i18n="page.formNaca.label.2">Chord (m)</label> <button type="button" class="def" data-term="chord"
+            aria-label="What is the chord?" data-i18n-attr="aria-label:page.def.chord">?</button>
+          <input id="naca-chord" name="chord" type="number" value="0.3" step="0.01" min="0.05" max="2"
+                 aria-describedby="naca-chord-help" required>
+          <p id="naca-chord-help" class="help" data-i18n="page.nacaChordHelp">Front-to-back length of the wing, 0.05 to 2 m.</p>
+        </div>
+        <div class="field">
+          <label for="naca-span" data-i18n="page.formNaca.label.3">Span (m)</label> <button type="button" class="def" data-term="span"
+            aria-label="What is the span?" data-i18n-attr="aria-label:page.def.span">?</button>
+          <input id="naca-span" name="span" type="number" value="0.6" step="0.01" min="0.1" max="5"
+                 aria-describedby="naca-span-help" required>
+          <p id="naca-span-help" class="help"><span data-i18n="page.nacaSpanHelp">Tip-to-tip width, 0.1 to 5 m. Span ÷ chord is the aspect ratio</span>
+            <button type="button" class="def" data-term="aspect-ratio" aria-label="What is the aspect ratio?" data-i18n-attr="aria-label:page.def.aspectRatio">?</button>.</p>
+        </div>
+        <div class="actions"><button type="submit" class="primary" data-i18n="page.formNaca.button">Make this wing</button></div>
+      </form>
+
+      <form id="form-upload" class="grid" hidden novalidate>
+        <div class="field wide">
+          <label for="stl-file" data-i18n="page.formUpload.label">STEP or STL file</label> <button type="button" class="def" data-term="step"
+            aria-label="What is a STEP file?" data-i18n-attr="aria-label:page.def.step">?</button> <button type="button" class="def" data-term="stl"
+            aria-label="What is an STL file?" data-i18n-attr="aria-label:page.def.stl">?</button>
+          <input id="stl-file" type="file" accept=".step,.stp,.stl,model/step,model/stl" aria-describedby="stl-help"
+                 required>
+          <p id="stl-help" class="help"><span data-i18n="page.stlHelp">In SolidWorks: File → Save As → <b>STEP AP214</b> (keeps the exact
+            surfaces and the units) or <b>STL</b>, exporting one solid body (the surface must be watertight</span>
+            <button type="button" class="def" data-term="watertight"
+            aria-label="What does watertight mean?" data-i18n-attr="aria-label:page.def.watertight">?</button><span data-i18n="page.stlHelp.2">). Up to <span data-max-upload>200</span> MB.</span></p>
+          <p id="step-unavailable" class="callout warn" role="note" hidden></p>
+        </div>
+        <div class="field">
+          <label for="stl-units" data-i18n="page.formUpload.label.2">Units the part was drawn in</label> <button type="button" class="def"
+            data-term="units" aria-label="Why do the units matter?" data-i18n-attr="aria-label:page.def.units">?</button>
+          <select id="stl-units" required aria-describedby="units-help">
+            <option value="" data-i18n="page.stlUnits.option">Choose units…</option>
+            <option value="file" id="units-from-file" hidden data-i18n="page.unitsFromFile">As written in the STEP file</option>
+            <option value="mm" data-i18n="page.stlUnits.option.2">millimetres (mm)</option>
+            <option value="cm" data-i18n="page.stlUnits.option.3">centimetres (cm)</option>
+            <option value="m" data-i18n="page.stlUnits.option.4">metres (m)</option>
+            <option value="in" data-i18n="page.stlUnits.option.5">inches (in)</option>
+          </select>
+          <p id="units-help" class="help" data-i18n="page.unitsHelp">STL files don't store units. SolidWorks parts are usually in mm.</p>
+        </div>
+        <div class="actions"><button type="submit" class="primary" data-i18n="page.formUpload.button">Check this file</button></div>
+      </form>
+
+      <p id="shape-error" class="error" role="alert" hidden></p>
+      <p id="shape-busy" class="busy" role="status" aria-live="polite" hidden></p>
+
+      <div id="shape-report" class="report" hidden>
+        <p class="size-headline" id="size-headline" aria-live="polite"></p>
+        <p class="size-detail" id="size-detail"></p>
+        <div id="units-confirm" class="callout warn" hidden>
+          <p id="units-confirm-text"></p>
+          <div class="row">
+            <button type="button" id="use-suggested" class="secondary" hidden data-i18n="page.useSuggested">Read the file in other units instead</button>
+            <label><input type="checkbox" id="units-ok"> <span data-i18n="page.unitsConfirm.label">Yes, this size is right</span></label>
+          </div>
+        </div>
+        <div id="units-from-file-note" class="callout info" role="note" hidden>
+          <p id="units-from-file-text"></p>
+        </div>
+        <div id="bodies-box" class="callout warn" hidden>
+          <p id="bodies-text"></p>
+          <div class="row"><button type="button" id="bodies-toggle" class="secondary" data-i18n="page.bodiesToggle">Use all bodies</button></div>
+        </div>
+        <ul id="shape-problems" class="msgs problems"></ul>
+        <ul id="shape-warnings" class="msgs warnings"></ul>
+        <ul id="shape-messages" class="msgs"></ul>
+        <figure class="viewer-fig">
+          <div id="shape-viewer" class="viewer" tabindex="0" role="img"
+               aria-label="3D view of the shape. Drag or use arrow keys to turn it, plus and minus to zoom, 0 to reset." data-i18n-attr="aria-label:page.shapeViewer.ariaLabel"></div>
+          <figcaption><span data-i18n="page.shapeReport.figcaption">The wind blows along the <b>x</b> axis (</span><span class="sw wind"></span> <span data-i18n="page.shapeReport.figcaption.2">arrow); <b>z</b> is up
+            (</span><span class="sw up"></span> <span data-i18n="page.shapeReport.figcaption.3">arrow), so lift is measured upwards. The box around the part shows its size
+            in metres. Drag or use the arrow keys to turn the view. <b>Ctrl + scroll</b> (or a pinch) zooms;
+            after you click the view, plain scrolling zooms too (Esc to stop), and + / − zoom, 0 resets.</span></figcaption>
+        </figure>
+
+        <div id="orient-box" class="subcard advanced" hidden>
+          <h3 id="h-orient" data-i18n="page.hOrient">Is the part facing the right way?</h3>
+          <p class="help" data-i18n="page.orientBox.p">CAD programs often use other axes. The wind must hit the <b>front</b> of the part and
+            <b>up</b> must be up. Turn the part until it looks right.</p>
+          <div class="row" role="group" aria-labelledby="h-orient">
+            <button type="button" class="secondary" data-rotate="x" data-i18n="page.orientBox.button">Turn 90° about x</button>
+            <button type="button" class="secondary" data-rotate="y" data-i18n="page.orientBox.button.2">Turn 90° about y</button>
+            <button type="button" class="secondary" data-rotate="z" data-i18n="page.orientBox.button.3">Turn 90° about z</button>
+            <button type="button" class="secondary" data-rotate="suggest" data-i18n="page.orientBox.button.4">Suggest orientation</button>
+          </div>
+          <p id="orient-note" class="note" role="status" aria-live="polite" hidden></p>
+        </div>
+
+        <form id="ref-box" class="subcard advanced" novalidate hidden>
+          <h3 data-i18n="page.refBox.h3">Reference values for the coefficients</h3>
+          <fieldset class="choice part-type" id="part-type-field" hidden>
+            <legend data-i18n="page.partTypeField.legend">This part is…</legend>
+            <label><input type="radio" name="part-type" value="body"> <span data-i18n="page.partTypeField.label">a body (rocket, car, sphere, bracket…):
+              coefficients on its <b>frontal area</b>, the silhouette seen from the front</span></label>
+            <label><input type="radio" name="part-type" value="wing"> <span data-i18n="page.partTypeField.label.2">a wing or blade: coefficients on its
+              <b>planform area</b>, the outline seen from above</span></label>
+          </fieldset>
+          <p class="help" id="part-type-note" hidden></p>
+          <p class="help" id="ref-default">–</p>
+          <div class="grid">
+            <div class="field">
+              <label for="ref-length" data-i18n="page.refBox.label">Reference length (m)</label> <button type="button" class="def"
+                data-term="reference-length" aria-label="What is the reference length?" data-i18n-attr="aria-label:page.def.referenceLength">?</button>
+              <input id="ref-length" type="number" step="any" min="0.001" max="100" aria-describedby="ref-default">
+            </div>
+            <div class="field">
+              <label for="ref-area" data-i18n="page.refBox.label.2">Reference area (m²)</label> <button type="button" class="def"
+                data-term="reference-area" aria-label="What is the reference area?" data-i18n-attr="aria-label:page.def.referenceArea">?</button>
+              <input id="ref-area" type="number" step="any" min="0.00001" max="10000"
+                     aria-describedby="ref-default">
+            </div>
+            <div class="actions">
+              <button type="submit" class="secondary" data-i18n="page.refBox.button">Use these values</button>
+              <button type="button" id="ref-reset" class="secondary" data-i18n="page.refReset">Back to the defaults</button>
+            </div>
+          </div>
+          <p id="ref-error" class="error" role="alert" hidden></p>
+          <p id="ref-note" class="note" role="status" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================ 2 conditions -->
+    <section id="step-conditions" class="card" aria-labelledby="h-cond">
+      <h2 id="h-cond" data-i18n="page.hCond">Step 2 · Conditions</h2>
+      <form id="form-cond" class="grid" novalidate>
+        <fieldset id="cond-fields" disabled>
+          <legend class="sr-only" data-i18n="page.condFields.legend">Wind-tunnel conditions</legend>
+          <div class="field">
+            <label for="airspeed" data-i18n="page.condFields.label">Airspeed (m/s)</label> <button type="button" class="def" data-term="airspeed"
+              aria-label="What is the airspeed?" data-i18n-attr="aria-label:page.def.airspeed">?</button>
+            <input id="airspeed" type="number" value="20" step="0.5" min="1" max="100" required
+                   aria-describedby="airspeed-help airspeed-err">
+            <p id="airspeed-help" class="help" data-i18n="page.airspeedHelp">How fast the air moves past the part: 1 to 100 m/s
+              (20 m/s ≈ 72 km/h).</p>
+            <p id="airspeed-err" class="error" hidden></p>
+          </div>
+          <fieldset class="choice field wide">
+            <legend data-i18n="page.condFields.legend.2">What kind of run?</legend>
+            <label><input type="radio" name="run-kind" value="single" checked> <span data-i18n="page.condFields.label.2">One angle of attack</span></label>
+            <label><input type="radio" name="run-kind" value="sweep"> <span data-i18n="page.condFields.label.3">Angle sweep: several angles, one mesh
+              (the classic wind-tunnel experiment)</span></label>
+            <button type="button" class="def" data-term="sweep" aria-label="What is an angle sweep?" data-i18n-attr="aria-label:page.def.sweep">?</button>
+          </fieldset>
+          <div class="field" id="alpha-field">
+            <label for="alpha" data-i18n="page.alphaField.label">Angle of attack (degrees)</label> <button type="button" class="def"
+              data-term="angle-of-attack" aria-label="What is the angle of attack?" data-i18n-attr="aria-label:page.def.angleOfAttack">?</button>
+            <input id="alpha" type="number" value="5" step="0.5" min="-20" max="20" required
+                   aria-describedby="alpha-help alpha-err">
+            <p id="alpha-help" class="help" data-i18n="page.alphaHelp">How much the wind is tilted up into the part: −20 to 20°.
+              The part stays still; the wind changes direction.</p>
+            <p id="alpha-err" class="error" hidden></p>
+          </div>
+          <div class="field" id="angles-field" hidden>
+            <label for="angles" data-i18n="page.anglesField.label">Angles of attack (degrees)</label> <button type="button" class="def"
+              data-term="angle-of-attack" aria-label="What is the angle of attack?" data-i18n-attr="aria-label:page.def.angleOfAttack">?</button>
+            <input id="angles" value="-4, 0, 4, 8, 12, 16" inputmode="decimal"
+                   aria-describedby="angles-help angles-err">
+            <p id="angles-help" class="help" data-i18n="page.anglesHelp">2 to 8 angles between −20 and 20°, separated by commas. The mesh is
+              made once; each angle then takes about as long as a single run.</p>
+            <p id="angles-err" class="error" hidden></p>
+          </div>
+          <div class="field wide">
+            <p class="re" aria-live="polite"><span class="re-label" data-i18n="page.condFields.span">Reynolds number</span>
+              <span id="re-value" class="re-value">–</span>
+              <button type="button" class="def" data-term="reynolds-number"
+                aria-label="What is the Reynolds number?" data-i18n-attr="aria-label:page.def.reynoldsNumber">?</button></p>
+            <p class="help" id="re-help"><span data-i18n="page.reHelp">Compares the air's momentum with its stickiness (viscosity</span>
+              <button type="button" class="def" data-term="viscosity" aria-label="What is viscosity?" data-i18n-attr="aria-label:page.def.viscosity">?</button><span data-i18n="page.reHelp.2">),
+              using the part's length</span> <span id="re-length">L</span><span data-i18n="page.reHelp.3">. Flows with the same Reynolds number behave
+              alike.</span></p>
+          </div>
+          <fieldset class="choice field wide" id="preset-field">
+            <legend><span data-i18n="page.presetField.legend">Mesh</span> <button type="button" class="def" data-term="mesh"
+              aria-label="What is the mesh?" data-i18n-attr="aria-label:page.def.mesh">?</button></legend>
+            <label><input type="radio" name="preset" value="quick" checked> <span data-i18n="page.presetField.label"><b>Quick</b> (about 0.4 million
+              cells)</span> <button type="button" class="def" data-term="quick-mesh"
+              aria-label="What is the Quick mesh?" data-i18n-attr="aria-label:page.def.quickMesh">?</button> <span class="est" id="est-quick"></span></label>
+            <label><input type="radio" name="preset" value="standard"> <span data-i18n="page.presetField.label.2"><b>More accurate, slower</b> (about twice
+              the cells; lift changes by about 1 %, drag by a few per cent; needs about 2 GB of memory)</span>
+              <span class="est" id="est-standard"></span></label>
+            <label id="preset-detailed" hidden><input type="radio" name="preset" value="detailed">
+              <span data-i18n="page.presetDetailed"><b>Detailed</b> (about five times the cells; needs about 7 GB of memory)</span>
+              <span class="est" id="est-detailed"></span></label>
+            <p class="help" id="est-help" data-i18n="page.estHelp">The times are estimated from this computer's own earlier runs.</p>
+            <!-- thin plates / fins of an upload: what this mesh choice does about them (server text) -->
+            <ul id="mesh-notes" class="msgs warnings" hidden></ul>
+          </fieldset>
+        </fieldset>
+      </form>
+      <p id="cond-hint" class="hint" data-i18n="page.condHint">Make or upload a shape first.</p>
+
+      <!-- instant 2D preview (PRD Tier 0): runs in the browser, no server work -->
+      <div class="row preview-row">
+        <button type="button" id="preview-btn" class="secondary" disabled aria-expanded="false"
+                aria-controls="preview-fig" data-i18n="page.previewBtn">Preview the airflow (instant, 2D)</button>
+        <p id="preview-hint" class="hint" data-i18n="page.previewHint">An instant sketch of the flow, drawn in your browser while you change the
+          angle. Make or upload a shape first.</p>
+      </div>
+      <figure class="viewer-fig preview" id="preview-fig" hidden>
+        <div class="slice-head">
+          <h3 id="h-preview" data-i18n="page.hPreview">Instant preview: airflow through the middle of the part</h3>
+          <div class="slice-controls">
+            <button type="button" id="preview-play" class="secondary small" data-i18n="page.previewPlay">Pause</button>
+            <button type="button" id="preview-advance" class="secondary small" data-i18n="page.previewAdvance">Advance 200 steps</button>
+            <button type="button" id="preview-reset" class="secondary small" data-i18n="page.previewReset">Start again</button>
+            <div class="seg" role="group" aria-labelledby="preview-colour-by">
+              <span id="preview-colour-by" class="seg-label" data-i18n="page.previewColourBy">Colour by</span>
+              <button type="button" class="secondary small" data-preview-field="speed" aria-pressed="true" data-i18n="page.previewFig.button">Air speed</button>
+              <button type="button" class="secondary small" data-preview-field="vorticity" aria-pressed="false" data-i18n="page.previewFig.button.2">Swirl</button>
+            </div>
+          </div>
+        </div>
+        <div id="preview-view" class="preview-view" role="img" aria-label="Animated airflow sketch" data-i18n-attr="aria-label:page.previewView.ariaLabel"></div>
+        <p id="preview-note" class="note" role="status" hidden></p>
+        <p id="preview-readout" class="probe" aria-live="off" data-i18n="page.previewReadout">The forces appear after a moment.</p>
+        <figcaption>
+          <p class="legend-text preview-label"><strong data-i18n="page.previewFig.strong">Preview — a 2D slice at a low Reynolds number; real wings differ
+            at the tips. Use the full simulation for numbers.</strong></p>
+          <p class="legend-text" id="preview-re" data-i18n="page.previewRe">Preview Reynolds number: –</p>
+          <p class="legend-text" id="preview-text"></p>
+          <p class="legend-text"><span data-i18n="page.previewFig.p">Made in your browser with a lattice-Boltzmann</span> <button type="button" class="def"
+            data-term="lattice-boltzmann" aria-label="What is the lattice-Boltzmann method?" data-i18n-attr="aria-label:page.def.latticeBoltzmann">?</button> <span data-i18n="page.previewFig.p.2">model of the
+            cut through the middle of the part; nothing is sent anywhere. Change the angle of attack above and the
+            picture follows. How it works and why it differs from the full run: docs/PREVIEW.md.</span></p>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ============================================================ 3 run -->
+    <section id="step-run" class="card" aria-labelledby="h-run">
+      <h2 id="h-run" data-i18n="page.hRun">Step 3 · Run</h2>
+      <div class="row">
+        <button type="button" id="run-btn" class="primary big" disabled data-i18n="page.runBtn">Run the wind tunnel</button>
+        <p id="run-hint" class="hint" data-i18n="page.runHint">Choose a shape and conditions first.</p>
+      </div>
+      <p id="run-error" class="error" role="alert" hidden></p>
+      <p id="run-note" class="note" role="status" hidden></p>
+      <div id="run-progress" hidden>
+        <div class="progress-head">
+          <p id="stage-label" class="stage" aria-live="polite" data-i18n="page.stageLabel">Starting…</p>
+          <p id="eta" class="eta" aria-live="off"></p>
+        </div>
+        <div class="bar" role="progressbar" aria-labelledby="stage-label" aria-valuemin="0" aria-valuemax="100"
+             aria-valuenow="0" id="bar"><div class="bar-fill" id="bar-fill"></div></div>
+        <div class="run-actions">
+          <button type="button" id="cancel-btn" class="secondary danger" hidden data-i18n="page.cancelBtn">Stop this run</button>
+          <div id="cancel-confirm" class="callout warn" role="group" aria-labelledby="cancel-q" hidden>
+            <p id="cancel-q" data-i18n="page.cancelQ">Stop this run? What it has calculated so far will be thrown away.</p>
+            <div class="row">
+              <button type="button" id="cancel-yes" class="danger" data-i18n="page.cancelYes">Yes, stop the run</button>
+              <button type="button" id="cancel-no" class="secondary" data-i18n="page.cancelNo">No, keep running</button>
+            </div>
+          </div>
+        </div>
+        <ol class="stage-list" id="stage-list"></ol>
+        <div class="charts">
+          <figure class="chart-fig">
+            <figcaption data-i18n="page.runProgress.figcaption">Lift coefficient C<sub>L</sub> while the solver works</figcaption>
+            <canvas id="chart-cl" width="480" height="200" tabindex="0" role="img"
+                    aria-label="Chart of lift coefficient against solver iteration" data-i18n-attr="aria-label:page.chartCl.ariaLabel"></canvas>
+          </figure>
+          <figure class="chart-fig">
+            <figcaption data-i18n="page.runProgress.figcaption.2">Drag coefficient C<sub>D</sub> while the solver works</figcaption>
+            <canvas id="chart-cd" width="480" height="200" tabindex="0" role="img"
+                    aria-label="Chart of drag coefficient against solver iteration" data-i18n-attr="aria-label:page.chartCd.ariaLabel"></canvas>
+          </figure>
+        </div>
+        <p class="help"><span data-i18n="page.runProgress.p">The solver</span> <button type="button" class="def" data-term="solver"
+          aria-label="What is the solver?" data-i18n-attr="aria-label:page.def.solver">?</button> <span data-i18n="page.runProgress.p.2">repeats its calculation until C<sub>L</sub> and C<sub>D</sub>
+          stop changing (it converges</span> <button type="button" class="def" data-term="convergence"
+          aria-label="What does converge mean?" data-i18n-attr="aria-label:page.def.convergence">?</button>). <span id="iter-text" aria-live="off"></span></p>
+        <button type="button" id="hist-toggle" class="secondary small" aria-expanded="false"
+                aria-controls="hist-wrap" data-i18n="page.histToggle">Show the numbers as a table</button>
+        <div id="hist-wrap" class="table-wrap hist" hidden>
+          <table class="runs" id="hist-table">
+            <caption class="sr-only" data-i18n="page.histTable.caption">Lift and drag coefficient at each solver iteration</caption>
+            <thead><tr><th scope="col" class="num" data-i18n="page.histTable.th">Iteration</th><th scope="col" class="num">C<sub>L</sub></th>
+              <th scope="col" class="num">C<sub>D</sub></th></tr></thead>
+            <tbody id="hist-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ 4 results -->
+    <section id="step-results" class="card" aria-labelledby="h-res">
+      <h2 id="h-res" tabindex="-1" data-i18n="page.hRes">Step 4 · Results</h2>
+      <p class="banner" role="note"><strong data-i18n="page.stepResults.strong">Uncalibrated prototype — not yet validated.</strong></p>
+      <p id="res-hint" class="hint" data-i18n="page.resHint">Results appear here when a run finishes.</p>
+      <div id="results" hidden>
+        <p id="res-title" class="res-title"></p>
+        <div id="sweep-results" hidden>
+          <div id="sweep-note" class="callout warn" role="note" hidden><p id="sweep-note-text"></p>
+            <p class="help"><span data-i18n="page.sweepNote.p">Stall</span> <button type="button" class="def" data-term="stall"
+              aria-label="What is stall?" data-i18n-attr="aria-label:page.def.stall">?</button> <span data-i18n="page.sweepNote.p.2">is where lift stops rising because the air separates</span>
+              <button type="button" class="def" data-term="separation" aria-label="What is flow separation?" data-i18n-attr="aria-label:page.def.separation">?</button>
+              <span data-i18n="page.sweepNote.p.3">from the upper surface.</span></p></div>
+          <div class="table-wrap">
+            <table class="runs" id="sweep-table">
+              <caption class="sr-only" data-i18n="page.sweepTable.caption">Results for each angle of attack</caption>
+              <thead><tr><th scope="col" class="num" data-i18n="page.sweepTable.th">Angle (°)</th><th scope="col" class="num">C<sub>L</sub>
+                <button type="button" class="def" data-term="lift-coefficient" aria-label="What is CL?" data-i18n-attr="aria-label:page.def.liftCoefficient">?</button></th>
+                <th scope="col"><span data-i18n="page.sweepTable.th.2">C<sub>L</sub> likely</span> <button type="button" class="def" data-term="expected-error"
+                  aria-label="What is the likely range?" data-i18n-attr="aria-label:page.def.expectedError">?</button></th>
+                <th scope="col" class="num">C<sub>D</sub> <button type="button" class="def" data-term="drag-coefficient"
+                  aria-label="What is CD?" data-i18n-attr="aria-label:page.def.dragCoefficient">?</button></th><th scope="col" data-i18n="page.sweepTable.th.3">C<sub>D</sub> likely</th>
+                <th scope="col" class="num">C<sub>M</sub> <button type="button" class="def"
+                  data-term="pitching-moment-coefficient" aria-label="What is CM?" data-i18n-attr="aria-label:page.def.pitchingMomentCoefficient">?</button></th>
+                <th scope="col" class="num">L/D <button type="button" class="def" data-term="lift-to-drag-ratio"
+                  aria-label="What is L/D?" data-i18n-attr="aria-label:page.def.liftToDragRatio">?</button></th><th scope="col" class="num"><span data-i18n="page.sweepTable.th.4">Iterations</span> <button type="button"
+                  class="def" data-term="convergence" aria-label="What are iterations?" data-i18n-attr="aria-label:page.def.convergence.2">?</button></th>
+                <th scope="col" data-i18n="page.sweepTable.th.5">Status</th></tr></thead>
+              <tbody id="sweep-body"></tbody>
+            </table>
+          </div>
+          <button type="button" class="link-btn" id="why-sweep-btn" aria-expanded="false" aria-controls="why-sweep" data-i18n="page.whySweepBtn">
+            Why these ranges?</button>
+          <div class="why" id="why-sweep" hidden></div>
+          <div class="charts three">
+            <figure class="chart-fig">
+              <figcaption data-i18n="page.sweepResults.figcaption">Lift coefficient C<sub>L</sub> against angle of attack</figcaption>
+              <canvas id="chart-cl-alpha" width="360" height="240" tabindex="0" role="img"
+                      aria-label="Chart of lift coefficient against angle of attack" data-i18n-attr="aria-label:page.chartClAlpha.ariaLabel"></canvas>
+            </figure>
+            <figure class="chart-fig">
+              <figcaption><span data-i18n="page.sweepResults.figcaption.2">Drag polar</span> <button type="button" class="def" data-term="drag-polar"
+                aria-label="What is a drag polar?" data-i18n-attr="aria-label:page.def.dragPolar">?</button><span data-i18n="page.sweepResults.figcaption.3">: C<sub>L</sub> against C<sub>D</sub></span></figcaption>
+              <canvas id="chart-polar" width="360" height="240" tabindex="0" role="img"
+                      aria-label="Drag polar: lift coefficient against drag coefficient" data-i18n-attr="aria-label:page.chartPolar.ariaLabel"></canvas>
+            </figure>
+            <figure class="chart-fig">
+              <figcaption data-i18n="page.sweepResults.figcaption.4">Lift-to-drag ratio L/D against angle of attack (best point ringed)</figcaption>
+              <canvas id="chart-ld" width="360" height="240" tabindex="0" role="img"
+                      aria-label="Chart of lift-to-drag ratio against angle of attack" data-i18n-attr="aria-label:page.chartLd.ariaLabel"></canvas>
+            </figure>
+          </div>
+          <p class="help" data-i18n="page.sweepResults.p">The table above holds the same numbers as the charts. Point at a chart (or focus it and
+            use the arrow keys) to read a value.</p>
+          <div class="field">
+            <label for="sweep-point" data-i18n="page.sweepResults.label">Show the pressure picture for</label>
+            <select id="sweep-point"></select>
+          </div>
+        </div>
+        <div class="tiles" id="single-tiles">
+          <div class="tile">
+            <p class="tile-name"><span data-i18n="page.singleTiles.p">Lift coefficient C<sub>L</sub></span> <button type="button" class="def"
+              data-term="lift-coefficient" aria-label="What is the lift coefficient?" data-i18n-attr="aria-label:page.def.liftCoefficient.2">?</button></p>
+            <p class="tile-value" id="res-cl">–</p>
+            <p class="tile-range" id="res-cl-range" aria-live="polite"></p>
+            <button type="button" class="link-btn" id="why-cl-btn" aria-expanded="false" aria-controls="why-cl" data-i18n="page.whyClBtn">Why
+              this range?</button>
+            <p class="why" id="why-cl" hidden></p>
+            <p class="tile-help" data-i18n="page.singleTiles.p.2">How much the part lifts, independent of size and speed. A small plane wing
+              cruises around 0.3–0.5.</p>
+          </div>
+          <div class="tile">
+            <p class="tile-name"><span data-i18n="page.singleTiles.p.3">Drag coefficient C<sub>D</sub></span> <button type="button" class="def"
+              data-term="drag-coefficient" aria-label="What is the drag coefficient?" data-i18n-attr="aria-label:page.def.dragCoefficient.2">?</button></p>
+            <p class="tile-value" id="res-cd">–</p>
+            <p class="tile-range" id="res-cd-range" aria-live="polite"></p>
+            <button type="button" class="link-btn" id="why-cd-btn" aria-expanded="false" aria-controls="why-cd" data-i18n="page.whyClBtn">Why
+              this range?</button>
+            <p class="why" id="why-cd" hidden></p>
+            <p class="tile-help" data-i18n="page.singleTiles.p.4">How much the air holds the part back. Lower is more streamlined.</p>
+          </div>
+          <div class="tile">
+            <p class="tile-name"><span data-i18n="page.singleTiles.p.5">Lift-to-drag ratio L/D</span> <button type="button" class="def"
+              data-term="lift-to-drag-ratio" aria-label="What is the lift-to-drag ratio?" data-i18n-attr="aria-label:page.def.liftToDragRatio.2">?</button></p>
+            <p class="tile-value" id="res-ld">–</p>
+            <p class="tile-range" id="res-ld-range" aria-live="polite"></p>
+            <button type="button" class="link-btn" id="why-ld-btn" aria-expanded="false" aria-controls="why-ld" data-i18n="page.whyClBtn">Why
+              this range?</button>
+            <p class="why" id="why-ld" hidden></p>
+            <p class="tile-help" data-i18n="page.singleTiles.p.6">Lift you get for each unit of drag. Higher means more efficient.</p>
+          </div>
+        </div>
+        <p id="res-forces" class="res-forces"></p>
+        <ul id="res-warnings" class="msgs warnings"></ul>
+        <p class="row downloads">
+          <a id="dl-report-html" class="button secondary" href="#" target="_blank" rel="noopener"
+             aria-describedby="dl-report-help" data-i18n="page.dlReportHtml">Open the report (print or save as PDF)</a>
+          <a id="dl-report" class="button secondary" href="#" download data-i18n="page.dlReport">Download report (Markdown)</a>
+          <a id="dl-results" class="button secondary" href="#" download data-i18n="page.dlResults">Download results (CSV)</a>
+          <a id="dl-history" class="button secondary" href="#" download data-i18n="page.dlHistory">Download C<sub>L</sub>/C<sub>D</sub>
+            history (CSV)</a>
+          <a id="dl-case" class="button secondary advanced" href="#" download aria-describedby="dl-case-help" data-i18n="page.dlCase">Download
+            OpenFOAM case (.zip)</a>
+        </p>
+        <p class="help" id="dl-report-help" data-i18n="page.dlReportHelp">The report is one self-contained page: inputs, mesh, convergence, results
+          with their likely ranges, the charts, the pressure and flow pictures, the validation note and the software
+          notices. It opens in a new tab; use your browser's Print (Ctrl+P) and "Save as PDF" to keep it.</p>
+        <p class="help advanced" id="dl-case-help" data-i18n="page.dlCaseHelp">The zip holds the complete case as WindLab generated it (mesh settings,
+          boundary conditions, your part's STL file), an <code>Allrun</code> script that repeats the run with plain
+          OpenFOAM v2606 on any computer, the recorded force histories and a README with the inputs. Solution
+          fields are not included (WindLab deletes them to save disk space).</p>
+        <figure class="viewer-fig">
+          <div id="result-viewer" class="viewer" tabindex="0" role="img"
+               aria-label="3D view of the part coloured by pressure coefficient. Arrow keys turn it, plus and minus zoom, 0 resets, Enter reads the pressure coefficient at the centre." data-i18n-attr="aria-label:page.resultViewer.ariaLabel"></div>
+          <p id="surface-probe" class="probe" role="status" aria-live="polite" data-i18n="page.surfaceProbe">Click a point on the part (or focus the
+            view, turn it with the arrow keys and press Enter) to read the pressure coefficient there.</p>
+          <figcaption>
+            <div class="legend" aria-label="Colour legend for pressure coefficient" data-i18n-attr="aria-label:page.results.div.ariaLabel">
+              <span class="legend-end" id="cp-min">−</span>
+              <span class="legend-bar" aria-hidden="true"><span class="legend-zero">0</span></span>
+              <span class="legend-end" id="cp-max">+</span>
+            </div>
+            <p class="legend-text"><span data-i18n="page.results.p"><b>Pressure coefficient C<sub>p</sub></b></span> <button type="button" class="def"
+              data-term="pressure-coefficient" aria-label="What is the pressure coefficient?" data-i18n-attr="aria-label:page.def.pressureCoefficient">?</button>:
+              <span class="sw blue"></span> <span data-i18n="page.results.p.2">blue = suction</span> <button type="button" class="def" data-term="suction"
+              aria-label="What is suction?" data-i18n-attr="aria-label:page.def.suction">?</button> <span data-i18n="page.results.p.3">(pressure below the surrounding air, pulls on the surface),</span>
+              <span class="sw gray"></span> <span data-i18n="page.results.p.4">gray = about the same as the surrounding air,</span> <span class="sw red"></span>
+              <span data-i18n="page.results.p.5">red = pressure pushing on the surface. C<sub>p</sub> = 1 where the air is brought to a stop (the
+              stagnation point</span> <button type="button" class="def" data-term="stagnation-point"
+              aria-label="What is the stagnation point?" data-i18n-attr="aria-label:page.def.stagnationPoint">?</button>). <span id="cp-range"></span></p>
+            <p class="legend-text" data-i18n="page.results.p.6">Drag to turn the part. <b>Ctrl + scroll</b> (or a pinch) zooms; after you click
+              the view, plain scrolling zooms too (Esc to stop).</p>
+          </figcaption>
+        </figure>
+        <figure class="viewer-fig" id="slice-fig" hidden>
+          <div class="slice-head">
+            <h3 id="h-slice"><span data-i18n="page.hSlice">Flow through the middle of the part</span> <button type="button" class="def"
+              data-term="flow-slice" aria-label="What is the flow slice?" data-i18n-attr="aria-label:page.def.flowSlice">?</button></h3>
+            <div class="slice-controls">
+              <div class="seg" role="group" aria-labelledby="slice-colour-by">
+                <span id="slice-colour-by" class="seg-label" data-i18n="page.previewColourBy">Colour by</span>
+                <button type="button" class="secondary small" data-field="speed" aria-pressed="true" data-i18n="page.previewFig.button">Air speed</button>
+                <button type="button" class="secondary small" data-field="cp" aria-pressed="false" data-i18n="page.sliceFig.button">Pressure</button>
+              </div>
+              <div class="seg" role="group" aria-labelledby="slice-show" id="slice-window-group">
+                <span id="slice-show" class="seg-label" data-i18n="page.sliceShow">Show</span>
+                <button type="button" class="secondary small" data-window="closeup" aria-pressed="true" data-i18n="page.sliceWindowGroup.button">Close-up</button>
+                <button type="button" class="secondary small" data-window="tunnel" aria-pressed="false" data-i18n="page.sliceWindowGroup.button.2">Whole
+                  tunnel</button>
+              </div>
+              <label class="check" id="slice-lines-label"><input type="checkbox" id="slice-lines" checked>
+                <span data-i18n="page.sliceLinesLabel">Streamlines</span></label> <button type="button" class="def" data-term="streamline"
+                aria-label="What is a streamline?" data-i18n-attr="aria-label:page.def.streamline">?</button>
+            </div>
+          </div>
+          <div id="slice-viewer" class="viewer slice" tabindex="0" role="img" aria-label="Flow slice" data-i18n-attr="aria-label:page.sliceViewer.ariaLabel"></div>
+          <p id="slice-probe" class="probe" role="status" aria-live="polite" data-i18n="page.sliceProbe">Click a point in the picture (or focus it
+            and use the arrow keys; Home returns to the centre) to read the air speed and pressure there.</p>
+          <figcaption>
+            <div class="scale" aria-hidden="true">
+              <span class="scale-title" id="slice-scale-title" data-i18n="page.sliceScaleTitle">Air speed ÷ wind speed</span>
+              <span class="scale-bar" id="slice-bar"></span>
+              <span class="scale-ticks" id="slice-ticks"></span>
+            </div>
+            <p class="legend-text" id="slice-text"></p>
+            <p class="legend-text"><span data-i18n="page.sliceFig.p">A cut along the wind through the middle of the part (</span><span
+              id="slice-y">y = 0 m</span><span data-i18n="page.sliceFig.p.2">), seen from the side: the wind blows from left to right; the</span>
+              <span class="sw body"></span> <span data-i18n="page.sliceFig.p.3">dark shape is the part.</span> <span id="slice-lines-text" data-i18n="page.sliceLinesText">The thin dark
+              lines are streamlines: the paths the air takes, started at the left edge.</span> <span data-i18n="page.sliceFig.p.4">The slow region
+              behind the part is its wake</span> <button type="button" class="def" data-term="wake"
+              aria-label="What is the wake?" data-i18n-attr="aria-label:page.def.wake">?</button><span data-i18n="page.sliceFig.p.5">; the thin slowed layer along the surface is the boundary
+              layer</span> <button type="button" class="def" data-term="boundary-layer"
+              aria-label="What is the boundary layer?" data-i18n-attr="aria-label:page.def.boundaryLayer">?</button><span data-i18n="page.sliceFig.p.6">. Made with OpenFOAM's own cutting-plane
+              sampling.</span></p>
+          </figcaption>
+        </figure>
+        <details class="details">
+          <summary data-i18n="page.results.summary">More details</summary>
+          <dl id="res-details"></dl>
+          <p class="help">y⁺ <button type="button" class="def" data-term="y-plus" aria-label="What is y-plus?" data-i18n-attr="aria-label:page.def.yPlus">?</button>
+            <span data-i18n="page.results.p.7">and the wall layers are described in the teaching notes; the turbulence model</span>
+            <button type="button" class="def" data-term="turbulence-model"
+            aria-label="What is the turbulence model?" data-i18n-attr="aria-label:page.def.turbulenceModel">?</button> <span data-i18n="page.results.p.8">is k-ω SST, fully turbulent</span>
+            <button type="button" class="def" data-term="laminar-and-turbulent"
+            aria-label="What do laminar and turbulent mean?" data-i18n-attr="aria-label:page.def.laminarAndTurbulent">?</button>.</p>
+        </details>
+        <details class="details meaning">
+          <summary data-i18n="page.results.summary.2">What do these numbers mean, and how much can I trust them?</summary>
+          <p data-i18n="page.results.p.9">C<sub>L</sub> and C<sub>D</sub> are the lift and drag forces divided by the dynamic pressure of the
+            wind (½ρV²) and the reference area, so they do not depend on the size of the part or the speed, only on
+            its shape, its angle to the wind and the Reynolds number. L/D is simply their ratio. The pitching moment
+            C<sub>m</sub> (under More details) is taken about the reference point, the quarter-chord for the built-in
+            wings. The "wobble" is how much C<sub>L</sub> and C<sub>D</sub> still moved over the last solver
+            iterations: it tells you whether the calculation settled, not whether it is right.</p>
+          <p data-i18n="page.results.p.10"><strong>Accuracy.</strong> The flow solver itself was checked in 2D against NASA's NACA 0012 reference
+            at Re 6 million: lift within 2 % and drag within 1 % of the reference. The Quick mesh you are using is
+            much coarser. On the built-in NACA 0012 wing it gives <strong>lift within a few percent</strong> of what
+            a finer mesh gives, but <strong>drag about 9 % too high</strong> (8 % at 10°) compared with what the
+            same method gives on a mesh ten times finer, and about a third above the validated 2D calculation at
+            the same Reynolds number, because the surface cells are coarse (see the mesh study in the project's
+            validation folder). On top of that, WindLab assumes the
+            boundary layer is turbulent from the leading edge; at the Reynolds numbers of a student-size model
+            (10⁵ to 10⁶) real air keeps a laminar run first, so measured drag is lower again, often by a third.
+            Treat C<sub>D</sub> as an upper estimate and L/D as a lower one, and compare runs made on the same mesh
+            with each other: trends and differences are far more trustworthy than absolute drag. A part that is
+            symmetric top to bottom has zero lift at 0°; a small C<sub>L</sub> shown there is numerical noise from
+            the mesh, not physics. Thin fins or plates thinner than a mesh cell would make it large, so WindLab
+            measures the thickness of every uploaded part and refines the mesh around such parts on its own (the
+            "Thin parts" note under the mesh choice says when).</p>
+        </details>
+        <form id="fb-form" class="subcard feedback" novalidate aria-labelledby="h-fb">
+          <h3 id="h-fb" data-i18n="page.hFb">How was this?</h3>
+          <p class="help" data-i18n="page.fbForm.p">A few seconds of feedback helps us improve WindLab for your class. Your answers are saved
+            on this computer only; nothing is sent anywhere.</p>
+          <fieldset class="rating">
+            <legend data-i18n="page.fbForm.legend">The results made sense to me</legend>
+            <label><input type="radio" name="fb-sense" value="1"> 1 <span class="sr-only" data-i18n="page.fbForm.span">(not at all)</span></label>
+            <label><input type="radio" name="fb-sense" value="2"> 2</label>
+            <label><input type="radio" name="fb-sense" value="3"> 3</label>
+            <label><input type="radio" name="fb-sense" value="4"> 4</label>
+            <label><input type="radio" name="fb-sense" value="5"> 5 <span class="sr-only" data-i18n="page.fbForm.span.2">(completely)</span></label>
+            <span class="rating-ends" aria-hidden="true" data-i18n="page.fbForm.span.3">1 = not at all · 5 = completely</span>
+          </fieldset>
+          <fieldset class="rating">
+            <legend data-i18n="page.fbForm.legend.2">The app was easy to use</legend>
+            <label><input type="radio" name="fb-easy" value="1"> 1 <span class="sr-only" data-i18n="page.fbForm.span">(not at all)</span></label>
+            <label><input type="radio" name="fb-easy" value="2"> 2</label>
+            <label><input type="radio" name="fb-easy" value="3"> 3</label>
+            <label><input type="radio" name="fb-easy" value="4"> 4</label>
+            <label><input type="radio" name="fb-easy" value="5"> 5 <span class="sr-only" data-i18n="page.fbForm.span.2">(completely)</span></label>
+            <span class="rating-ends" aria-hidden="true" data-i18n="page.fbForm.span.3">1 = not at all · 5 = completely</span>
+          </fieldset>
+          <div class="field">
+            <label for="fb-comment" data-i18n="page.fbForm.label">What confused you or what would you change?</label>
+            <textarea id="fb-comment" rows="3" maxlength="2000"></textarea>
+          </div>
+          <div class="field fb-name">
+            <label for="fb-name" data-i18n="page.fbForm.label.2">Your name or initials (optional)</label>
+            <input id="fb-name" maxlength="80" autocomplete="off">
+          </div>
+          <div class="row">
+            <button type="submit" class="secondary" id="fb-send" data-i18n="page.fbSend">Save my answer</button>
+            <p id="fb-note" class="note" role="status" hidden></p>
+          </div>
+          <p id="fb-error" class="error" role="alert" hidden></p>
+          <p class="help" data-i18n="page.fbForm.p.2">At the end of the trial, run <code>windlab feedback export</code> in the Ubuntu window and
+            e-mail the file it makes to your instructor.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================ my runs -->
+    <section id="my-runs" class="card" aria-labelledby="h-runs">
+      <h2 id="h-runs" tabindex="-1" data-i18n="page.misc.a.6">My runs</h2>
+      <p class="help" id="runs-help" data-i18n="page.runsHelp">WindLab keeps your most recent finished runs and deletes older ones
+        automatically.</p>
+      <p id="runs-empty" class="hint" data-i18n="page.runsEmpty">You have no runs yet.</p>
+      <p id="runs-error" class="error" role="alert" hidden></p>
+      <div class="row compare-bar" id="compare-bar" hidden>
+        <button type="button" id="compare-btn" class="primary" disabled aria-describedby="compare-hint" data-i18n="page.navCompare.a">Compare</button>
+        <p id="compare-hint" class="hint" aria-live="polite" data-i18n="page.compareHint">Tick 2 to 5 finished runs to compare them.</p>
+      </div>
+      <div class="table-wrap">
+        <table id="runs-table" class="runs" hidden>
+          <caption class="sr-only" data-i18n="page.runsTable.caption">Your runs, newest first</caption>
+          <thead>
+            <tr><th scope="col" class="pick" data-i18n="page.navCompare.a">Compare</th>
+              <th scope="col" data-i18n="page.runsTable.th">Date</th><th scope="col" data-i18n="page.formBuiltin.label">Shape</th><th scope="col" class="num" data-i18n="page.runsTable.th.2">Speed (m/s)</th>
+              <th scope="col" class="num" data-i18n="page.sweepTable.th">Angle (°)</th><th scope="col" class="num">C<sub>L</sub></th>
+              <th scope="col" class="num">C<sub>D</sub></th><th scope="col" data-i18n="page.sweepTable.th.5">Status</th>
+              <th scope="col"><span class="sr-only" data-i18n="page.runsTable.span">Actions</span></th></tr>
+          </thead>
+          <tbody id="runs-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================ compare -->
+    <section id="compare" class="card" aria-labelledby="h-compare" hidden>
+      <div class="slice-head">
+        <h2 id="h-compare" tabindex="-1" data-i18n="page.hCompare">Compare runs</h2>
+        <button type="button" id="compare-close" class="secondary small" data-i18n="page.compareClose">Close the comparison</button>
+      </div>
+      <p class="banner" role="note"><strong data-i18n="page.stepResults.strong">Uncalibrated prototype — not yet validated.</strong></p>
+      <p id="compare-error" class="error" role="alert" hidden></p>
+      <div id="compare-body">
+        <ul id="compare-warnings" class="callouts"></ul>
+        <ul id="compare-legend" class="compare-legend" aria-label="Runs in this comparison" data-i18n-attr="aria-label:page.compareLegend.ariaLabel"></ul>
+        <div class="table-wrap">
+          <table class="runs" id="compare-table">
+            <caption class="sr-only" data-i18n="page.compareTable.caption">CL, CD and L/D of each run at each angle of attack</caption>
+            <thead><tr><th scope="col" data-i18n="page.compareTable.th">Run</th><th scope="col" class="num" data-i18n="page.sweepTable.th">Angle (°)</th>
+              <th scope="col" class="num">C<sub>L</sub></th><th scope="col" data-i18n="page.sweepTable.th.2">C<sub>L</sub> likely</th>
+              <th scope="col" class="num">C<sub>D</sub></th><th scope="col" data-i18n="page.sweepTable.th.3">C<sub>D</sub> likely</th>
+              <th scope="col" class="num">L/D</th><th scope="col" class="num" data-i18n="page.runsTable.th.2">Speed (m/s)</th>
+              <th scope="col" class="num" data-i18n="page.condFields.span">Reynolds number</th><th scope="col" class="num" data-i18n="page.compareTable.th.2">Reference area</th></tr></thead>
+            <tbody id="compare-tbody"></tbody>
+          </table>
+        </div>
+        <button type="button" class="link-btn" id="why-compare-btn" aria-expanded="false" aria-controls="why-compare" data-i18n="page.whySweepBtn">
+          Why these ranges?</button>
+        <div class="why" id="why-compare" hidden></div>
+        <div class="charts three">
+          <figure class="chart-fig">
+            <figcaption data-i18n="page.sweepResults.figcaption">Lift coefficient C<sub>L</sub> against angle of attack</figcaption>
+            <canvas id="cmp-cl" width="360" height="240" tabindex="0" role="img"
+                    aria-label="Lift coefficient against angle of attack for each run" data-i18n-attr="aria-label:page.cmpCl.ariaLabel"></canvas>
+          </figure>
+          <figure class="chart-fig">
+            <figcaption data-i18n="page.compareBody.figcaption">Drag polar: C<sub>L</sub> against C<sub>D</sub></figcaption>
+            <canvas id="cmp-polar" width="360" height="240" tabindex="0" role="img"
+                    aria-label="Drag polar for each run" data-i18n-attr="aria-label:page.cmpPolar.ariaLabel"></canvas>
+          </figure>
+          <figure class="chart-fig">
+            <figcaption data-i18n="page.compareBody.figcaption.2">Lift-to-drag ratio L/D against angle of attack</figcaption>
+            <canvas id="cmp-ld" width="360" height="240" tabindex="0" role="img"
+                    aria-label="Lift-to-drag ratio against angle of attack for each run" data-i18n-attr="aria-label:page.cmpLd.ariaLabel"></canvas>
+          </figure>
+        </div>
+        <p class="help" data-i18n="page.compareBody.p">Each run has its own colour and marker shape (see the list above the table). The table holds
+          the same numbers as the charts. Point at a chart (or focus it and use the arrow keys) to read a value.</p>
+        <p class="row downloads"><a id="dl-compare" class="button secondary" href="#" download data-i18n="page.dlCompare">Download the
+          comparison (CSV)</a></p>
+      </div>
+    </section>
+
+    <!-- ============================================================ lessons -->
+    <section id="lessons" class="card" aria-labelledby="h-lessons">
+      <h2 id="h-lessons" tabindex="-1" data-i18n="page.misc.a.7">Lessons</h2>
+      <p class="help" data-i18n="page.lessons.p">Five guided lessons of about 50 minutes each. Every lesson asks you to <b>predict</b> before you
+        run, then <b>observe</b> and <b>explain</b>, and ends with three quick questions. You can run the cases
+        yourself (a few minutes each) or use the pre-computed results that ship with WindLab. Your answers are saved
+        on this computer only and go into <code>windlab feedback export</code>.</p>
+      <p id="lessons-error" class="error" role="alert" hidden></p>
+      <ul id="lesson-list" class="lesson-cards"></ul>
+    </section>
+
+    <!-- ============================================================ glossary -->
+    <section id="glossary" class="card" aria-labelledby="h-glossary">
+      <h2 id="h-glossary" tabindex="-1" data-i18n="page.misc.a.8">Glossary</h2>
+      <p class="help"><span data-i18n="page.glossary.p">Every technical term WindLab uses, in plain words. The same definitions sit behind the</span>
+        <span class="def-example" aria-hidden="true">?</span> <span data-i18n="page.glossary.p.2">buttons on the page.</span></p>
+      <div class="field glossary-filter">
+        <label for="glossary-filter" data-i18n="page.glossary.label">Find a term</label>
+        <input id="glossary-filter" type="search" autocomplete="off" aria-describedby="glossary-count">
+        <p id="glossary-count" class="help" aria-live="polite"></p>
+      </div>
+      <dl id="glossary-list" class="glossary"></dl>
+    </section>
+  </main>
+  <footer class="foot"><p>WindLab <span id="version"></span> <span data-i18n="page.misc.p.2">· SenSym LLC · open-source software (MIT License) ·
+    educational simulation: results may be inaccurate (see DISCLAIMER.md); not for airworthiness or safety
+    determinations.</span></p>
+    <p class="trademark" data-i18n="page.aboutTrademark">OPENFOAM® is a registered trade mark of OpenCFD Limited, producer and distributor of the
+      OpenFOAM software via www.openfoam.com. This offering is not approved or endorsed by OpenCFD Limited, producer
+      and distributor of the OpenFOAM software via www.openfoam.com, and owner of the OPENFOAM® and OpenCFD® trade
+      marks. OpenFOAM is distributed under the GNU GPL v3.</p></footer>
+</body>
+</html>

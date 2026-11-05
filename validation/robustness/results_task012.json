@@ -1,0 +1,949 @@
+{
+ "info": {
+  "date": "2026-11-04",
+  "machine": "Ubuntu 24.04.5 LTS, 63b1f4773003",
+  "n_procs": 4,
+  "airspeed": 20.0,
+  "alpha_deg": 0.0,
+  "preset": "quick",
+  "version": "0.1.0.dev0",
+  "data_dir": "/runs/scratch-012/robustness2"
+ },
+ "rows": [
+  {
+   "part": "bracket",
+   "about": "L-bracket 120 x 80 x 60 mm, 6 mm plate, four holes, 2 mm fillets",
+   "bodies": "largest",
+   "upload_seconds": 1.4,
+   "geometry_id": "e6726ab6-1fe5-405f-841d-0301fee6f877",
+   "usable": true,
+   "units": "mm",
+   "triangles": 7434,
+   "pieces": 1,
+   "size_m": [
+    0.12,
+    0.08,
+    0.06
+   ],
+   "problems": [],
+   "warnings": [
+    "10 triangles have zero area; they will be ignored."
+   ],
+   "source": {
+    "solids": 1,
+    "faces": 60,
+    "fused": false,
+    "healed": true,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.12,
+    "area": 0.004596435341398321,
+    "moment_point": [
+     0.03,
+     0.04,
+     0.03
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 11210,
+    "problems": []
+   },
+   "run_seconds": 48.2,
+   "stage_seconds": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 6.7,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.3,
+    "simpleFoam": 38.6,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "mesh": {
+    "cells": 242629,
+    "max_non_orthogonality": 62.361645,
+    "max_skewness": 1.0686553,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 4.64,
+    "target_layers": 5,
+    "thickness_pct": 90.9
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": -0.15858148453999998,
+    "cd": 1.00138344709,
+    "cm": -0.017334081838,
+    "cl_pm": 0.016559103000000006,
+    "cd_pm": 0.00628894200000002,
+    "iterations": 311,
+    "converged": true,
+    "cells": 242629,
+    "solver_seconds": 46.017965479011764,
+    "peak_memory_mb": 772.73046875,
+    "cd_pressure": 1.0022272701193615,
+    "cd_viscous": -0.0008438232727439515
+   },
+   "y_plus": {
+    "min": 0.387381541,
+    "max": 51.0811772,
+    "average": 6.82534857
+   },
+   "reynolds": 164304.7853768741
+  },
+  {
+   "part": "car",
+   "about": "car body 400 mm long with a rounded cabin and four wheels",
+   "bodies": "largest",
+   "upload_seconds": 0.8,
+   "geometry_id": "93bdb810-ce94-47d2-8e82-2495febb8842",
+   "usable": true,
+   "units": "mm",
+   "triangles": 2608,
+   "pieces": 1,
+   "size_m": [
+    0.4,
+    0.18,
+    0.165
+   ],
+   "problems": [],
+   "warnings": [
+    "12 triangles have zero area; they will be ignored."
+   ],
+   "source": {
+    "solids": 1,
+    "faces": 71,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.4,
+    "area": 0.023820232377070663,
+    "moment_point": [
+     0.1,
+     0.0,
+     0.0825
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 8284,
+    "problems": []
+   },
+   "run_seconds": 54.2,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 7.0,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.3,
+    "simpleFoam": 44.7,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "mesh": {
+    "cells": 211238,
+    "max_non_orthogonality": 64.488958,
+    "max_skewness": 3.2798771,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 4.19,
+    "target_layers": 5,
+    "thickness_pct": 82.8
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": 0.147301167681,
+    "cd": 0.415237633005,
+    "cm": -0.1461747867,
+    "cl_pm": 0.037219457,
+    "cd_pm": 0.011693562500000004,
+    "iterations": 418,
+    "converged": true,
+    "cells": 211238,
+    "solver_seconds": 52.305388605978806,
+    "peak_memory_mb": 715.90234375,
+    "cd_pressure": 0.3935217908920565,
+    "cd_viscous": 0.0217158420963991
+   },
+   "y_plus": {
+    "min": 1.01334199,
+    "max": 188.809033,
+    "average": 23.4183058
+   },
+   "reynolds": 547682.6179229137
+  },
+  {
+   "part": "rocket",
+   "about": "rocket 420 mm long, 40 mm diameter, four 2 mm thick fins",
+   "bodies": "largest",
+   "upload_seconds": 0.5,
+   "geometry_id": "c3de0216-1ea2-4d66-9a3c-6e2b670b0c54",
+   "usable": true,
+   "units": "mm",
+   "triangles": 737,
+   "pieces": 1,
+   "size_m": [
+    0.42,
+    0.12,
+    0.12
+   ],
+   "problems": [],
+   "warnings": [
+    "1 triangles have zero area; they will be ignored."
+   ],
+   "source": {
+    "solids": 1,
+    "faces": 28,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.42,
+    "area": 0.0015906005148321135,
+    "moment_point": [
+     0.105,
+     0.0,
+     0.0
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 1889,
+    "problems": []
+   },
+   "run_seconds": 16.0,
+   "stage_seconds": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 3.6,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.2,
+    "simpleFoam": 10.2,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "Your part is mirror-symmetric top to bottom, so at 0\u00b0 its true lift is zero. The CL of -0.584 shown here (about 89 % of the drag) is numerical noise from the mesh, not physics: thin fins or plates about one mesh cell thick are not meshed symmetrically and can produce a sideways force as large as the drag. Compare the drag between runs and ignore this lift."
+   ],
+   "mesh": {
+    "cells": 86631,
+    "max_non_orthogonality": 64.857337,
+    "max_skewness": 2.6199473,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 3.32,
+    "target_layers": 5,
+    "thickness_pct": 75.4
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": -0.5836037927200001,
+    "cd": 0.65345102495,
+    "cm": 0.4063263313199999,
+    "cl_pm": 6.571999999982481e-06,
+    "cd_pm": 2.7979999999705463e-06,
+    "iterations": 249,
+    "converged": true,
+    "cells": 86631,
+    "solver_seconds": 14.262866966018919,
+    "peak_memory_mb": 482.2421875,
+    "cd_pressure": 0.39009189438512615,
+    "cd_viscous": 0.26335913122629667
+   },
+   "y_plus": {
+    "min": 8.12843537,
+    "max": 179.372913,
+    "average": 44.5819597
+   },
+   "reynolds": 575066.7488190595
+  },
+  {
+   "part": "drone-arm",
+   "about": "drone arm: 16 mm tube, 220 mm long, motor mount and clamp plate",
+   "bodies": "largest",
+   "upload_seconds": 0.7,
+   "geometry_id": "70974773-a3bb-4f70-9587-4c96f13a0cce",
+   "usable": true,
+   "units": "mm",
+   "triangles": 596,
+   "pieces": 1,
+   "size_m": [
+    0.231,
+    0.0319,
+    0.016
+   ],
+   "problems": [],
+   "warnings": [],
+   "source": {
+    "solids": 1,
+    "faces": 22,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.231,
+    "area": 0.0003335203638686207,
+    "moment_point": [
+     0.04775,
+     0.0,
+     0.0
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 726,
+    "problems": []
+   },
+   "run_seconds": 14.1,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 3.1,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.2,
+    "simpleFoam": 8.2,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [],
+   "mesh": {
+    "cells": 77321,
+    "max_non_orthogonality": 62.291812,
+    "max_skewness": 2.0500142,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 3.73,
+    "target_layers": 5,
+    "thickness_pct": 78.6
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": 0.0017480479321999997,
+    "cd": 0.7396088191500002,
+    "cm": -0.0016878265051,
+    "cl_pm": 0.00030693788000000014,
+    "cd_pm": 0.0003346825000000164,
+    "iterations": 224,
+    "converged": true,
+    "cells": 77321,
+    "solver_seconds": 11.83996404701611,
+    "peak_memory_mb": 465.9296875,
+    "cd_pressure": 0.6140444683949942,
+    "cd_viscous": 0.1255643507376219
+   },
+   "y_plus": {
+    "min": 1.25789365,
+    "max": 103.776044,
+    "average": 16.5887272
+   },
+   "reynolds": 316286.7118504827
+  },
+  {
+   "part": "wing-winglet",
+   "about": "NACA 2412 wing, chord 150 mm, span 400 mm, with a 70 mm winglet",
+   "bodies": "largest",
+   "upload_seconds": 0.6,
+   "geometry_id": "0662d946-73c1-42f9-93a7-4e10e18f5986",
+   "usable": true,
+   "units": "mm",
+   "triangles": 1230,
+   "pieces": 1,
+   "size_m": [
+    0.15,
+    0.4214,
+    0.0753
+   ],
+   "problems": [],
+   "warnings": [],
+   "source": {
+    "solids": 1,
+    "faces": 9,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.15001573114469646,
+    "area": 0.061269453045021245,
+    "moment_point": [
+     0.03748820164147764,
+     0.010685607910156242,
+     -0.025779298305511473
+    ],
+    "how": "planform area (the outline seen from above, measured from the surface) and length along the wind (x)",
+    "part_type": "wing",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 2696,
+    "problems": []
+   },
+   "run_seconds": 74.2,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 17.3,
+    "checkMesh": 0.4,
+    "potentialFoam": 0.5,
+    "simpleFoam": 54.9,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "The mesh failed 1 quality check; results may be less accurate."
+   ],
+   "mesh": {
+    "cells": 497109,
+    "max_non_orthogonality": 64.65529,
+    "max_skewness": 4.1016965,
+    "failed_checks": 1,
+    "mesh_ok": false
+   },
+   "layers": {
+    "mean_layers": 4.46,
+    "target_layers": 5,
+    "thickness_pct": 91.6
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": 0.10615706172,
+    "cd": 0.022818601836,
+    "cm": -0.033557492023,
+    "cl_pm": 0.00014260549999999678,
+    "cd_pm": 2.9792000000011115e-06,
+    "iterations": 232,
+    "converged": true,
+    "cells": 497109,
+    "solver_seconds": 73.1279562410491,
+    "peak_memory_mb": 1227.65234375,
+    "cd_pressure": 0.009607300558345884,
+    "cd_viscous": 0.013211301277837966
+   },
+   "y_plus": {
+    "min": 1.10886565,
+    "max": 142.676405,
+    "average": 15.4765962
+   },
+   "reynolds": 205402.52090736834
+  },
+  {
+   "part": "plate-2mm",
+   "about": "flat plate 200 x 100 x 2 mm, edge-on",
+   "bodies": "largest",
+   "upload_seconds": 0.6,
+   "geometry_id": "0462ee83-afa8-4bb9-a12e-55ebeec29f7c",
+   "usable": true,
+   "units": "mm",
+   "triangles": 12,
+   "pieces": 1,
+   "size_m": [
+    0.2,
+    0.1,
+    0.002
+   ],
+   "problems": [],
+   "warnings": [],
+   "source": {
+    "solids": 1,
+    "faces": 6,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.2,
+    "area": 0.020000000596046452,
+    "moment_point": [
+     0.05,
+     0.0,
+     0.0
+    ],
+    "how": "planform area (the outline seen from above, measured from the surface) and length along the wind (x)",
+    "part_type": "wing",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 12,
+    "problems": []
+   },
+   "run_seconds": 26.1,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 3.9,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.3,
+    "simpleFoam": 20.4,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [],
+   "mesh": {
+    "cells": 193325,
+    "max_non_orthogonality": 48.67165,
+    "max_skewness": 2.3612695,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 5.0,
+    "target_layers": 5,
+    "thickness_pct": 100.0
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": -3.2603198598e-06,
+    "cd": 0.021966137404999996,
+    "cm": 1.9502394865e-06,
+    "cl_pm": 1.4007069999999995e-07,
+    "cd_pm": 3.226499999987864e-07,
+    "iterations": 240,
+    "converged": true,
+    "cells": 193325,
+    "solver_seconds": 24.827973053004825,
+    "peak_memory_mb": 684.18359375,
+    "cd_pressure": 0.013811671082869917,
+    "cd_viscous": 0.008154466319631026
+   },
+   "y_plus": {
+    "min": 8.64588653,
+    "max": 18.8701476,
+    "average": 11.3156604
+   },
+   "reynolds": 273841.3089614569
+  },
+  {
+   "part": "reentrant",
+   "about": "L-section block 100 x 100 x 80 mm with a sharp 270 degree inside corner",
+   "bodies": "largest",
+   "upload_seconds": 0.7,
+   "geometry_id": "ce8a849d-8267-4b51-9cae-0553a244a340",
+   "usable": true,
+   "units": "mm",
+   "triangles": 20,
+   "pieces": 1,
+   "size_m": [
+    0.1,
+    0.08,
+    0.1
+   ],
+   "problems": [],
+   "warnings": [],
+   "source": {
+    "solids": 1,
+    "faces": 8,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.1,
+    "area": 0.007998047113360373,
+    "moment_point": [
+     0.025,
+     0.0,
+     0.05
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 20,
+    "problems": []
+   },
+   "run_seconds": 265.2,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 8.6,
+    "checkMesh": 0.3,
+    "potentialFoam": 0.4,
+    "simpleFoam": 254.2,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "The numbers did not fully settle before the iteration limit. Treat them as a rough guide.",
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "mesh": {
+    "cells": 333677,
+    "max_non_orthogonality": 59.859426,
+    "max_skewness": 3.5561962,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 4.95,
+    "target_layers": 5,
+    "thickness_pct": 94.7
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": -0.0566388739595,
+    "cd": 1.10663144605,
+    "cm": 0.015625988341500002,
+    "cl_pm": 0.02227205,
+    "cd_pm": 0.01676073,
+    "iterations": 1500,
+    "converged": false,
+    "cells": 333677,
+    "solver_seconds": 263.60934341295797,
+    "peak_memory_mb": 950.5,
+    "cd_pressure": 1.1095749976409164,
+    "cd_viscous": -0.0029435515280616274
+   },
+   "y_plus": {
+    "min": 0.254334738,
+    "max": 13.2766033,
+    "average": 5.89928893
+   },
+   "reynolds": 136920.65448072844
+  },
+  {
+   "part": "assembly",
+   "about": "two separate bodies 15 mm apart (assembly export), both in the tunnel",
+   "bodies": "all",
+   "upload_seconds": 1.1,
+   "geometry_id": "d1c0129a-8f06-4fd6-8cea-7f9fb2ef89d1",
+   "usable": true,
+   "units": "mm",
+   "triangles": 152,
+   "pieces": 2,
+   "size_m": [
+    0.225,
+    0.05,
+    0.05
+   ],
+   "problems": [],
+   "warnings": [
+    "The file holds 2 separate bodies that do not touch; all of them are in the wind tunnel together. Their forces are added up and the reference values come from the box around all of them."
+   ],
+   "source": {
+    "solids": 2,
+    "faces": 9,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 2
+   },
+   "reference": {
+    "length": 0.225,
+    "area": 0.0020012856126214733,
+    "moment_point": [
+     0.05625,
+     0.0,
+     0.0
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 292,
+    "problems": []
+   },
+   "run_seconds": 18.1,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 3.2,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.2,
+    "simpleFoam": 12.2,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "mesh": {
+    "cells": 93278,
+    "max_non_orthogonality": 64.910653,
+    "max_skewness": 2.4448886,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 4.19,
+    "target_layers": 5,
+    "thickness_pct": 81.6
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": 0.0003282265768827,
+    "cd": 0.9057929140800001,
+    "cm": -0.0006419468359002999,
+    "cl_pm": 0.0011451981075,
+    "cd_pm": 0.00033359650000003294,
+    "iterations": 255,
+    "converged": true,
+    "cells": 93278,
+    "solver_seconds": 15.939344381986302,
+    "peak_memory_mb": 489.72265625,
+    "cd_pressure": 0.8975585603462148,
+    "cd_viscous": 0.008234354025471667
+   },
+   "y_plus": {
+    "min": 0.57205544,
+    "max": 84.0196473,
+    "average": 12.556249
+   },
+   "reynolds": 308071.47258163895
+  },
+  {
+   "part": "beam-2m",
+   "about": "2 m long beam with a flange, 8 mm fillets",
+   "bodies": "largest",
+   "upload_seconds": 0.5,
+   "geometry_id": "5dbbe248-3dab-46d3-8fbe-45a628a60421",
+   "usable": true,
+   "units": "mm",
+   "triangles": 28,
+   "pieces": 1,
+   "size_m": [
+    2.0,
+    0.3,
+    0.12
+   ],
+   "problems": [],
+   "warnings": [],
+   "source": {
+    "solids": 1,
+    "faces": 12,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 2.0,
+    "area": 0.026025411766800104,
+    "moment_point": [
+     0.5,
+     0.0,
+     0.06
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 28,
+    "problems": []
+   },
+   "run_seconds": 16.0,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 3.0,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.2,
+    "simpleFoam": 12.2,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [],
+   "mesh": {
+    "cells": 98057,
+    "max_non_orthogonality": 56.754412,
+    "max_skewness": 2.3609939,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 3.88,
+    "target_layers": 5,
+    "thickness_pct": 77.2
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": 0.004072600464800001,
+    "cd": 1.2206681576,
+    "cm": 0.014002893781999998,
+    "cl_pm": 0.0003385690899999998,
+    "cd_pm": 0.0001106199999999502,
+    "iterations": 262,
+    "converged": true,
+    "cells": 98057,
+    "solver_seconds": 15.688355216014315,
+    "peak_memory_mb": 501.34375,
+    "cd_pressure": 1.0918620294033081,
+    "cd_viscous": 0.12880612794113216
+   },
+   "y_plus": {
+    "min": 5.18369599,
+    "max": 523.99448,
+    "average": 85.0468663
+   },
+   "reynolds": 2738413.0896145683
+  },
+  {
+   "part": "knob-30mm",
+   "about": "30 mm knob: 24 mm sphere on an 8 mm stem",
+   "bodies": "largest",
+   "upload_seconds": 0.8,
+   "geometry_id": "805abc17-dcc9-49b4-83d9-811c347092b2",
+   "usable": true,
+   "units": "mm",
+   "triangles": 2732,
+   "pieces": 1,
+   "size_m": [
+    0.03,
+    0.024,
+    0.024
+   ],
+   "problems": [],
+   "warnings": [
+    "2 triangles have zero area; they will be ignored."
+   ],
+   "source": {
+    "solids": 1,
+    "faces": 3,
+    "fused": false,
+    "healed": false,
+    "bodies_available": 1
+   },
+   "reference": {
+    "length": 0.029999303853081073,
+    "area": 0.00045089099904953674,
+    "moment_point": [
+     0.0075005221101891945,
+     0.0,
+     0.0
+    ],
+    "how": "frontal area (the silhouette seen from the front, measured from the surface) and length along the wind (x)",
+    "part_type": "body",
+    "area_method": "silhouette"
+   },
+   "stl_twin": {
+    "status": 200,
+    "usable": true,
+    "triangles": 2534,
+    "problems": []
+   },
+   "run_seconds": 36.1,
+   "stage_seconds": {
+    "blockMesh": 0.0,
+    "surfaceFeatureExtract": 0.0,
+    "decomposePar": 0.1,
+    "snappyHexMesh": 5.8,
+    "checkMesh": 0.2,
+    "potentialFoam": 0.2,
+    "simpleFoam": 28.4,
+    "surface": 0.3
+   },
+   "status": "done",
+   "error": null,
+   "run_warnings": [
+    "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+   ],
+   "mesh": {
+    "cells": 144118,
+    "max_non_orthogonality": 63.578739,
+    "max_skewness": 1.5471593,
+    "failed_checks": 0,
+    "mesh_ok": true
+   },
+   "layers": {
+    "mean_layers": 4.13,
+    "target_layers": 5,
+    "thickness_pct": 87.0
+   },
+   "failed_stage": null,
+   "log_tail": null,
+   "result": {
+    "cl": -0.0019510232800899986,
+    "cd": 0.3582156048749999,
+    "cm": 0.0001803935700779498,
+    "cl_pm": 0.025563117599999997,
+    "cd_pm": 0.0010955950000000048,
+    "iterations": 372,
+    "converged": true,
+    "cells": 144118,
+    "solver_seconds": 34.76289751401055,
+    "peak_memory_mb": 589.7265625,
+    "cd_pressure": 0.33312514443237023,
+    "cd_viscous": 0.025090460414842572
+   },
+   "y_plus": {
+    "min": 0.208399235,
+    "max": 8.56678595,
+    "average": 4.1381134
+   },
+   "reynolds": 41075.24317530098
+  }
+ ]
+}

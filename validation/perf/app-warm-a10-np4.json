@@ -1,0 +1,147 @@
+{
+  "label": "app-warm",
+  "date": "2026-11-03 20:08:32",
+  "host": "63b1f4773003",
+  "machine": {
+    "cpu": "aarch64",
+    "logical_cores": 16,
+    "physical_cores": 16,
+    "ram_gb": 29.6,
+    "ram_available_gb": 24.4,
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.14-linuxkit",
+    "arch": "aarch64",
+    "wsl": false,
+    "solver_cores": 8,
+    "python": "3.12.3"
+  },
+  "n_procs": 4,
+  "preset": "quick",
+  "airspeed": 20.0,
+  "alpha": 10.0,
+  "angles": null,
+  "geometry_id": "cc0dc4bd-8e52-4386-ad1d-915c8db27d8f",
+  "app_wall_s": 39.6,
+  "app_stage_times": {
+    "meshReuse": 0.031099557876586914,
+    "changeDictionary": 0.17763996124267578,
+    "simpleFoam": 38.57111310958862,
+    "surface": 0.3221163749694824
+  },
+  "app_result": {
+    "cl": 0.4521270910300001,
+    "cd": 0.05591461565199998,
+    "cm": 0.015706019996,
+    "cl_pm": 0.0001543544999999813,
+    "cd_pm": 1.7497400000000135e-05,
+    "l_over_d": 8.086026985215058,
+    "iterations": 214,
+    "converged": true,
+    "cells": 372592,
+    "mesh_reused": true,
+    "warm_start": {
+      "alpha_deg": 4.0,
+      "airspeed": 20.0
+    },
+    "solver_seconds": 38.76388701800897,
+    "peak_memory_mb": 993.8515625,
+    "label": "Uncalibrated prototype \u2014 not yet validated"
+  },
+  "warnings": [],
+  "case": "/runs/perf-data-1/runs/b3d69ad7-3cc6-4330-96a2-b9ec6bd8a526",
+  "stages": [
+    {
+      "name": "meshReuse",
+      "seconds": 0.02,
+      "peak_mb": 0
+    },
+    {
+      "name": "changeDictionary",
+      "seconds": 0.18,
+      "peak_mb": 6
+    },
+    {
+      "name": "simpleFoam",
+      "seconds": 38.56,
+      "peak_mb": 994
+    }
+  ],
+  "stage_seconds": {
+    "meshReuse": 0.02,
+    "changeDictionary": 0.18,
+    "simpleFoam": 38.56
+  },
+  "snappy_phases": {
+    "refine": 5.96,
+    "snap": 3.19,
+    "layers": 2.94,
+    "total": 12.22
+  },
+  "solver_log": {
+    "iterations_logged": 214,
+    "first_50_s_per_it": 0.1826,
+    "mean_s_per_it": 0.17845070422535214,
+    "last_100_s_per_it": 0.17220000000000002,
+    "exec_total_s": 38.34,
+    "clock_total_s": 39.0,
+    "p_iterations_mean": 1.4065420560747663,
+    "ux_iterations_mean": 5.140186915887851
+  },
+  "iterations": 214,
+  "converged": true,
+  "cells": 372592,
+  "mesh_ok": true,
+  "layers": {
+    "body": {
+      "faces": 32256,
+      "target_layers": 5,
+      "mean_layers": 4.75,
+      "thickness_m": 0.0055,
+      "thickness_pct": 96.0
+    }
+  },
+  "max_non_orthogonality": 64.992868,
+  "cl": 0.4521270910300001,
+  "cd": 0.05591461565199998,
+  "cm": 0.015706019996,
+  "cd_pressure": 0.04688902747471557,
+  "cd_viscous": 0.00902558813788455,
+  "cl_pm": 0.0001543544999999813,
+  "cd_pm": 1.7497400000000135e-05,
+  "points": [],
+  "y_plus": {
+    "body": {
+      "min": 5.24548291,
+      "max": 167.694622,
+      "average": 24.6380715
+    }
+  },
+  "events": [
+    {
+      "mesh_reused": {
+        "cells": 372592
+      },
+      "t": 0.04930941600468941
+    },
+    {
+      "warm_start": {
+        "alpha_deg": 4.0,
+        "airspeed": 20.0,
+        "iterations": 241
+      },
+      "t": 0.23554108300595544
+    },
+    {
+      "converged": 212,
+      "t": 38.41190643400478
+    }
+  ],
+  "post": {
+    "surface_error": "the solver did not write a body surface",
+    "slice_error": "the solver did not write a flow slice"
+  },
+  "run_case_wall_s": 39.6,
+  "total_wall_s": 39.6,
+  "peak_memory_mb": 994,
+  "notes": []
+}

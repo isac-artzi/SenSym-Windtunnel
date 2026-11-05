@@ -1,0 +1,101 @@
+{
+  "label": "e3e-nowriteflags",
+  "date": "2026-11-03 20:27:23",
+  "host": "63b1f4773003",
+  "machine": {
+    "cpu": "aarch64",
+    "logical_cores": 16,
+    "physical_cores": 16,
+    "ram_gb": 29.6,
+    "ram_available_gb": 24.5,
+    "os": "Ubuntu 24.04.5 LTS",
+    "kernel": "7.0.14-linuxkit",
+    "arch": "aarch64",
+    "wsl": false,
+    "solver_cores": 8,
+    "python": "3.12.3"
+  },
+  "n_procs": 4,
+  "preset": "quick",
+  "airspeed": 20.0,
+  "alpha": 10.0,
+  "angles": null,
+  "patches": [
+    [
+      "system/snappyHexMeshDict",
+      "writeFlags\\n(\\n    scalarLevels\\n    layerSets\\n    layerFields\\n);",
+      "writeFlags ();"
+    ]
+  ],
+  "case": "/runs/1b3b25cc-3790-44c8-bb1a-bc9bdea94b09",
+  "stages": [
+    {
+      "name": "blockMesh",
+      "seconds": 0.1,
+      "peak_mb": 7
+    },
+    {
+      "name": "surfaceFeatureExtract",
+      "seconds": 0.02,
+      "peak_mb": 6
+    },
+    {
+      "name": "decomposePar",
+      "seconds": 0.07,
+      "peak_mb": 8
+    },
+    {
+      "name": "snappyHexMesh",
+      "seconds": 11.43,
+      "peak_mb": 915
+    },
+    {
+      "name": "checkMesh",
+      "seconds": 0.28,
+      "peak_mb": 352
+    }
+  ],
+  "stage_seconds": {
+    "blockMesh": 0.1,
+    "surfaceFeatureExtract": 0.02,
+    "decomposePar": 0.07,
+    "snappyHexMesh": 11.43,
+    "checkMesh": 0.28
+  },
+  "snappy_phases": {
+    "refine": 5.58,
+    "snap": 3.14,
+    "layers": 2.81,
+    "total": 11.65
+  },
+  "solver_log": {},
+  "iterations": 0,
+  "converged": false,
+  "cells": 371941,
+  "mesh_ok": true,
+  "layers": {
+    "body": {
+      "faces": 32256,
+      "target_layers": 5,
+      "mean_layers": 4.75,
+      "thickness_m": 0.0055,
+      "thickness_pct": 96.0
+    }
+  },
+  "max_non_orthogonality": 64.992623,
+  "cl": null,
+  "cd": null,
+  "cm": null,
+  "cd_pressure": null,
+  "cd_viscous": null,
+  "cl_pm": null,
+  "cd_pm": null,
+  "points": [],
+  "y_plus": {},
+  "events": [],
+  "post": {},
+  "run_case_wall_s": 12.2,
+  "total_wall_s": 12.2,
+  "peak_memory_mb": 915,
+  "notes": []
+}

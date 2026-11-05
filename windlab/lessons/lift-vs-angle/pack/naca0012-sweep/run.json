@@ -1,0 +1,175 @@
+{
+ "pack_version": 1,
+ "name": "naca0012-sweep",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "sweep",
+  "airspeed": 20.0,
+  "alpha_deg": null,
+  "angles": [
+   -4.0,
+   0.0,
+   4.0,
+   8.0,
+   12.0,
+   16.0
+  ],
+  "preset": "quick",
+  "reynolds": 410761.96344218525,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.18,
+  "reference_length": 0.3,
+  "reference_how": "mean aerodynamic chord and planform area (chord x span)",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "NACA 0012 wing, chord 0.3 m, span 0.6 m",
+  "geometry_class": null
+ },
+ "geometry": {
+  "name": "NACA 0012 wing, chord 0.3 m, span 0.6 m",
+  "class": null,
+  "body_min": [
+   0.0,
+   -0.30000001192092896,
+   -0.018001887947320938
+  ],
+  "body_max": [
+   0.30000001192092896,
+   0.30000001192092896,
+   0.018001887947320938
+  ]
+ },
+ "result": {
+  "points": [
+   {
+    "alpha_deg": -4.0,
+    "status": "done",
+    "seconds": 61.17466448600317,
+    "cl": -0.17542816312499998,
+    "cd": 0.022677131876,
+    "cm": -0.00944974924445,
+    "l_over_d": -7.735906113888314,
+    "cl_pm": 7.416999999995677e-06,
+    "cd_pm": 3.488499999999145e-07,
+    "iterations": 371,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 0.0,
+    "status": "done",
+    "seconds": 55.19300490000023,
+    "cl": 0.0007583479197449999,
+    "cd": 0.0171075036425,
+    "cm": -0.00030078353211999997,
+    "l_over_d": 0.044328379849707805,
+    "cl_pm": 5.298908499999991e-06,
+    "cd_pm": 3.844999999988441e-08,
+    "iterations": 338,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 4.0,
+    "status": "done",
+    "seconds": 61.243208029001835,
+    "cl": 0.17640050840000002,
+    "cd": 0.022741503453,
+    "cm": 0.0090649065186,
+    "l_over_d": 7.756765455923704,
+    "cl_pm": 1.4620500000006587e-05,
+    "cd_pm": 8.490000000006825e-07,
+    "iterations": 374,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 8.0,
+    "status": "done",
+    "seconds": 63.2942873610009,
+    "cl": 0.35976650374999997,
+    "cd": 0.040971900376499996,
+    "cm": 0.0147257425975,
+    "l_over_d": 8.780810761620153,
+    "cl_pm": 7.443999999995343e-06,
+    "cd_pm": 1.2807000000017443e-06,
+    "iterations": 373,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 12.0,
+    "status": "done",
+    "seconds": 89.39093216499896,
+    "cl": 0.5357331203200001,
+    "cd": 0.075857090767,
+    "cm": 0.014752526349000001,
+    "l_over_d": 7.06240003278717,
+    "cl_pm": 0.000288341999999997,
+    "cd_pm": 3.2569600000004195e-05,
+    "iterations": 489,
+    "converged": true,
+    "warnings": [],
+    "surface": true,
+    "slice": true
+   },
+   {
+    "alpha_deg": 16.0,
+    "status": "done",
+    "seconds": 183.90228641800059,
+    "cl": 0.5880347229099999,
+    "cd": 0.17958973121,
+    "cm": -0.0421352208264085,
+    "l_over_d": 3.2743226405433625,
+    "cl_pm": 0.142862197,
+    "cd_pm": 0.03591161150000001,
+    "iterations": 956,
+    "converged": true,
+    "warnings": [
+     "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+    ],
+    "surface": true,
+    "slice": true
+   }
+  ],
+  "max_l_over_d": 8.780810761620153,
+  "max_l_over_d_alpha": 8.0,
+  "cl_max": 0.5880347229099999,
+  "cl_max_alpha": 16.0,
+  "stall_alpha": null,
+  "stall_note": null,
+  "iterations": 2901,
+  "converged": true,
+  "cells": 372571,
+  "solver_seconds": 526.4733101160091,
+  "peak_memory_mb": 1017.05078125,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [],
+ "y_plus": {},
+ "mesh": {
+  "cells": 372571,
+  "max_non_orthogonality": 64.992777,
+  "max_skewness": 2.3219516,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 32256,
+    "target_layers": 5,
+    "mean_layers": 4.75,
+    "thickness_m": 0.0055,
+    "thickness_pct": 96.0
+   }
+  }
+ }
+}

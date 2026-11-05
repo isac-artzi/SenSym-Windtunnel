@@ -1,0 +1,27 @@
+{
+  "name": "WindLab dev (Ubuntu 24.04 + OpenFOAM v2606)",
+  "dockerComposeFile": ["../dev/compose.yaml"],
+  "service": "dev",
+  "workspaceFolder": "/work",
+  "remoteUser": "windlab",
+  "shutdownAction": "none",
+  "forwardPorts": [8080],
+  "portsAttributes": { "8080": { "label": "WindLab web app (host: 8090)" } },
+  "remoteEnv": { "OPENFOAM_VERSION": "2606" },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/venv/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": { "bash": { "path": "bash", "args": ["-l", "-i"] } },
+        "files.watcherExclude": { "**/runs/**": true, "**/processor*/**": true }
+      }
+    }
+  }
+}

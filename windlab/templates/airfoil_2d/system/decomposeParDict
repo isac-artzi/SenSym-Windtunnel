@@ -1,0 +1,25 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| WindLab airfoil_2d template                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+numberOfSubdomains  @@N_PROCS@@;
+
+// Coordinate-based split: deterministic, so a validation run is reproducible (scotch
+// gave a different partition, and a different solver path, on every run).
+method              hierarchical;
+
+coeffs
+{
+    n               (@@N_PROCS@@ 1 1);
+    order           xyz;
+}
+
+// ************************************************************************* //

@@ -1,0 +1,77 @@
+{
+ "pack_version": 1,
+ "name": "cylinder",
+ "windlab_version": "0.1.0.dev0",
+ "computed": "2026-11-03",
+ "params": {
+  "kind": "single",
+  "airspeed": 20.0,
+  "alpha_deg": 0.0,
+  "angles": null,
+  "preset": "quick",
+  "reynolds": 205380.98172109263,
+  "mach": 0.05877339915954039,
+  "reference_area": 0.0675,
+  "reference_length": 0.15,
+  "reference_how": "frontal area and diameter",
+  "max_iterations": 1500,
+  "n_procs": 4,
+  "geometry_name": "Cylinder across the wind, diameter 0.15 m, length 0.45 m",
+  "geometry_class": "bluff"
+ },
+ "geometry": {
+  "name": "Cylinder across the wind, diameter 0.15 m, length 0.45 m",
+  "class": "bluff",
+  "body_min": [
+   0.0,
+   -0.22499999403953552,
+   -0.07500000298023224
+  ],
+  "body_max": [
+   0.15000000596046448,
+   0.22499999403953552,
+   0.07500000298023224
+  ]
+ },
+ "result": {
+  "cl": -0.007571694665050001,
+  "cd": 0.5744162552950001,
+  "cm": 5.260078634208999e-05,
+  "cl_pm": 0.250101708,
+  "cd_pm": 0.022738097000000013,
+  "l_over_d": -0.013181546648886953,
+  "iterations": 1500,
+  "converged": false,
+  "cells": 548119,
+  "solver_seconds": 441.82476991000294,
+  "peak_memory_mb": 1318.14453125,
+  "label": "Uncalibrated prototype \u2014 not yet validated"
+ },
+ "warnings": [
+  "The numbers did not fully settle before the iteration limit. Treat them as a rough guide.",
+  "The lift kept swinging up and down (the flow may be unsteady, e.g. stalled). Treat the numbers as a rough guide."
+ ],
+ "y_plus": {
+  "body": {
+   "min": 0.65184935,
+   "max": 116.896576,
+   "average": 16.8114869
+  }
+ },
+ "mesh": {
+  "cells": 548119,
+  "max_non_orthogonality": 63.50364,
+  "max_skewness": 2.3138711,
+  "failed_checks": 0,
+  "mesh_ok": true,
+  "layers": {
+   "body": {
+    "faces": 47264,
+    "target_layers": 5,
+    "mean_layers": 4.68,
+    "thickness_m": 0.00375,
+    "thickness_pct": 95.5
+   }
+  }
+ }
+}

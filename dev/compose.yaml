@@ -1,0 +1,58 @@
+# WindLab in Docker. Two services share one image (dev/Dockerfile: Ubuntu 24.04 + OpenFOAM v2606 +
+# the Python tools, arm64 and amd64):
+#
+#   windlab  the app for users on macOS or other Linux distributions (docs/INSTALL.md):
+#              scripts/run_docker.sh            (asks you to accept DISCLAIMER.md, then builds and starts it)
+#              or  WINDLAB_ACCEPT_DISCLAIMER=1 docker compose -f dev/compose.yaml up --build windlab
+#            then open http://localhost:8080/. WINDLAB_PORT=8081 changes the host port.
+#   dev      a shell for development (profile "dev", so plain `up` does not start it):
+#              docker compose -f dev/compose.yaml --profile dev up -d --build dev
+#              docker compose -f dev/compose.yaml exec dev bash -l
+#
+# The repository is mounted at /work (a git pull is live at once); simulation output goes to the
+# `runs` volume on Linux disk (fast, case-sensitive), the home folder (the accepted notice, caches)
+# to `windlab-home`.
+services:
+  windlab:
+    build:
+      context: .
+    image: windlab:2606
+    container_name: windlab
+    working_dir: /work
+    volumes:
+      - ..:/work
+      - runs:/runs
+      - windlab-home:/home/windlab
+    ports:
+      - "127.0.0.1:${WINDLAB_PORT:-8080}:8080"   # the host's browser only; the container itself listens on all
+    environment:
+      WINDLAB_ACCEPT_DISCLAIMER: "${WINDLAB_ACCEPT_DISCLAIMER:-}"   # set by scripts/run_docker.sh after you say yes
+    shm_size: "2gb"         # room for MPI parallel runs
+    init: true              # reap cancelled solver processes (no zombies)
+    command: windlab start --host 0.0.0.0 --port 8080
+
+  dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      args:
+        CLAUDE_CODE: "${CLAUDE_CODE:-0}"
+    image: windlab-dev:2606
+    container_name: windlab-dev
+    working_dir: /work
+    volumes:
+      - ..:/work
+      - claude-config:/home/windlab/.claude
+      - runs:/runs
+    ports:
+      - "127.0.0.1:${WINDLAB_DEV_PORT:-8090}:8080"   # `windlab start --host 0.0.0.0` inside -> http://localhost:8090
+    shm_size: "2gb"
+    init: true
+    stdin_open: true
+    tty: true
+    command: sleep infinity
+
+volumes:
+  runs:
+  windlab-home:
+  claude-config:
