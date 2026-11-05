@@ -17,7 +17,7 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
-COMPOSE=(docker compose -f dev/compose.yaml)
+COMPOSE=(docker compose -p windlab -f dev/compose.yaml)   # own project: own runs volume
 ACCEPT_FILE="$HOME/.windlab/accepted"
 VERSION="$(sed -n 's/^VERSION = "\([^"]*\)".*/\1/p' windlab/disclaimer.py | head -n 1)"
 PORT="${WINDLAB_PORT:-8080}"
