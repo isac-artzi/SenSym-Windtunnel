@@ -62,11 +62,24 @@ REPO_URL = "https://github.com/isac-artzi/SenSym-Windtunnel"
 CSP = ("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; "
        "object-src 'none'; base-uri 'none'; form-action 'self'")
 DEMO_BANNER = (
-    '<p class="banner demo" role="note"><strong>Online demo — the instant preview only, not the full CFD solver.'
-    "</strong> This page runs entirely in your browser: nothing you type is sent or uploaded anywhere. The instant "
-    "airflow preview and the lessons with their pre-computed results work here; the full simulation (the OpenFOAM "
-    "solver) and your own parts need the free, installed WindLab "
-    f'(<a href="{REPO_URL}">how to install</a>).</p>'
+    '<div class="banner demo" role="note"><p><strong>Limited online demo: this is not the WindLab simulator.</strong> '
+    "This page cannot run a simulation. The Run button is switched off and you cannot upload your own part.</p>"
+    "<p><strong>What works here:</strong> the instant airflow preview (a rough 2D sketch drawn in your browser, not a "
+    "simulation result), the glossary, the tour, and the five lessons with results the WindLab team computed "
+    "in advance with the full app. Every number on this page comes from those pre-computed runs "
+    "or from the rough preview.</p>"
+    "<p><strong>To simulate your own shapes</strong>, install the free WindLab on your own computer "
+    f'(<a href="{REPO_URL}#readme">how to install</a>). Nothing you type here is sent or uploaded anywhere.</p></div>'
+)
+DEMO_BADGE = '<span class="demo-badge">Limited online demo</span>'
+DEMO_STRIP = (
+    '<div class="demo-strip" role="note"><strong>Limited online demo</strong>: no simulations, no uploads. '
+    f'<a href="{REPO_URL}#readme">Install WindLab</a> for the full simulator.</div>'
+)
+DEMO_MODAL_NOTE = (
+    '<p class="demo-notice"><strong>You are opening the limited online demo, not the full WindLab.</strong> It cannot '
+    "run simulations or take your own parts; it shows the instant preview and results computed in advance. The full "
+    "WindLab runs on your own computer.</p>"
 )
 DISCLAIMER_FILE = "disclaimer.txt"  # the full notice, next to index.html (the app serves it at /disclaimer)
 
@@ -117,11 +130,21 @@ def demo_index(html: str, sri_css: str, sri_js: str) -> str:
     title = re.compile(r"(<title[^>]*>)WindLab — virtual wind tunnel(</title>)")
     if len(title.findall(out)) != 1:
         raise SystemExit("index.html changed: the <title> moved")
-    out = title.sub(r"\1WindLab — virtual wind tunnel (online demo)\2", out)
+    out = title.sub(r"\1WindLab — limited online demo (not the full simulator)\2", out)
     anchor = "Use the numbers to learn and compare, not to design real hardware.</p>"
     if out.count(anchor) != 1:
         raise SystemExit("index.html changed: the prototype banner moved")
     out = out.replace(anchor, anchor + "\n    " + DEMO_BANNER)
+    h1 = re.compile(r'(<h1>WindLab <span class="sub"[^>]*>[^<]*</span>)(</h1>)')
+    if len(h1.findall(out)) != 1:
+        raise SystemExit("index.html changed: the page heading moved")
+    out = h1.sub(lambda m: m.group(1) + " " + DEMO_BADGE + m.group(2), out)
+    if out.count('<div id="disclaimer-text">') != 1:
+        raise SystemExit("index.html changed: the disclaimer text moved")
+    out = out.replace('<div id="disclaimer-text">', '<div id="disclaimer-text">\n        ' + DEMO_MODAL_NOTE)
+    if out.count("</body>") != 1:
+        raise SystemExit("index.html changed: no single </body>")
+    out = out.replace("</body>", "  " + DEMO_STRIP + "\n</body>")
     if re.search(r'=["\'](/static/|/api/)', out) or "localhost" in out:
         raise SystemExit("the demo page still has an absolute /static/ or /api/ URL, or names localhost")
     return out

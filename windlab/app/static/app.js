@@ -2107,6 +2107,7 @@ function setupDemo() {
   ["fb-form", "dl-case", "dl-case-help", "dl-compare", "dl-report", "dl-report-html", "dl-report-help"]
     .forEach((id) => show($(id), false));
   setText("runs-help", t("runs.help.demo"));
+  document.querySelector("title").textContent = t("demo.title");
 }
 
 (async function init() {

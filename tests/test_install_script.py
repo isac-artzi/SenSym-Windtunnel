@@ -66,7 +66,7 @@ def test_wsl_wrapper_runs_the_linux_installer():
 
 def test_docker_script_and_compose_start_windlab_on_8080():
     text = DOCKER.read_text()
-    for needle in ("docker compose -f dev/compose.yaml", "DISCLAIMER.md", "WINDLAB_ACCEPT_DISCLAIMER",
+    for needle in ("docker compose -p windlab -f dev/compose.yaml", "DISCLAIMER.md", "WINDLAB_ACCEPT_DISCLAIMER",
                    "--accept-disclaimer", "docker info", "build windlab", "up windlab", "http://localhost:$PORT/",
                    "windlab doctor", '.windlab/accepted', "windlab/disclaimer.py"):
         assert needle in text, needle

@@ -70,15 +70,20 @@ version; `windlab start --help` lists the options (port, cores, data folder).
 **First run:** press **Make this wing** (NACA 0012), set 20 m/s and 8°, press **Run the wind tunnel**.
 Expect C<sub>L</sub> ≈ 0.36 and C<sub>D</sub> ≈ 0.04 after 20–60 s on a fast desktop, 1–3 minutes on a laptop.
 
-## Online demo (no install)
+## Online demo (limited, no install)
 
-**https://isac-artzi.github.io/SenSym-Windtunnel/** — the same page as a static site: the instant
-airflow preview, the glossary and the five lessons with their pre-computed results work in the
-browser alone. It is the **preview only, not the full CFD solver**: uploading your own part and
-running the simulation need the installed WindLab. Nothing you type is sent anywhere. The demo shows
-the same educational-use notice as the app. (It is built by `scripts/build_static_demo.py` and
-published by `.github/workflows/pages.yml` on every push to `main` once GitHub Pages is enabled for
-the repository; to try it locally: `python scripts/build_static_demo.py --out site --check`, then
+**https://isac-artzi.github.io/SenSym-Windtunnel/** is a **limited online demo, not the WindLab
+simulator**. It runs in any browser with nothing to install, but it **cannot run a simulation** and
+**cannot take your own parts**. What it does:
+
+- the **instant airflow preview**: a rough 2D sketch drawn in your browser, not a simulation result;
+- the **five lessons**, showing results the WindLab team computed in advance with the full app;
+- the glossary, the tour and the same educational-use notice as the app.
+
+Use it for a first look, or to follow the lessons if your laptop cannot run the full app. To simulate
+your own shapes, install WindLab (above). Nothing you type in the demo is sent anywhere. (It is built
+by `scripts/build_static_demo.py` and published by `.github/workflows/pages.yml`; to try it locally:
+`python scripts/build_static_demo.py --out site --check`, then
 `python -m http.server 8081 --directory site`.)
 
 ## Documentation

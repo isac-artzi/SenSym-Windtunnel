@@ -47,8 +47,9 @@ def test_site_is_small_complete_and_self_contained(site):
     assert re.search(r'<script type="module" src="\./static/app\.js" integrity="sha384-[A-Za-z0-9+/=]+">', html)
     assert re.search(r'href="\./static/app\.css" integrity="sha384-', html)
     assert not re.search(r'=["\'](/static/|/api/)', html) and "localhost" not in html
-    assert "Online demo — the instant preview only, not the full CFD solver." in html
-    assert "nothing you type is sent or uploaded anywhere" in html
+    assert "Limited online demo: this is not the WindLab simulator." in html
+    assert "demo-badge" in html and "demo-strip" in html and "demo-notice" in html
+    assert "Nothing you type here is sent or uploaded anywhere" in html
     assert "how to install" in html and demo.REPO_URL in html
     # the educational-use notice: the same modal as the installed app, its links pointing at the bundled full text
     from windlab import disclaimer
